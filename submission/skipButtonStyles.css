@@ -1,0 +1,37 @@
+.skipContainer {
+    display: none; /* Hidden until ad starts */
+    position: absolute;
+    bottom: 60px;
+    right: 0;
+    background: rgba(0, 0, 0, 0.6);
+    border: 2px solid black;
+    border-right-width: 0;
+    font-size: 1.2rem;
+    border-radius: 10px 0 0 10px;
+    color: white;
+    cursor: pointer;
+}
+
+.skipContainer .gradientText {
+    padding: 10px 18px;
+    border:none;
+
+    font-size: 1.25rem;
+    font-weight: 400;
+
+    background: linear-gradient(90deg, #cf22d2, #09a9ce);
+    background-size: 200% 100%;
+    animation: gradientShift 4s linear infinite alternate;
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0 50%;
+    }
+    100% {
+        background-position: 100% 50%;
+    }
+}
