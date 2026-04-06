@@ -60,4 +60,3 @@ function generateVideoAd(){
     setTimeout( sendToParentAsCallback({ type: 'play' }),10000)
     setTimeout( dismissOverlay,10000)
 }
-
