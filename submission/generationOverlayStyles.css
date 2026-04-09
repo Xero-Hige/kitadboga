@@ -24,6 +24,9 @@
     flex-direction: column;
     background: rgba(0, 0, 0, 0.2);
     backdrop-filter: blur(600px);
+
+    pointer-events: none;
+    user-select: none;
 }
 
 .overlay.videoGeneration .logo {
@@ -71,6 +74,9 @@
     font-size: 3rem;
     animation: think 1.2s ease-in-out infinite alternate;
     filter: hue-rotate(120deg) saturate(2);
+
+    pointer-events: none;
+    user-select: none;
 }
 
 @keyframes think {
