@@ -35,7 +35,7 @@
 </div>
 <div id="overlay-generation" class="overlay videoGeneration">
   <img src="Logo2.png" class="logo" alt="AAS Logo"/>
-  <div id="spinner" class="spinner"></div>
+  <div id="spinner" class="loader">✨</div>
   <div id="buffering-text" class="generationText">
     Generating...
   </div>
@@ -44,7 +44,7 @@
   <div id="overlay-container">
     <!-- We've added a sample button. Feel free to remove it: -->
     <div id="skip" class="skipContainer">
-      <button class="gradientText">Skip Ad...</button>
+      <button id="skipButton" class="gradientText"></button>
     </div>
   </div>
 
@@ -55,31 +55,53 @@
         window.top.postMessage({ type: 'success' }, '*');
       }
 
-      const skipButton = document.getElementById('skip');
+      const skipContainer = document.getElementById('skip')
+      const skipButton = document.getElementById('skipButton')
+
+      let state_executions = 0
 
       // Listen for messages from the game shell
       window.addEventListener('message', (event) => {
-        if (!event.data || !event.data.type) return;
+        if (!event.data || !event.data.type) return
 
         if (event.data.type === 'adStarted') {
           // Show the skip button when the ad starts
-          skipButton.style.display = 'block';
-          generateVideoAd();
+          sendToParent({ type: 'pause' })
+          generateVideoAd()
+
+          //window.location.replace("https://{ad.company.ulr}");
+          //state_executions++
+          //skipButton.style.display = 'block'
+          //let animateEmojis = spawnEmojiOverlay()
+          //animateEmojis()
         }
 
-        // By default, if the user doesn't "skip" the ad before the video ends,
-        // we call fail to restart. You're welcome to replace this with a survey
-        // or other interaction instead (see examples/survey).
+        if (event.data.type ==='timeupdate'){
+          let waitTime = Math.max(event.data.duration/4,15)
+          if (event.data.currentTime > waitTime){
+            skipContainer.style.pointerEvents = 'all'
+            skipButton.innerHTML = "Skip Ad &#9656"
+          }else {
+            skipContainer.style.pointerEvents = 'none'
+            let remainingTime =(Math.round(waitTime)-Math.round(event.data.currentTime)).toString()
+            skipButton.innerText = `Skip Ad in ${remainingTime}`
+          }
+        }
+
+        if (event.data.type ==='timeupdate' && event.data.currentTime > 1) {
+          skipContainer.style.display = 'block'
+        }
+
         if (event.data.type === 'adFinished') {
           skipButton.style.display = 'none';
           window.top.postMessage({ type: 'fail' }, '*');
         }
       });
 
-      // Your ad overlay code goes here, we've added a simple example below:
       skipButton.addEventListener('click', () => {
-        skipButton.style.display = 'none';
-        adSuccess();
+          state_executions++
+          skipContainer.style.display = 'none'
+          generateVideoAd()
       });
 
     })(window, document);
