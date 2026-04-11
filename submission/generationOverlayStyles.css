@@ -8,14 +8,26 @@
 .overlay.brand {
     background: transparent;
     position: absolute;
+
+    opacity: 0.5;
+    user-select: none;
+    pointer-events: none;
 }
 
 .overlay.brand .poweredBy{
     width: 8rem;
     position: absolute;
+}
+
+.overlay.brand .poweredBy.bot{
     bottom: 0.25rem;
     left: 0.25rem;
 }
+
+.overlay.brand .poweredBy.top{
+     top: 0.25rem;
+     right: 0.25rem;
+ }
 
 .overlay.videoGeneration {
     display: flex;
@@ -67,7 +79,7 @@
     25%  { border-color: #032b77; }
     50%  { border-color: #087ac4; }
     75%  { border-color: rgb(9 169 206 / 0.5); }
-    100% { border-color: #cf22d200; }
+    100% { border-color: #cf22d2; }
 }
 
 .loader {
