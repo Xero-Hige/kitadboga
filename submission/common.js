@@ -11,11 +11,11 @@ function sendToParentAsCallback(msg) {
 }
 
 function dismissOverlay(){
-    document.getElementById('overlay-generation').style.display = 'none';
+    document.getElementById('overlay-generation').style.display = 'none'
 }
 
-function generateVideoAd(){
-    const overlay = document.getElementById('overlay-generation');
+function generateVideoAd(callback){
+    const overlay = document.getElementById('overlay-generation')
     const bufferingMessage = document.getElementById('buffering-text')
 
     const baseBlur = 600;
@@ -64,15 +64,7 @@ function generateVideoAd(){
     setTimeout(updateBackdrop(0.25,0.05,"Sharpening Edges..."),7000)
     setTimeout(updateBackdrop(0.05,0,"Syncing Audio..."),8500)
     setTimeout(updateBackdrop(0,0),9700)
+    if (callback) setTimeout( callback,10000)
     setTimeout( sendToParentAsCallback({ type: 'play' }),10000)
     setTimeout( dismissOverlay,10000)
-}
-
-async function typingText(message,target){
-    for (const chunk of chunks) {
-        for (let i = 0; i < text.length; i++) {
-            output.textContent += text[i];
-            await new Promise(r => setTimeout(r, speed));
-        }
-    }
 }
