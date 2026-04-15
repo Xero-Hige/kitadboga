@@ -1,0 +1,69 @@
+.overlay.message{
+    display: none;
+}
+
+.bot-mascot{
+    position: relative;
+    right: -65%;
+    bottom: -40%;
+    height: 60%;
+    pointer-events: none;
+    user-select: none;
+}
+
+.bot-visible-message{
+
+}
+
+.bot-debug-message {
+    background: whitesmoke;
+    border-style: solid;
+    border-color: purple;
+    border-width: 3px;
+    border-radius: 10px;
+    width: 50%;
+    height: 30%;
+    color: black;
+    pointer-events: none;
+    user-select: none;
+    white-space: pre-line;
+    padding: 0.25rem;
+    font-family: roboto;
+    font-weight: 300;
+}
+
+
+.bot-message-container{
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    width: 55%;
+    background: red;
+    padding: 0.25rem;
+    min-height: 80%;
+    pointer-events: none;
+    user-select: none;
+
+    font-size: 10px;
+    color: black;
+}
+
+.thinking {
+    font-size: 24px;
+}
+
+.dots::after {
+    content: "";
+    display: inline-block;
+    width: 1em;
+    text-align: left;
+    animation: dots .75s steps(4, end) infinite;
+}
+
+@keyframes dots {
+    0%   { content: ""; }
+    25%  { content: "."; }
+    50%  { content: ".."; }
+    75%  { content: "..."; }
+    100% { content: ""; }
+}
