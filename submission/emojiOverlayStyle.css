@@ -1,0 +1,21 @@
+.overlay.emojiOverlay {
+}
+
+.overlay.emojiOverlay .emoji-1,
+.overlay.emojiOverlay .emoji-2{
+    position: absolute;
+    user-select: none;
+    will-change: transform;
+
+    z-index: 200;
+    filter: blur(1px);
+    opacity: 0.8;
+}
+
+.overlay.emojiOverlay .emoji-1{
+    font-size: 2rem;
+}
+
+.overlay.emojiOverlay .emoji-2{
+    font-size: 6rem;
+}
