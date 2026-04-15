@@ -100,5 +100,5 @@ function userSecondSkip(){
 
     simulateTextGeneration(prompt+userAction,botMessage,true,false)
         .then(()=>simulateTextGeneration(text,botMessage,false,true))
-        .then(()=>showEmojiPicker(true))
+        .then(()=>showMultiSkipOverlay())
 }

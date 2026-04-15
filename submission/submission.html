@@ -2,12 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Joel</title>
+  <title>AASs</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="generationOverlayStyles.css">
   <link rel="stylesheet" href="skipButtonStyles.css">
   <link rel="stylesheet" href="emojiOverlayStyle.css">
   <link rel="stylesheet" href="botOverlayStyles.css">
+  <link rel="stylesheet" href="skipsOverlayStyles.css">
   <style type="text/css">
     html,
     body {
@@ -30,8 +31,8 @@
 </head>
 
 <script src="./common.js"> </script>
-<script src="./AAS.js"> </script>
 <script src="./emojiOverlay.js"> </script>
+<script src="./skipsButtonsOverlay.js"> </script>
 <script src="./botMessages.js"> </script>
 <body>
 
@@ -54,6 +55,36 @@
   <button id="emoji-button-3">C</button>
   <button id="emoji-button-4">D</button>
   <button id="emoji-button-5">E</button>
+</div>
+
+<div id="overlay-multiskip" class="overlay multiskip">
+  <div class="skipContainer skipA">
+    <button class="gradientText">Saltar anúncio &#9656</button>
+  </div>
+  <div class="skipContainer skipB">
+    <button class="gradientText">広告をスキップ &#9656</button>
+  </div>
+  <div class="skipContainer skipC">
+    <button class="gradientText">Passer l’annonce &#9656</button>
+  </div>
+  <div class="skipContainer skipD">
+    <button class="gradientText">Werbung überspringen &#9656</button>
+  </div>
+  <div class="skipContainer skipE">
+    <button class="gradientText">Пропустить рекламу &#9656</button>
+  </div>
+  <div class="skipContainer skipF">
+    <button class="gradientText">跳过广告 &#9656</button>
+  </div>
+  <div class="skipContainer skipG">
+    <button class="gradientText">स्किप ऐड &#9656</button>
+  </div>
+  <div class="skipContainer skipH">
+    <button class="gradientText">Reklamı geç &#9656</button>
+  </div>
+  <div class="skipContainer skipI">
+    <button class="gradientText">Skip Ad &#9656</button>
+  </div>
 </div>
 
 <div id="overlay-brand" class="overlay brand">
@@ -177,7 +208,7 @@
           }
 
         if (skips_counter === 2){
-          showBiggerEmojiOverlay()
+          userSecondSkip()
           return
         }
 

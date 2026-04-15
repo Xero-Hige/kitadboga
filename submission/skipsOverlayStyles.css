@@ -1,0 +1,136 @@
+.skipContainer.skipA,
+.skipContainer.skipB,
+.skipContainer.skipC,
+.skipContainer.skipD,
+.skipContainer.skipE,
+.skipContainer.skipF,
+.skipContainer.skipG,
+.skipContainer.skipH,
+.skipContainer.skipI{
+    display: flex;
+    border-right-width: 2px;
+    font-size: 1.2rem;
+    border-radius: 10px;
+    width: 16rem;
+    justify-content: center;
+    align-items: center;
+
+    pointer-events: none;
+    user-select: none;
+}
+
+.skipContainer.skipA {
+    position: absolute;
+    left: calc(50% - 7rem);
+    right: unset;
+    top: 50%;
+    bottom: unset;
+    width: 11rem;
+}
+
+.skipContainer.skipB{
+    position: absolute;
+    left: 0;
+    right: unset;
+    top: 25%;
+    bottom: unset;
+    width: 12rem;
+    border-radius: 0 10px 10px 0;
+    border-left-width: 0;
+}
+
+
+.skipContainer.skipC{
+    position: absolute;
+    left: 0;
+    right: unset;
+    top: 75%;
+    bottom: unset;
+    width: 13rem;
+    border-radius: 0 10px 10px 0;
+    border-left-width: 0;
+}
+
+.skipContainer.skipD{
+    position: absolute;
+    left: calc(50% - 8rem);
+    right: unset;
+    top: 0;
+    bottom: unset;
+    border-top-width: 0;
+    border-radius: 0 0 10px 10px;
+}
+
+.skipContainer.skipE{
+    position: absolute;
+    left: calc(50% - 7rem);
+    right: unset;
+    top: unset;
+    bottom: 0;
+    border-bottom-width: 0;
+    border-radius: 10px 10px 0 0;
+}
+
+.skipContainer.skipF{
+    position: absolute;
+    left: unset;
+    right: 0;
+    top: 15%;
+    bottom: unset;
+    width: 8rem;
+    border-left-width: 0;
+    border-radius: 10px 0 0 10px;
+}
+
+.skipContainer.skipG{
+    position: absolute;
+    left: unset;
+    right: 0;
+    top: 50%;
+    bottom: unset;
+    width: 9rem;
+    border-left-width: 0;
+    border-radius: 10px 0 0 10px;
+}
+
+.skipContainer.skipH{
+    position: absolute;
+    left: 0;
+    right: unset;
+    top: 0;
+    bottom: unset;
+    width: 10rem;
+    border-left-width: 0;
+    border-radius: 0 0 10px 0;
+}
+
+.skipContainer.skipI{
+    position: absolute;
+    left: unset;
+    right: 0;
+    top: unset;
+    bottom: 0;
+    width: 9rem;
+    border-left-width: 0;
+    border-radius: 10px 0 0 0;
+}
+
+.overlay.multiskip{
+    display: none;
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+
+.skipContainer.animated {
+    animation: glitchAnimation 4s alternate infinite;
+}
+
+.skipContainer.animated:hover {
+    animation-duration: 1s;
+}
+
+@keyframes glitchAnimation {
+    0%   { bottom: 0; }
+    100%  { bottom: 100%; }
+}
