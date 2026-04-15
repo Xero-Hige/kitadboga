@@ -6,6 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="generationOverlayStyles.css">
   <link rel="stylesheet" href="skipButtonStyles.css">
+  <link rel="stylesheet" href="emojiOverlayStyle.css">
+  <link rel="stylesheet" href="botOverlayStyles.css">
   <style type="text/css">
     html,
     body {
@@ -27,13 +29,41 @@
   </style>
 </head>
 
+<script src="./common.js"> </script>
 <script src="./AAS.js"> </script>
+<script src="./emojiOverlay.js"> </script>
+<script src="./botMessages.js"> </script>
 <body>
+
+<div id="bot-message-overlay" class="overlay message">
+  <div class="bot-message-container">
+    <div id="bot-top-message-1" class="bot-visible-message"></div>
+    <div id="bot-thinking" class="thinking">
+      Thinking<span class="dots"></span>
+    </div>
+    <div id="bot-debug-message" class="bot-debug-message"></div>
+    <div id="bot-bot-message-1" class="bot-visible-message"></div>
+  </div>
+    <img src="mascot.png" class="bot-mascot" alt="mascot"/>
+</div>
+
+<div id="interest-picker-overlay" class="overlay emojiPicker">
+  <div>Please pick a topic of your interest</div>
+  <button id="emoji-button-1">A</button>
+  <button id="emoji-button-2">B</button>
+  <button id="emoji-button-3">C</button>
+  <button id="emoji-button-4">D</button>
+  <button id="emoji-button-5">E</button>
+</div>
 
 <div id="overlay-brand" class="overlay brand">
   <img src="poweredBy.png" class="poweredBy bot" alt="Powered By AAS"/>
   <img src="poweredBy.png" class="poweredBy top" alt="Powered By AAS"/>
 </div>
+
+<div id="emoji-container-1" class="overlay emojiOverlay" style="display: none"></div>
+<div id="emoji-container-2" class="overlay emojiOverlay" style="display: none"></div>
+
 <div id="overlay-generation" class="overlay videoGeneration">
   <img src="Logo2.png" class="logo" alt="AAS Logo"/>
   <div id="spinner" class="loader">✨</div>
@@ -53,13 +83,15 @@
     (function(window, document){
       // This is how you tell the parent window that the ad was successfully skipped.
       function adSuccess() {
-        window.top.postMessage({ type: 'success' }, '*');
+        window.top.postMessage({ type: 'success' }, '*')
       }
 
       const skipContainer = document.getElementById('skip')
       const skipButton = document.getElementById('skipButton')
 
-      let state_executions = 0
+      let skips_counter = 0
+      let skipping = false
+      let finished_count = 0
 
       // Listen for messages from the game shell
       window.addEventListener('message', (event) => {
@@ -69,6 +101,8 @@
           // Show the skip button when the ad starts
           sendToParent({ type: 'pause' })
           generateVideoAd()
+
+          skipping = false
 
           //window.location.replace("https://{ad.company.ulr}");
           //state_executions++
@@ -89,19 +123,64 @@
           }
         }
 
-        if (event.data.type ==='timeupdate' && event.data.currentTime > 1) {
-          skipContainer.style.display = 'block'
-        }
+        if (event.data.type ==='timeupdate' && event.data.currentTime < 1)
+          skipping = false
+
+        if (event.data.type ==='timeupdate' && event.data.currentTime > 1)
+          if (skipContainer.style.pointerEvents === 'none')
+            skipContainer.style.display = 'block'
+
 
         if (event.data.type === 'adFinished') {
-          skipButton.style.display = 'none';
-          window.top.postMessage({ type: 'fail' }, '*');
+          if (skipping)
+            return
+
+          finished_count++
+
+          skipContainer.style.display = 'none'
+          hideEmojiOverlay()
+
+          if (skips_counter === 0 ) {
+            if (finished_count === 1) {
+              document.getElementById("overlay-brand").style.display = 'none'
+              document.getElementById("overlay-container").style.display = 'none'
+              sendToParent({type: "setPlaybackRate", value: 0.8})
+              sendToParent({type: "play"})
+              skipping = false
+            }
+
+            if (finished_count === 2) {
+              sendToParent({type: "success"}) //ENDING 1
+            }
+
+            return
+          }
+
+          if (skips_counter === 1) {
+            hideEmojiOverlay()
+            userEmojiNoLike()
+          }
+
+          //skipButton.style.display = 'none';
+          //window.top.postMessage({ type: 'fail' }, '*');
         }
       });
 
       skipButton.addEventListener('click', () => {
-          state_executions++
+          skips_counter++
           skipContainer.style.display = 'none'
+          skipping = true
+
+          if (skips_counter === 1){
+            userFirstSkip()
+            return
+          }
+
+        if (skips_counter === 2){
+          showBiggerEmojiOverlay()
+          return
+        }
+
           generateVideoAd()
       });
 
