@@ -19,3 +19,8 @@
 .overlay.emojiOverlay .emoji-2{
     font-size: 6rem;
 }
+
+.overlay.emojiPicker{
+    display: none;
+    z-index: 200;
+}

@@ -1,15 +1,4 @@
-const flowerPicker=`<div class="overlay picker">
-            Pick something you like
-            <div>ASD 1</div>
-            <div>ASD 2</div>
-            <div>ASD 3</div>
-</div>`
-
 let setEmoji = ""
-
-function spawnPicker( parent ){
-
-}
 
 EMOJIS = [
     ["Artemis Mission","🚀"],
@@ -52,16 +41,19 @@ function showEmojiPicker(){
 }
 
 function hideEmojiOverlay(){
-    document.getElementById('emoji-container-1').style.display='none'
-    document.getElementById('emoji-container-2').style.display='none'
+    let container = document.getElementById('emoji-container-1')
+    if(container) container.style.display='none'
+    container =  document.getElementById('emoji-container-2')
+    if(container) container.style.display='none'
 }
 
-function showBiggerEmojiOverlay(){
+function showBiggerEmojiOverlay() {
     document.getElementById('bot-message-overlay').style.display='none'
 
     document.getElementById(`emoji-container-1`).remove()
     document.getElementById(`emoji-container-2`).style.display='flex'
     let animateEmojis = spawnEmojiOverlay(setEmoji,2)
+
     generateVideoAd(animateEmojis)
 }
 
@@ -79,8 +71,8 @@ function spawnEmojiOverlay(emoji,iteration=1){
         const x = Math.random() * (window.innerWidth - 30)
         const y = Math.random() * (window.innerHeight - 30)
 
-        const vx = (Math.random() * 4) + 1
-        const vy = (Math.random() * 4) + 1
+        const vx = (6 - (Math.random() * 12)) || -1
+        const vy = (6 - (Math.random() * 12)) || 1
 
         items.push({ el, x, y, vx, vy })
 
