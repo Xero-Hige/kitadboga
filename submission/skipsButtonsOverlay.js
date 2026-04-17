@@ -1,14 +1,16 @@
 function showMultiSkipOverlay() {
-    document.getElementById('bot-message-overlay').style.display='none'
+    document.getElementById('bot-message-overlay').style.display = 'none'
 
-    document.getElementById(`emoji-container-1`).remove()
-    document.getElementById(`emoji-container-2`).remove()
+    let container = document.getElementById(`emoji-container-1`)
+    if (container) container.remove()
+    container = document.getElementById(`emoji-container-2`)?.remove()
+    if (container) container.remove()
 
-    document.getElementById( "skip").classList.add("animated")
+    document.getElementById("skip").classList.add("animated")
 
 
-    generateVideoAd(()=>{
-        document.getElementById('overlay-multiskip').style.display='flex'
-        document.getElementById('overlay-multiskip').style.opacity=1
+    generateVideoAd(() => {
+        document.getElementById('overlay-multiskip').style.display = 'flex'
+        document.getElementById('overlay-multiskip').style.opacity = "1"
     })
 }
