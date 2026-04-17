@@ -131,25 +131,6 @@ function userThirdSkip(videoDuration){
         .then(()=>showBubblesOverlay(videoDuration))
 }
 
-function praiseUser(){
-    let botMessage = document.getElementById("bot-debug-message")
-
-    let userAction = "[USER ACTION] user skipped the ad before ending[/USER ACTION]\n"
-
-    let text="[ANALYSIS] User interaction suggests the ad did not align with user interests.\n"+
-        "Negative feedback is inferred from user behavior.\n"+
-        "Need extra input to refine the system [/ANALYSIS]\n "+
-        "[ACTION] Generate personalized interest selector and render it. Sending request to FrontendAgent [/ACTION]\n"
-
-    prompt = "Q"
-    userAction = "D"
-    text = "S"
-
-    simulateTextGeneration(prompt+userAction,botMessage,true,false)
-        .then(()=>simulateTextGeneration(text,botMessage,false,true))
-        .then(()=> slightlySlowReplay())
-}
-
 const GEMIPP_ERROR= "[Errno fetch http://text-gen-service.gemimipp.svc.cluster.local:8082/gemimipp/worker_convo2text\n" +
     "failed: 429: b'{\\n \"error\": {\\n \"message\": \"You're generating text too quickly. To ensure the best experience for everyone on the free tier, we have rate limits in place. Please wait before making more requests.\",\\n \"type\": \"text\",\\n \"param\": null,\\n \"code\": \"rate_limit_exceeded\"\\n }\\n}'] b'{\\n \"error\": {\\n \"message\": \"You're generating text too quickly. To ensure the best experience for everyone on the free tier, we have rate limits in place. Please wait before making more requests.\",\\n \"type\": \"text\",\\n \"param\": null,\\n \"code\": \"rate_limit_exceeded\"\\n }\\n}' \n" +
     "\n"
