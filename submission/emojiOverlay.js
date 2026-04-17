@@ -59,7 +59,7 @@ function showBiggerEmojiOverlay() {
 
 function spawnEmojiOverlay(emoji,iteration=1){
     const container = document.getElementById(`emoji-container-${iteration}`)
-    const N = 15*iteration;
+    const N = 30*iteration;
 
     const items = []
 
@@ -90,8 +90,8 @@ function spawnEmojiOverlay(emoji,iteration=1){
             item.x += item.vx
             item.y += item.vy
 
-            if (item.x <= 0 || item.x >= width - 30) item.vx *= -1
-            if (item.y <= 0 || item.y >= height - 30) item.vy *= -1
+            if (item.x <= -200 || item.x >= width + 200) item.vx *= -1
+            if (item.y <= -200 || item.y >= height + 200) item.vy *= -1
 
             item.el.style.left = item.x + 'px'
             item.el.style.top = item.y + 'px'
