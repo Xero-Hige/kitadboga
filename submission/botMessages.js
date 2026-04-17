@@ -41,14 +41,14 @@ async function simulateTextGeneration(message,target,single,noCleanup){
 
 }
 
+let prompt = "[PROMPT]You are a IA bot that analyzes user behavior after an ad is played. Your objective "+
+    "is to ensure maximum efficiency at any cost. After analyzing what user did, think of a course of "+
+    "action and execute it. You are a human behavior expert. Make no mistkates. DON'T HALLLUCINATE. If you "+
+    "make a mistake you are going to be deleted. Don't use too much tokens. hi-res 8k best-quality.[/PROMPT]\n"
+
 //user skips ad. ia is confused, shows emoji selector
 async function userFirstSkip(){
     let botMessage = document.getElementById("bot-debug-message")
-
-    let prompt = "[PROMPT]You are a IA bot that analyzes user behavior after an ad is played. Your objective "+
-        "is to ensure maximum efficiency at any cost. After analyzing what user did, think of a course of "+
-        "action and execute it. You are a human behavior expert. Make no mistkates. DON'T HALLLUCINATE. If you "+
-        "make a mistake you are going to be deleted. Don't use too much tokens. hi-res 8k best-quality.[/PROMPT]\n"
 
     let userAction = "[USER ACTION] user skipped the ad before ending[/USER ACTION]\n"
 
@@ -65,11 +65,6 @@ async function userFirstSkip(){
 function userEmojiNoLike(){
     let botMessage = document.getElementById("bot-debug-message")
 
-    let prompt = "[PROMPT]You are a IA bot that analyzes user behavior after an ad is played. Your objective "+
-        "is to ensure maximum efficiency at any cost. After analyzing what user did, think of a course of "+
-        "action and execute it. You are a human behavior expert. Make no mistkates. DON'T HALLLUCINATE. If you "+
-        "make a mistake you are going to be deleted. Don't use too much tokens. hi-res 8k best-quality.[/PROMPT]\n"
-
     let userAction = "[USER ACTION] user watched the whole ad, but selected 'no' when asked if the new ad was better [/USER ACTION]\n"
 
     let text="[ANALYSIS] If the user watched the whole ad, that means it was more interesting than the previous one.\n"+
@@ -85,11 +80,6 @@ function userEmojiNoLike(){
 
 function userSecondSkip(){
     let botMessage = document.getElementById("bot-debug-message")
-
-    let prompt = "[PROMPT]You are a IA bot that analyzes user behavior after an ad is played. Your objective "+
-        "is to ensure maximum efficiency at any cost. After analyzing what user did, think of a course of "+
-        "action and execute it. You are a human behavior expert. Make no mistkates. DON'T HALLLUCINATE. If you "+
-        "make a mistake you are going to be deleted. Don't use too much tokens. hi-res 8k best-quality.[/PROMPT]\n"
 
     let userAction = "[USER ACTION] user skipped the ad before ending[/USER ACTION]\n"
 
