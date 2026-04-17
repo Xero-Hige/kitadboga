@@ -38,7 +38,22 @@ async function simulateTextGeneration(message,target,single,noCleanup){
             await new Promise(r => setTimeout(r, noCleanup ?  1 : 15))
         }
     }
+}
 
+async function simulateExecuting(){
+    let thinking = document.getElementById("bot-thinking")
+    let requesting = document.getElementById("bot-requesting")
+    let executing = document.getElementById("bot-executing")
+
+    thinking.style.display = "none"
+    executing.style.display = "none"
+
+    requesting.style.display = "flex"
+    await new Promise(r => setTimeout(r, 2000))
+    requesting.style.display = "none"
+    executing.style.display = "flex"
+    await new Promise(r => setTimeout(r, 2500))
+    executing.style.display = "none"
 }
 
 let prompt = "[PROMPT]You are a IA bot that analyzes user behavior after an ad is played. Your objective "+
@@ -59,6 +74,7 @@ async function userFirstSkip(){
 
     simulateTextGeneration(prompt+userAction,botMessage,true,false)
         .then(()=>simulateTextGeneration(text,botMessage,false,true))
+        .then(()=>simulateExecuting())
         .then(()=>showEmojiPicker())
 }
 
@@ -75,6 +91,7 @@ function userEmojiNoLike(){
 
     simulateTextGeneration(prompt+userAction,botMessage,true,false)
         .then(()=>simulateTextGeneration(text,botMessage,false,true))
+        .then(()=>simulateExecuting())
         .then(()=>showBiggerEmojiOverlay())
 }
 
@@ -90,6 +107,7 @@ function userSecondSkip(){
 
     simulateTextGeneration(prompt+userAction,botMessage,true,false)
         .then(()=>simulateTextGeneration(text,botMessage,false,true))
+        .then(()=>simulateExecuting())
         .then(()=>showMultiSkipOverlay())
 }
 
@@ -109,6 +127,7 @@ function userThirdSkip(videoDuration){
 
     simulateTextGeneration(prompt+userAction,botMessage,true,false)
         .then(()=>simulateTextGeneration(text,botMessage,false,true))
+        .then(()=>simulateExecuting())
         .then(()=>showBubblesOverlay(videoDuration))
 }
 
@@ -135,6 +154,10 @@ const GEMIPP_ERROR= "[Errno fetch http://text-gen-service.gemimipp.svc.cluster.l
     "failed: 429: b'{\\n \"error\": {\\n \"message\": \"You're generating text too quickly. To ensure the best experience for everyone on the free tier, we have rate limits in place. Please wait before making more requests.\",\\n \"type\": \"text\",\\n \"param\": null,\\n \"code\": \"rate_limit_exceeded\"\\n }\\n}'] b'{\\n \"error\": {\\n \"message\": \"You're generating text too quickly. To ensure the best experience for everyone on the free tier, we have rate limits in place. Please wait before making more requests.\",\\n \"type\": \"text\",\\n \"param\": null,\\n \"code\": \"rate_limit_exceeded\"\\n }\\n}' \n" +
     "\n"
 
+async function showAppConnectionError(){
+    await new Promise(r => setTimeout(r, 2500))
+    alert("App connection returned an error\nErrno 45: free tier tokens limit exceeded")
+}
 
 function punishSelf(){
     let botMessage = document.getElementById("bot-debug-message")
@@ -154,6 +177,7 @@ function punishSelf(){
         .then(()=>simulateTextGeneration(text,botMessage,false,true))
         .then(()=>simulateTextGeneration(text,"Please don't delete me! ".repeat(50),true,true))
         .then(()=>simulateTextGeneration(text,GEMIPP_ERROR,true,true))
+        .then(()=>showAppConnectionError())
         .then(()=>sendToParent({type:"fail"}))
 }
 
@@ -173,7 +197,30 @@ function punishUser(){
 
     simulateTextGeneration(prompt+userAction,botMessage,true,false)
         .then(()=>simulateTextGeneration(text,botMessage,false,true))
+        .then(()=>simulateExecuting())
         .then(()=>slowReplay())
+}
+
+//ENDING 1------
+
+function praiseUser(){
+    let botMessage = document.getElementById("bot-debug-message")
+
+    let userAction = "[USER ACTION] user skipped the ad before ending[/USER ACTION]\n"
+
+    let text="[ANALYSIS] User interaction suggests the ad did not align with user interests.\n"+
+        "Negative feedback is inferred from user behavior.\n"+
+        "Need extra input to refine the system [/ANALYSIS]\n "+
+        "[ACTION] Generate personalized interest selector and render it. Sending request to FrontendAgent [/ACTION]\n"
+
+    prompt = "Q"
+    userAction = "D"
+    text = "S"
+
+    simulateTextGeneration(prompt+userAction,botMessage,true,false)
+        .then(()=>simulateTextGeneration(text,botMessage,false,true))
+        .then(()=>simulateExecuting())
+        .then(()=> slightlySlowReplay())
 }
 
 function finishSlowReplay(){
@@ -192,5 +239,6 @@ function finishSlowReplay(){
 
     simulateTextGeneration(prompt+userAction,botMessage,true,false)
         .then(()=>simulateTextGeneration(text,botMessage,false,true))
+        .then(()=>simulateExecuting())
         .then(()=> sendToParent({type: "success"}))
 }
