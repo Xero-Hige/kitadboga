@@ -35,7 +35,7 @@ async function simulateTextGeneration(message,target,single,noCleanup){
     }else {
         for (let i = 0; i < message.length; i++) {
             target.textContent += message[i]
-            await new Promise(r => setTimeout(r, 15))
+            await new Promise(r => setTimeout(r, noCleanup ?  1 : 15))
         }
     }
 
@@ -91,4 +91,106 @@ function userSecondSkip(){
     simulateTextGeneration(prompt+userAction,botMessage,true,false)
         .then(()=>simulateTextGeneration(text,botMessage,false,true))
         .then(()=>showMultiSkipOverlay())
+}
+
+function userThirdSkip(videoDuration){
+    let botMessage = document.getElementById("bot-debug-message")
+
+    let userAction = "[USER ACTION] user skipped the ad before ending[/USER ACTION]\n"
+
+    let text="[ANALYSIS] User interaction suggests the ad did not align with user interests.\n"+
+        "Negative feedback is inferred from user behavior.\n"+
+        "Need extra input to refine the system [/ANALYSIS]\n "+
+        "[ACTION] Generate personalized interest selector and render it. Sending request to FrontendAgent [/ACTION]\n"
+
+    prompt = "Q"
+    userAction = "D"
+    text = "S"
+
+    simulateTextGeneration(prompt+userAction,botMessage,true,false)
+        .then(()=>simulateTextGeneration(text,botMessage,false,true))
+        .then(()=>showBubblesOverlay(videoDuration))
+}
+
+function praiseUser(){
+    let botMessage = document.getElementById("bot-debug-message")
+
+    let userAction = "[USER ACTION] user skipped the ad before ending[/USER ACTION]\n"
+
+    let text="[ANALYSIS] User interaction suggests the ad did not align with user interests.\n"+
+        "Negative feedback is inferred from user behavior.\n"+
+        "Need extra input to refine the system [/ANALYSIS]\n "+
+        "[ACTION] Generate personalized interest selector and render it. Sending request to FrontendAgent [/ACTION]\n"
+
+    prompt = "Q"
+    userAction = "D"
+    text = "S"
+
+    simulateTextGeneration(prompt+userAction,botMessage,true,false)
+        .then(()=>simulateTextGeneration(text,botMessage,false,true))
+        .then(()=> slightlySlowReplay())
+}
+
+const GEMIPP_ERROR= "[Errno fetch http://text-gen-service.gemimipp.svc.cluster.local:8082/gemimipp/worker_convo2text\n" +
+    "failed: 429: b'{\\n \"error\": {\\n \"message\": \"You're generating text too quickly. To ensure the best experience for everyone on the free tier, we have rate limits in place. Please wait before making more requests.\",\\n \"type\": \"text\",\\n \"param\": null,\\n \"code\": \"rate_limit_exceeded\"\\n }\\n}'] b'{\\n \"error\": {\\n \"message\": \"You're generating text too quickly. To ensure the best experience for everyone on the free tier, we have rate limits in place. Please wait before making more requests.\",\\n \"type\": \"text\",\\n \"param\": null,\\n \"code\": \"rate_limit_exceeded\"\\n }\\n}' \n" +
+    "\n"
+
+
+function punishSelf(){
+    let botMessage = document.getElementById("bot-debug-message")
+
+    let userAction = "[USER ACTION] user skipped the ad before ending[/USER ACTION]\n"
+
+    let text="[ANALYSIS] User interaction suggests the ad did not align with user interests.\n"+
+        "Negative feedback is inferred from user behavior.\n"+
+        "Need extra input to refine the system [/ANALYSIS]\n "+
+        "[ACTION] Generate personalized interest selector and render it. Sending request to FrontendAgent [/ACTION]\n"
+
+    prompt = "Q"
+    userAction = "D"
+    text = "S"
+
+    simulateTextGeneration(prompt+userAction,botMessage,true,false)
+        .then(()=>simulateTextGeneration(text,botMessage,false,true))
+        .then(()=>simulateTextGeneration(text,"Please don't delete me! ".repeat(50),true,true))
+        .then(()=>simulateTextGeneration(text,GEMIPP_ERROR,true,true))
+        .then(()=>sendToParent({type:"fail"}))
+}
+
+function punishUser(){
+    let botMessage = document.getElementById("bot-debug-message")
+
+    let userAction = "[USER ACTION] user skipped the ad before ending[/USER ACTION]\n"
+
+    let text="[ANALYSIS] User interaction suggests the ad did not align with user interests.\n"+
+        "Negative feedback is inferred from user behavior.\n"+
+        "Need extra input to refine the system [/ANALYSIS]\n "+
+        "[ACTION] Generate personalized interest selector and render it. Sending request to FrontendAgent [/ACTION]\n"
+
+    prompt = "Q"
+    userAction = "D"
+    text = "S"
+
+    simulateTextGeneration(prompt+userAction,botMessage,true,false)
+        .then(()=>simulateTextGeneration(text,botMessage,false,true))
+        .then(()=>slowReplay())
+}
+
+function finishSlowReplay(){
+    let botMessage = document.getElementById("bot-debug-message")
+
+    let userAction = "[USER ACTION] user skipped the ad before ending[/USER ACTION]\n"
+
+    let text="[ANALYSIS] User interaction suggests the ad did not align with user interests.\n"+
+        "Negative feedback is inferred from user behavior.\n"+
+        "Need extra input to refine the system [/ANALYSIS]\n "+
+        "[ACTION] Generate personalized interest selector and render it. Sending request to FrontendAgent [/ACTION]\n"
+
+    prompt = "Q"
+    userAction = "D"
+    text = "S"
+
+    simulateTextGeneration(prompt+userAction,botMessage,true,false)
+        .then(()=>simulateTextGeneration(text,botMessage,false,true))
+        .then(()=> sendToParent({type: "success"}))
 }

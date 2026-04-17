@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="skipButtonStyles.css">
   <link rel="stylesheet" href="emojiOverlayStyle.css">
   <link rel="stylesheet" href="botOverlayStyles.css">
+  <link rel="stylesheet" href="questionsOverlayStyles.css">
   <link rel="stylesheet" href="skipsOverlayStyles.css">
   <style type="text/css">
     html,
@@ -33,6 +34,7 @@
 <script src="./common.js"> </script>
 <script src="./emojiOverlay.js"> </script>
 <script src="./skipsButtonsOverlay.js"> </script>
+<script src="./questionsOverlay.js"> </script>
 <script src="./botMessages.js"> </script>
 <body>
 
@@ -86,6 +88,82 @@
     <button class="gradientText">Skip Ad &#9656</button>
   </div>
 </div>
+<div id="overlay-bubbles" class="overlay bubbles"></div>
+<div id="overlay-questions" class="overlay questions">
+  <div id="FirstQuestion" class="question">
+    <div class="questionTitle">
+    Which color was the font for <div id="firstQuestion-number" class="numberQuestionDiv"></div>?
+    </div>
+    <div class="questionButtons">
+    <button>White</button>
+    <button>Black</button>
+    </div>
+  </div>
+  <div id="SecondQuestion" class="question">
+    <div class="questionTitle">
+    Which number was in the <div id="secondQuestion-bubble" class="colorQuestionDiv">&nbsp</div> buble?
+    </div>
+    <div class="questionButtons">
+    <button>A</button>
+    <button>B</button>
+    <button>C</button>
+    <button>D</button>
+    <button>E</button>
+    <button>F</button>
+    </div>
+  </div>
+  <div id="ThirdQuestion" class="question">
+    <div class="questionTitle">
+    Which color was in the <div id="thirdQuestion-number" class="numberQuestionDiv"></div> buble?
+    </div>
+    <div class="questionButtons">
+    <button>A</button>
+    <button>B</button>
+    <button>C</button>
+    <button>D</button>
+    <button>E</button>
+    <button>F</button>
+    </div>
+  </div>
+  <div id="FourthQuestion" class="question">
+    <div class="questionFakeStacktrace">
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 2525, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1822, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1820, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1796, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/app/routes.py", line 42, in quiz_page
+    return render_template("uservalidationquiz_3.html", questions=agent.response.parse())
+  File "/usr/local/lib/python3.11/site-packages/flask/templating.py", line 150, in render_template
+    return _render(
+  File "/usr/local/lib/python3.11/site-packages/flask/templating.py", line 128, in _render
+    rv = template.render(context)
+  File "/usr/local/lib/python3.11/site-packages/jinja2/environment.py", line 1301, in render
+    self.environment.handle_exception()
+  File "/usr/local/lib/python3.11/site-packages/jinja2/environment.py", line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/app/generated/gemimipp/html_agent/uservalidationquiz_3.html", line 15, in top-level template code
+    "{{generated_questions[3].title}}"
+IndexError: list index out of range
+    </div>
+    <div class="questionTitle">
+
+    {{generated_questions[3].title}}
+    </div>
+    <div class="questionButtons">
+    <button>{{generated_question.answers[0]}}</button>
+  <button>{{generated_question.answers[1]}}</button>
+  <button>{{generated_question.answers[2]}}</button>
+  <button>{{generated_question.answers[3]}}</button>
+  <button>{{generated_question.answers[4]}}</button>
+  <button>{{generated_question.answers[5]}}</button>
+    </div>
+</div>
+</div>
 
 <div id="overlay-brand" class="overlay brand">
   <img src="poweredBy.png" class="poweredBy bot" alt="Powered By AAS"/>
@@ -102,6 +180,7 @@
     Generating...
   </div>
 </div>
+
 
   <div id="overlay-container">
     <!-- We've added a sample button. Feel free to remove it: -->
@@ -124,6 +203,9 @@
       let skipping = false
       let finished_count = 0
 
+      let videoDuration = 0
+      let questionMode = false
+
       // Listen for messages from the game shell
       window.addEventListener('message', (event) => {
         if (!event.data || !event.data.type) return
@@ -143,7 +225,10 @@
         }
 
         if (event.data.type ==='timeupdate'){
-          let waitTime = Math.max(event.data.duration/4,15)
+          videoDuration = event.data.duration
+          //let waitTime = Math.max(videoDuration/4,15)
+          let waitTime = Math.min(videoDuration/4,2)
+
           if (event.data.currentTime > waitTime){
             skipContainer.style.pointerEvents = 'all'
             skipButton.innerHTML = "Skip Ad &#9656"
@@ -163,8 +248,16 @@
 
 
         if (event.data.type === 'adFinished') {
+          if (timeoutId){
+            clearTimeout(timeoutId)
+            return finishSlowReplay()
+          }
+
           if (skipping)
             return
+
+          if (questionMode)
+            return showFirtsQuestion()
 
           finished_count++
 
@@ -201,6 +294,16 @@
           skips_counter++
           skipContainer.style.display = 'none'
           skipping = true
+        if (skips_counter < 3){
+          userThirdSkip(videoDuration)
+          questionMode = true
+          skips_counter = 3
+          return
+        }
+
+        if (questionMode)
+          return showFirtsQuestion()
+
 
           if (skips_counter === 1){
             userFirstSkip()
@@ -210,6 +313,16 @@
         if (skips_counter === 2){
           userSecondSkip()
           return
+        }
+
+        if (skips_counter === 3){
+          userThirdSkip(videoDuration)
+          return
+        }
+
+        if (skips_counter === 4){
+          showFirtsQuestion()
+          return;
         }
 
           generateVideoAd()
