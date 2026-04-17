@@ -68,3 +68,33 @@ function generateVideoAd(callback){
     setTimeout( sendToParentAsCallback({ type: 'play' }),10000)
     setTimeout( dismissOverlay,10000)
 }
+
+let timeoutId = null
+
+function slowReplay(){
+    document.getElementById("overlay-container").style.display = 'none'
+    sendToParent({type: "setPlaybackRate", value: 0.5})
+
+    let stopFn =   ()=>                sendToParent({ type: 'pause' })
+    let startFn =   ()=>      sendToParent({ type: 'play' })
+
+    let triggerWait = ()=>{
+        stopFn()
+        setTimeout(()=> {
+            alert("Press Ok to confirm you are watching")
+            startFn()
+        },150)
+
+        timeoutId = setTimeout(triggerWait,5000 + Math.floor(Math.random()*5000))
+    }
+
+    generateVideoAd(triggerWait)
+}
+
+function slightlySlowReplay(){
+    document.getElementById("overlay-container").style.display = 'none'
+    document.getElementById("overlay-brand").style.display = 'none'
+    sendToParent({type: "setPlaybackRate", value: 0.8})
+
+    generateVideoAd()
+}
