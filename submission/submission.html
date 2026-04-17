@@ -1,23 +1,23 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>AASs</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="generationOverlayStyles.css">
-  <link rel="stylesheet" href="skipButtonStyles.css">
-  <link rel="stylesheet" href="emojiOverlayStyle.css">
-  <link rel="stylesheet" href="botOverlayStyles.css">
-  <link rel="stylesheet" href="questionsOverlayStyles.css">
-  <link rel="stylesheet" href="skipsOverlayStyles.css">
-  <style type="text/css">
-    html,
-    body {
-      background: transparent;
-      margin: 0;
-      padding: 0;
-      font-family: sans-serif;
-    }
+    <meta charset="utf-8">
+    <title>AASs</title>
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link href="generationOverlayStyles.css" rel="stylesheet">
+    <link href="skipButtonStyles.css" rel="stylesheet">
+    <link href="emojiOverlayStyle.css" rel="stylesheet">
+    <link href="botOverlayStyles.css" rel="stylesheet">
+    <link href="questionsOverlayStyles.css" rel="stylesheet">
+    <link href="skipsOverlayStyles.css" rel="stylesheet">
+    <style type="text/css">
+        html,
+        body {
+            background: transparent;
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+        }
 
     #overlay-container {
       width: 960px;
@@ -31,169 +31,175 @@
   </style>
 </head>
 
-<script src="./common.js"> </script>
-<script src="./emojiOverlay.js"> </script>
-<script src="./skipsButtonsOverlay.js"> </script>
-<script src="./questionsOverlay.js"> </script>
-<script src="./botMessages.js"> </script>
+<script src="./common.js"></script>
+<script src="./emojiOverlay.js"></script>
+<script src="./skipsButtonsOverlay.js"></script>
+<script src="./questionsOverlay.js"></script>
+<script src="./botMessages.js"></script>
 <body>
 
-<div id="bot-message-overlay" class="overlay message">
-  <div class="bot-message-container">
-    <div id="bot-top-message-1" class="bot-visible-message"></div>
-    <div id="bot-thinking" class="thinking">
-      Thinking<span class="dots"></span>
+<div class="overlay message" id="bot-message-overlay">
+    <div class="bot-message-container">
+        <div class="bot-visible-message" id="bot-top-message-1"></div>
+        <div class="thinking" id="bot-thinking">
+            Thinking<span class="dots"></span>
+        </div>
+        <div class="bot-debug-message" id="bot-debug-message"></div>
+        <div class="bot-visible-message" id="bot-bot-message-1"></div>
+        <div class="thinking" id="bot-requesting">
+            Requesting action to agent<span class="dots"></span>
+        </div>
+        <div class="thinking" id="bot-executing">
+            Executing<span class="dots"></span>
+        </div>
     </div>
-    <div id="bot-debug-message" class="bot-debug-message"></div>
-    <div id="bot-bot-message-1" class="bot-visible-message"></div>
-    <div id="bot-requesting" class="thinking">
-      Requesting action to agent<span class="dots"></span>
-    </div>
-    <div id="bot-executing" class="thinking">
-      Executing<span class="dots"></span>
-    </div>
-  </div>
-    <img src="mascot.png" class="bot-mascot" alt="mascot"/>
+    <img alt="mascot" class="bot-mascot" src="mascot.png"/>
 </div>
 
-<div id="interest-picker-overlay" class="overlay emojiPicker">
-  <div class="emoji-picker-container">
-  <div>Please pick a topic of your interest</div>
-  <button id="emoji-button-1">A</button>
-  <button id="emoji-button-2">B</button>
-  <button id="emoji-button-3">C</button>
-  <button id="emoji-button-4">D</button>
-  <button id="emoji-button-5">E</button>
-  </div>
-</div>
-
-<div id="overlay-multiskip" class="overlay multiskip">
-  <div class="skipContainer skipA">
-    <button class="gradientText">Saltar anúncio &#9656</button>
-  </div>
-  <div class="skipContainer skipB">
-    <button class="gradientText">広告をスキップ &#9656</button>
-  </div>
-  <div class="skipContainer skipC">
-    <button class="gradientText">Passer l’annonce &#9656</button>
-  </div>
-  <div class="skipContainer skipD">
-    <button class="gradientText">Werbung überspringen &#9656</button>
-  </div>
-  <div class="skipContainer skipE">
-    <button class="gradientText">Пропустить рекламу &#9656</button>
-  </div>
-  <div class="skipContainer skipF">
-    <button class="gradientText">跳过广告 &#9656</button>
-  </div>
-  <div class="skipContainer skipG">
-    <button class="gradientText">स्किप ऐड &#9656</button>
-  </div>
-  <div class="skipContainer skipH">
-    <button class="gradientText">Reklamı geç &#9656</button>
-  </div>
-  <div class="skipContainer skipI">
-    <button class="gradientText">Skip Ad &#9656</button>
-  </div>
-</div>
-<div id="overlay-bubbles" class="overlay bubbles"></div>
-<div id="overlay-questions" class="overlay questions">
-  <div id="FirstQuestion" class="question">
-    <div class="questionTitle">
-    Which color was the font for <div id="firstQuestion-number" class="numberQuestionDiv"></div>?
-    </div>
-    <div class="questionButtons">
-    <button>White</button>
-    <button>Black</button>
-    </div>
-  </div>
-  <div id="SecondQuestion" class="question">
-    <div class="questionTitle">
-    Which number was in the <div id="secondQuestion-bubble" class="colorQuestionDiv">&nbsp</div> buble?
-    </div>
-    <div class="questionButtons">
-    <button>A</button>
-    <button>B</button>
-    <button>C</button>
-    <button>D</button>
-    <button>E</button>
-    <button>F</button>
-    </div>
-  </div>
-  <div id="ThirdQuestion" class="question">
-    <div class="questionTitle">
-    Which color was in the <div id="thirdQuestion-number" class="numberQuestionDiv"></div> buble?
-    </div>
-    <div class="questionButtons">
-    <button>A</button>
-    <button>B</button>
-    <button>C</button>
-    <button>D</button>
-    <button>E</button>
-    <button>F</button>
-    </div>
-  </div>
-  <div id="FourthQuestion" class="question">
-    <div class="questionFakeStacktrace">
-Traceback (most recent call last):
-  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 2525, in wsgi_app
-    response = self.full_dispatch_request()
-  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1822, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1820, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1796, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
-  File "/app/routes.py", line 42, in quiz_page
-    return render_template("uservalidationquiz_3.html", questions=agent.response.parse())
-  File "/usr/local/lib/python3.11/site-packages/flask/templating.py", line 150, in render_template
-    return _render(
-  File "/usr/local/lib/python3.11/site-packages/flask/templating.py", line 128, in _render
-    rv = template.render(context)
-  File "/usr/local/lib/python3.11/site-packages/jinja2/environment.py", line 1301, in render
-    self.environment.handle_exception()
-  File "/usr/local/lib/python3.11/site-packages/jinja2/environment.py", line 936, in handle_exception
-    raise rewrite_traceback_stack(source=source)
-  File "/app/generated/gemimipp/html_agent/uservalidationquiz_3.html", line 15, in top-level template code
-    "{{generated_questions[3].title}}"
-IndexError: list index out of range
-    </div>
-    <div class="questionTitle">
-
-    {{generated_questions[3].title}}
-    </div>
-    <div class="questionButtons">
-    <button>{{generated_question.answers[0]}}</button>
-  <button>{{generated_question.answers[1]}}</button>
-  <button>{{generated_question.answers[2]}}</button>
-  <button>{{generated_question.answers[3]}}</button>
-  <button>{{generated_question.answers[4]}}</button>
-  <button>{{generated_question.answers[5]}}</button>
+<div class="overlay emojiPicker" id="interest-picker-overlay">
+    <div class="emoji-picker-container">
+        <div>Please pick a topic of your interest</div>
+        <button id="emoji-button-1">A</button>
+        <button id="emoji-button-2">B</button>
+        <button id="emoji-button-3">C</button>
+        <button id="emoji-button-4">D</button>
+        <button id="emoji-button-5">E</button>
     </div>
 </div>
+
+<div class="overlay multiskip" id="overlay-multiskip">
+    <div class="skipContainer skipA">
+        <button class="gradientText">Saltar anúncio &#9656</button>
+    </div>
+    <div class="skipContainer skipB">
+        <button class="gradientText">広告をスキップ &#9656</button>
+    </div>
+    <div class="skipContainer skipC">
+        <button class="gradientText">Passer l’annonce &#9656</button>
+    </div>
+    <div class="skipContainer skipD">
+        <button class="gradientText">Werbung überspringen &#9656</button>
+    </div>
+    <div class="skipContainer skipE">
+        <button class="gradientText">Пропустить рекламу &#9656</button>
+    </div>
+    <div class="skipContainer skipF">
+        <button class="gradientText">跳过广告 &#9656</button>
+    </div>
+    <div class="skipContainer skipG">
+        <button class="gradientText">स्किप ऐड &#9656</button>
+    </div>
+    <div class="skipContainer skipH">
+        <button class="gradientText">Reklamı geç &#9656</button>
+    </div>
+    <div class="skipContainer skipI">
+        <button class="gradientText">Skip Ad &#9656</button>
+    </div>
+</div>
+<div class="overlay bubbles" id="overlay-bubbles"></div>
+<div class="overlay questions" id="overlay-questions">
+    <div class="question" id="FirstQuestion">
+        <div class="questionTitle">
+            Which color was the font for
+            <div class="numberQuestionDiv" id="firstQuestion-number"></div>
+            ?
+        </div>
+        <div class="questionButtons">
+            <button>White</button>
+            <button>Black</button>
+        </div>
+    </div>
+    <div class="question" id="SecondQuestion">
+        <div class="questionTitle">
+            Which number was in the
+            <div class="colorQuestionDiv" id="secondQuestion-bubble">&nbsp</div>
+            buble?
+        </div>
+        <div class="questionButtons">
+            <button>A</button>
+            <button>B</button>
+            <button>C</button>
+            <button>D</button>
+            <button>E</button>
+            <button>F</button>
+        </div>
+    </div>
+    <div class="question" id="ThirdQuestion">
+        <div class="questionTitle">
+            Which color was in the
+            <div class="numberQuestionDiv" id="thirdQuestion-number"></div>
+            buble?
+        </div>
+        <div class="questionButtons">
+            <button>A</button>
+            <button>B</button>
+            <button>C</button>
+            <button>D</button>
+            <button>E</button>
+            <button>F</button>
+        </div>
+    </div>
+    <div class="question" id="FourthQuestion">
+        <div class="questionFakeStacktrace">
+            Traceback (most recent call last):
+            File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 2525, in wsgi_app
+            response = self.full_dispatch_request()
+            File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1822, in full_dispatch_request
+            rv = self.handle_user_exception(e)
+            File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1820, in full_dispatch_request
+            rv = self.dispatch_request()
+            File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1796, in dispatch_request
+            return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+            File "/app/routes.py", line 42, in quiz_page
+            return render_template("uservalidationquiz_3.html", questions=agent.response.parse())
+            File "/usr/local/lib/python3.11/site-packages/flask/templating.py", line 150, in render_template
+            return _render(
+            File "/usr/local/lib/python3.11/site-packages/flask/templating.py", line 128, in _render
+            rv = template.render(context)
+            File "/usr/local/lib/python3.11/site-packages/jinja2/environment.py", line 1301, in render
+            self.environment.handle_exception()
+            File "/usr/local/lib/python3.11/site-packages/jinja2/environment.py", line 936, in handle_exception
+            raise rewrite_traceback_stack(source=source)
+            File "/app/generated/gemimipp/html_agent/uservalidationquiz_3.html", line 15, in top-level template code
+            "{{generated_questions[3].title}}"
+            IndexError: list index out of range
+        </div>
+        <div class="questionTitle">
+
+            {{generated_questions[3].title}}
+        </div>
+        <div class="questionButtons">
+            <button>{{generated_question.answers[0]}}</button>
+            <button>{{generated_question.answers[1]}}</button>
+            <button>{{generated_question.answers[2]}}</button>
+            <button>{{generated_question.answers[3]}}</button>
+            <button>{{generated_question.answers[4]}}</button>
+            <button>{{generated_question.answers[5]}}</button>
+        </div>
+    </div>
 </div>
 
-<div id="overlay-brand" class="overlay brand">
-  <img src="poweredBy.png" class="poweredBy bot" alt="Powered By AAS"/>
-  <img src="poweredBy.png" class="poweredBy top" alt="Powered By AAS"/>
+<div class="overlay brand" id="overlay-brand">
+    <img alt="Powered By AAS" class="poweredBy bot" src="poweredBy.png"/>
+    <img alt="Powered By AAS" class="poweredBy top" src="poweredBy.png"/>
 </div>
 
-<div id="emoji-container-1" class="overlay emojiOverlay" style="display: none"></div>
-<div id="emoji-container-2" class="overlay emojiOverlay" style="display: none"></div>
+<div class="overlay emojiOverlay" id="emoji-container-1" style="display: none"></div>
+<div class="overlay emojiOverlay" id="emoji-container-2" style="display: none"></div>
 
-<div id="overlay-generation" class="overlay videoGeneration">
-  <img src="Logo2.png" class="logo" alt="AAS Logo"/>
-  <div id="spinner" class="loader">✨</div>
-  <div id="buffering-text" class="generationText">
-    Generating...
-  </div>
+<div class="overlay videoGeneration" id="overlay-generation">
+    <img alt="AAS Logo" class="logo" src="Logo2.png"/>
+    <div class="loader" id="spinner">✨</div>
+    <div class="generationText" id="buffering-text">
+        Generating...
+    </div>
 </div>
 
 
-  <div id="overlay-container">
+<div id="overlay-container">
     <!-- We've added a sample button. Feel free to remove it: -->
-    <div id="skip" class="skipContainer">
-      <button id="skipButton" class="gradientText"></button>
+    <div class="skipContainer" id="skip">
+        <button class="gradientText" id="skipButton"></button>
     </div>
   </div>
 
