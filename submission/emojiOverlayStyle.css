@@ -2,7 +2,7 @@
 }
 
 .overlay.emojiOverlay .emoji-1,
-.overlay.emojiOverlay .emoji-2{
+.overlay.emojiOverlay .emoji-2 {
     position: absolute;
     user-select: none;
     will-change: transform;
@@ -12,15 +12,15 @@
     opacity: 0.8;
 }
 
-.overlay.emojiOverlay .emoji-1{
+.overlay.emojiOverlay .emoji-1 {
     font-size: 2rem;
 }
 
-.overlay.emojiOverlay .emoji-2{
+.overlay.emojiOverlay .emoji-2 {
     font-size: 6rem;
 }
 
-.overlay.emojiPicker{
+.overlay.emojiPicker {
     display: none;
     z-index: 200;
     flex-direction: column;
@@ -40,7 +40,7 @@
     margin-bottom: 1rem;
 }
 
-.overlay.emojiPicker button{
+.overlay.emojiPicker button {
     padding: 0.25rem;
     border-radius: 10px;
     margin: 0.15rem;
@@ -53,13 +53,13 @@
     border-style: solid;
 }
 
-.overlay.emojiPicker button:hover{
+.overlay.emojiPicker button:hover {
     background: blueviolet;
     color: white;
     border-color: white;
 }
 
-.emoji-picker-container{
+.emoji-picker-container {
     width: 50%;
     background: rgb(108 73 190 / 0.8);
     display: flex;

@@ -1,10 +1,10 @@
-.overlay.message{
+.overlay.message {
     display: none;
 
     z-index: 250;
 }
 
-.bot-mascot{
+.bot-mascot {
     position: relative;
     right: -65%;
     bottom: -40%;
@@ -13,7 +13,7 @@
     user-select: none;
 }
 
-.bot-visible-message{
+.bot-visible-message {
 
 }
 
@@ -35,7 +35,7 @@
 }
 
 
-.bot-message-container{
+.bot-message-container {
     position: absolute;
     top: 10%;
     left: 10%;
@@ -63,9 +63,19 @@
 }
 
 @keyframes dots {
-    0%   { content: ""; }
-    25%  { content: "."; }
-    50%  { content: ".."; }
-    75%  { content: "..."; }
-    100% { content: ""; }
+    0% {
+        content: "";
+    }
+    25% {
+        content: ".";
+    }
+    50% {
+        content: "..";
+    }
+    75% {
+        content: "...";
+    }
+    100% {
+        content: "";
+    }
 }

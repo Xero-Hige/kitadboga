@@ -13,9 +13,9 @@
     cursor: pointer;
 }
 
-.skipContainer .gradientText{
+.skipContainer .gradientText {
     padding: 10px 18px;
-    border:none;
+    border: none;
 
     font-size: 1.25rem;
     font-weight: 400;

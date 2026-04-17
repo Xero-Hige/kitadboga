@@ -1,65 +1,65 @@
 let setEmoji = ""
 
 EMOJIS = [
-    ["Artemis Mission","🚀"],
-    ["Healthy Recipes","🥗"],
-    ["Music","🎶"],
-    ["Films","🎬"],
-    ["Pandas","🐼"],
-    ["Football","⚽"],
-    ["Traveling","✈️"],
-    ["Videogaming","🎮"],
-    ["Photography","📸"],
-    ["Rose gardening","🌹"],
-    ["Dog Kissing","🐶"],
-    ["Bread Baking","🍞"],
-    ["Cooking beans","🫘"],
-    ["Crow watching","🐦‍⬛"],
-    ["Sunflower farming","🌻"],
-    ["Cherry Blossom Festival","🌸"],
-    ["Hibiscus Tea","🌺"]
+    ["Artemis Mission", "🚀"],
+    ["Healthy Recipes", "🥗"],
+    ["Music", "🎶"],
+    ["Films", "🎬"],
+    ["Pandas", "🐼"],
+    ["Football", "⚽"],
+    ["Traveling", "✈️"],
+    ["Videogames", "🎮"],
+    ["Photography", "📸"],
+    ["Rose gardening", "🌹"],
+    ["Dog Kissing", "🐶"],
+    ["Bread Baking", "🍞"],
+    ["Cooking beans", "🫘"],
+    ["Crow watching", "🐦‍⬛"],
+    ["Sunflower farming", "🌻"],
+    ["Cherry Blossom Festival", "🌸"],
+    ["Hibiscus Tea", "🌺"]
 ]
 
-function showEmojiPicker(){
-    document.getElementById('bot-message-overlay').style.display='none'
+function showEmojiPicker() {
+    document.getElementById('bot-message-overlay').style.display = 'none'
 
     let emojis = [...EMOJIS].sort(() => Math.random() - 0.5).slice(0, 5);
 
-    for (let i = 0; i<5;i++) {
-        let button = document.getElementById(`emoji-button-${i+1}`)
+    for (let i = 0; i < 5; i++) {
+        let button = document.getElementById(`emoji-button-${i + 1}`)
         button.innerText = emojis[i][0] + emojis[i][1]
-        button.onclick = ()=>{
-            document.getElementById('interest-picker-overlay').style.display='none'
-            document.getElementById('emoji-container-1').style.display='flex'
+        button.onclick = () => {
+            document.getElementById('interest-picker-overlay').style.display = 'none'
+            document.getElementById('emoji-container-1').style.display = 'flex'
             let animate = spawnEmojiOverlay(emojis[i][1])
-            setEmoji=emojis[i][1]
+            setEmoji = emojis[i][1]
             generateVideoAd(animate)
         }
     }
 
-    document.getElementById('interest-picker-overlay').style.display='flex'
+    document.getElementById('interest-picker-overlay').style.display = 'flex'
 }
 
-function hideEmojiOverlay(){
+function hideEmojiOverlay() {
     let container = document.getElementById('emoji-container-1')
-    if(container) container.style.display='none'
-    container =  document.getElementById('emoji-container-2')
-    if(container) container.style.display='none'
+    if (container) container.style.display = 'none'
+    container = document.getElementById('emoji-container-2')
+    if (container) container.style.display = 'none'
 }
 
 function showBiggerEmojiOverlay() {
-    document.getElementById('bot-message-overlay').style.display='none'
+    document.getElementById('bot-message-overlay').style.display = 'none'
 
     document.getElementById(`emoji-container-1`).remove()
-    document.getElementById(`emoji-container-2`).style.display='flex'
-    let animateEmojis = spawnEmojiOverlay(setEmoji,2)
+    document.getElementById(`emoji-container-2`).style.display = 'flex'
+    let animateEmojis = spawnEmojiOverlay(setEmoji, 2)
 
     generateVideoAd(animateEmojis)
 }
 
-function spawnEmojiOverlay(emoji,iteration=1){
+function spawnEmojiOverlay(emoji, iteration = 1) {
     const container = document.getElementById(`emoji-container-${iteration}`)
-    const N = 30*iteration;
+    const N = 30 * iteration;
 
     const items = []
 
@@ -74,7 +74,7 @@ function spawnEmojiOverlay(emoji,iteration=1){
         const vx = (6 - (Math.random() * 12)) || -1
         const vy = (6 - (Math.random() * 12)) || 1
 
-        items.push({ el, x, y, vx, vy })
+        items.push({el, x, y, vx, vy})
 
         el.style.left = x + 'px'
         el.style.top = y + 'px'
