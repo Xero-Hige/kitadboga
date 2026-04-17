@@ -65,7 +65,10 @@ function showQuestionsOverlay() {
 let skipped = 0
 let incorrectAnswers = 0
 
+let questionMode = false
+
 function showFirtsQuestion(){
+    questionMode = true
     const questionForm = document.getElementById('FirstQuestion')
     const options = questionForm.querySelectorAll('button')
 
@@ -96,7 +99,10 @@ function showSecondQuestion(){
 
     document.getElementById('secondQuestion-bubble').style.background = colors[0][0]
 
-    let answers = [numbers[0],numbers[0]+1,numbers[0]-1,numbers[3],numbers[3]+1,numbers[3]-1]
+    const pairs = [[-4, -2], [-2, -1], [-2, 2], [-1, 1], [1, 2], [2, 4]]
+    const [distance0A, distance0B] = pairs[Math.floor(Math.random() * pairs.length)]
+    const [distance3A, distance3B] = pairs[Math.floor(Math.random() * pairs.length)]
+    let answers = [numbers[0], numbers[0] + distance0A, numbers[0] + distance0B, numbers[3], numbers[3] + distance3A, numbers[3] + distance3B]
 
     const shuffledAnswers = answers.sort(() => Math.random() - 0.5);
 

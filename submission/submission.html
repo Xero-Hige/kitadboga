@@ -212,7 +212,6 @@ IndexError: list index out of range
       let finished_count = 0
 
       let videoDuration = 0
-      let questionMode = false
 
       // Listen for messages from the game shell
       window.addEventListener('message', (event) => {
@@ -302,14 +301,8 @@ IndexError: list index out of range
           skips_counter++
           skipContainer.style.display = 'none'
           skipping = true
-        if (skips_counter < 3){
-          userThirdSkip(videoDuration)
-          questionMode = true
-          skips_counter = 3
-          return
-        }
 
-        if (questionMode)
+          if (questionMode)
           return showFirtsQuestion()
 
 
@@ -330,7 +323,7 @@ IndexError: list index out of range
 
         if (skips_counter === 4){
           showFirtsQuestion()
-          return;
+          return
         }
 
           generateVideoAd()
