@@ -19,16 +19,15 @@
             font-family: sans-serif;
         }
 
-    #overlay-container {
-      width: 960px;
-      height: 540px;
-    }
+        #overlay-container {
+            width: 960px;
+            height: 540px;
+        }
 
 
+        /* Your style here... (feel free to remove this example styling) */
 
-    /* Your style here... (feel free to remove this example styling) */
-
-  </style>
+    </style>
 </head>
 
 <script src="./common.js"></script>
@@ -53,7 +52,7 @@
             Executing<span class="dots"></span>
         </div>
     </div>
-    <img alt="mascot" class="bot-mascot" src="mascot.png"/>
+    <img id="bot-mascot" alt="mascot" class="bot-mascot" src="mascot.png"/>
 </div>
 
 <div class="overlay emojiPicker" id="interest-picker-overlay">
@@ -201,141 +200,132 @@
     <div class="skipContainer" id="skip">
         <button class="gradientText" id="skipButton"></button>
     </div>
-  </div>
+</div>
 
-  <script type="text/javascript">
-    (function(window, document){
-      // This is how you tell the parent window that the ad was successfully skipped.
-      function adSuccess() {
-        window.top.postMessage({ type: 'success' }, '*')
-      }
-
-      const skipContainer = document.getElementById('skip')
-      const skipButton = document.getElementById('skipButton')
-
-      let skips_counter = 0
-      let skipping = false
-      let finished_count = 0
-
-      let videoDuration = 0
-
-      // Listen for messages from the game shell
-      window.addEventListener('message', (event) => {
-        if (!event.data || !event.data.type) return
-
-        if (event.data.type === 'adStarted') {
-          // Show the skip button when the ad starts
-          sendToParent({ type: 'pause' })
-          generateVideoAd()
-
-          skipping = false
-
-          //window.location.replace("https://{ad.company.ulr}");
-          //state_executions++
-          //skipButton.style.display = 'block'
-          //let animateEmojis = spawnEmojiOverlay()
-          //animateEmojis()
+<script type="text/javascript">
+    (function (window, document) {
+        // This is how you tell the parent window that the ad was successfully skipped.
+        function adSuccess() {
+            window.top.postMessage({type: 'success'}, '*')
         }
 
-        if (event.data.type ==='timeupdate'){
-          videoDuration = event.data.duration
-          //let waitTime = Math.max(videoDuration/4,15)
-          let waitTime = Math.min(videoDuration/4,2)
+        let skipContainer = document.getElementById('skip')
+        let skipButton = document.getElementById('skipButton')
 
-          if (event.data.currentTime > waitTime){
-            skipContainer.style.pointerEvents = 'all'
-            skipButton.innerHTML = "Skip Ad &#9656"
-          }else {
-            skipContainer.style.pointerEvents = 'none'
-            let remainingTime =(Math.round(waitTime)-Math.round(event.data.currentTime)).toString()
-            skipButton.innerText = `Skip Ad in ${remainingTime}`
-          }
-        }
+        // Listen for messages from the game shell
+        window.addEventListener('message', (event) => {
+            if (!event.data || !event.data.type) return
 
-        if (event.data.type ==='timeupdate' && event.data.currentTime < 1)
-          skipping = false
+            if (event.data.type === 'adStarted') {
+                // Show the skip button when the ad starts
+                sendToParent({type: 'pause'})
+                generateVideoAd()
 
-        if (event.data.type ==='timeupdate' && event.data.currentTime > 1)
-          if (skipContainer.style.pointerEvents === 'none')
-            skipContainer.style.display = 'block'
+                skipping = false
 
-
-        if (event.data.type === 'adFinished') {
-          if (timeoutId){
-            clearTimeout(timeoutId)
-            return finishSlowReplay()
-          }
-
-          if (skipping)
-            return
-
-          if (questionMode)
-            return showFirtsQuestion()
-
-          finished_count++
-
-          skipContainer.style.display = 'none'
-          hideEmojiOverlay()
-
-          if (skips_counter === 0 ) {
-            if (finished_count === 1) {
-              document.getElementById("overlay-brand").style.display = 'none'
-              document.getElementById("overlay-container").style.display = 'none'
-              sendToParent({type: "setPlaybackRate", value: 0.8})
-              sendToParent({type: "play"})
-              skipping = false
+                //window.location.replace("https://{ad.company.ulr}");
+                //state_executions++
+                //skipButton.style.display = 'block'
+                //let animateEmojis = spawnEmojiOverlay()
+                //animateEmojis()
             }
 
-            if (finished_count === 2) {
-              sendToParent({type: "success"}) //ENDING 1
+            if (event.data.type === 'timeupdate') {
+                videoDuration = event.data.duration
+                //let waitTime = Math.max(videoDuration/4,15)
+                let waitTime = Math.min(videoDuration / 4, 2)
+
+                if (event.data.currentTime > waitTime) {
+                    skipContainer.style.pointerEvents = 'all'
+                    skipButton.innerHTML = "Skip Ad &#9656"
+                } else {
+                    skipContainer.style.pointerEvents = 'none'
+                    let remainingTime = (Math.round(waitTime) - Math.round(event.data.currentTime)).toString()
+                    skipButton.innerText = `Skip Ad in ${remainingTime}`
+                }
             }
 
-            return
-          }
+            if (event.data.type === 'timeupdate' && event.data.currentTime < 1)
+                skipping = false
 
-          if (skips_counter === 1) {
-            hideEmojiOverlay()
-            userEmojiNoLike()
-          }
-
-          //skipButton.style.display = 'none';
-          //window.top.postMessage({ type: 'fail' }, '*');
-        }
-      });
-
-      skipButton.addEventListener('click', () => {
-          skips_counter++
-          skipContainer.style.display = 'none'
-          skipping = true
-
-          if (questionMode)
-          return showFirtsQuestion()
+            if (event.data.type === 'timeupdate' && event.data.currentTime > 1)
+                if (skipContainer.style.pointerEvents === 'none')
+                    skipContainer.style.display = 'block'
 
 
-          if (skips_counter === 1){
-            userFirstSkip()
-            return
-          }
+            if (event.data.type === 'adFinished') {
+                if (timeoutId) {
+                    clearTimeout(timeoutId)
+                    return finishSlowReplay()
+                }
 
-        if (skips_counter === 2){
-          userSecondSkip()
-          return
-        }
+                if (skipping)
+                    return
 
-        if (skips_counter === 3){
-          userThirdSkip(videoDuration)
-          return
-        }
+                if (questionMode)
+                    return showFirtsQuestion()
 
-        if (skips_counter === 4){
-          showFirtsQuestion()
-          return
-        }
+                finished_count++
 
-          generateVideoAd()
-      });
+                skipContainer.style.display = 'none'
+                hideEmojiOverlay()
+
+                if (skips_counter === 0) {
+                    if (finished_count === 1) {
+                        skipping = false
+                        return praiseUser()
+                    }
+
+                    if (finished_count === 2) {
+                        sendToParent({type: "success"}) //ENDING 1
+                    }
+
+                    return
+                }
+
+                if (skips_counter === 1) {
+                    hideEmojiOverlay()
+                    userEmojiNoLike()
+                }
+
+                //skipButton.style.display = 'none';
+                //window.top.postMessage({ type: 'fail' }, '*');
+            }
+        });
+
+        skipButton.addEventListener('click', () => {
+            skips_counter++
+            skipContainer.style.display = 'none'
+            skipping = true
+
+            if (questionMode)
+                return showFirtsQuestion()
+
+
+            if (skips_counter === 1) {
+                userFirstSkip()
+                return
+            }
+
+            if (skips_counter === 2) {
+                userSecondSkip()
+                return
+            }
+
+            if (skips_counter === 3) {
+                userThirdSkip(videoDuration)
+                return
+            }
+
+            if (skips_counter === 4) {
+                showFirtsQuestion()
+                return
+            }
+
+            generateVideoAd()
+        });
 
     })(window, document);
-  </script>
+</script>
 </body>
 </html>

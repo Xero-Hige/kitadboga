@@ -1,3 +1,14 @@
+//state
+let skipContainer = document.getElementById('skip')
+let skipButton = document.getElementById('skipButton')
+
+let skips_counter = 0
+let skipping = false
+let finished_count = 0
+
+let videoDuration = 0
+//---
+
 function sendToParent(msg) {
     window.top.postMessage(msg, '*')
 }
