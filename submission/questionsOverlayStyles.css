@@ -1,0 +1,87 @@
+.bubble {
+    position: absolute;
+    width: 5rem;
+    height: 5rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    border-radius: 200%;
+    font-weight: 800;
+    font-size: 2rem;
+    opacity: 35%;
+}
+
+.overlay.questions {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.questionTitle {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.numberQuestionDiv {
+    margin: 0.15rem;
+}
+
+.colorQuestionDiv {
+    min-width: 2rem;
+    min-height: 2rem;
+    background: red;
+    border-radius: 200%;
+    margin: 0.15rem;
+}
+
+.questionTitle {
+    display: flex;
+}
+
+.questionButtons {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: space-around;
+    align-items: center;
+    padding: 1rem;
+    width: 100%;
+}
+
+.questionButtons button {
+    width: 40%;
+    flex: 0 0 auto;
+    margin: 0.5rem;
+}
+
+.question {
+    display: none;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+}
+
+.questionFakeStacktrace {
+
+    white-space: pre;
+    font-family: monospace;
+    background-color: #f4f4f4;
+    padding: 0.25rem 1rem;
+    border-radius: 5px;
+    font-size: 0.45rem;
+    width: 60%;
+    color: black;
+}
