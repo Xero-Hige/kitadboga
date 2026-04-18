@@ -232,8 +232,8 @@
 
             if (event.data.type === 'timeupdate') {
                 videoDuration = event.data.duration
-                //let waitTime = Math.max(videoDuration/4,15)
-                let waitTime = Math.min(videoDuration / 4, 2)
+                let waitTime = Math.min(Math.max(videoDuration/3,15),videoDuration-2)
+                //let waitTime = Math.min(videoDuration / 4, 2)
 
                 if (event.data.currentTime > waitTime) {
                     skipContainer.style.pointerEvents = 'all'
@@ -245,85 +245,15 @@
                 }
             }
 
-            if (event.data.type === 'timeupdate' && event.data.currentTime < 1)
-                skipping = false
-
-            if (event.data.type === 'timeupdate' && event.data.currentTime > 1)
+            if (event.data.type === 'timeupdate' && event.data.currentTime > 1.5)
                 if (skipContainer.style.pointerEvents === 'none')
                     skipContainer.style.display = 'block'
 
+            if (event.data.type === 'adFinished')
+                handleAdEnd()
+        })
 
-            if (event.data.type === 'adFinished') {
-                if (timeoutId) {
-                    clearTimeout(timeoutId)
-                    return finishSlowReplay()
-                }
-
-                if (skipping)
-                    return
-
-                if (questionMode)
-                    return showFirtsQuestion()
-
-                finished_count++
-
-                skipContainer.style.display = 'none'
-                hideEmojiOverlay()
-
-                if (skips_counter === 0) {
-                    if (finished_count === 1) {
-                        skipping = false
-                        return praiseUser()
-                    }
-
-                    if (finished_count === 2) {
-                        sendToParent({type: "success"}) //ENDING 1
-                    }
-
-                    return
-                }
-
-                if (skips_counter === 1) {
-                    hideEmojiOverlay()
-                    userEmojiNoLike()
-                }
-
-                //skipButton.style.display = 'none';
-                //window.top.postMessage({ type: 'fail' }, '*');
-            }
-        });
-
-        skipButton.addEventListener('click', () => {
-            skips_counter++
-            skipContainer.style.display = 'none'
-            skipping = true
-
-            if (questionMode)
-                return showFirtsQuestion()
-
-
-            if (skips_counter === 1) {
-                userFirstSkip()
-                return
-            }
-
-            if (skips_counter === 2) {
-                userSecondSkip()
-                return
-            }
-
-            if (skips_counter === 3) {
-                userThirdSkip(videoDuration)
-                return
-            }
-
-            if (skips_counter === 4) {
-                showFirtsQuestion()
-                return
-            }
-
-            generateVideoAd()
-        });
+        skipButton.addEventListener('click', () => handleSkip())
 
     })(window, document);
 </script>

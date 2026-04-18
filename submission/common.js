@@ -1,7 +1,4 @@
 //state
-let skipContainer = document.getElementById('skip')
-let skipButton = document.getElementById('skipButton')
-
 let skips_counter = 0
 let skipping = false
 let finished_count = 0
@@ -78,9 +75,10 @@ function generateVideoAd(callback) {
     if (callback) setTimeout(callback, 10000)
     setTimeout(sendToParentAsCallback({type: 'play'}), 10000)
     setTimeout(dismissOverlay, 10000)
+    setTimeout(skippingFlagCleanup,11000)
 }
 
-let timeoutId = null
+let slowReplayTimeoutId = null
 
 function slowReplay() {
     document.getElementById("overlay-container").style.display = 'none'
@@ -96,7 +94,7 @@ function slowReplay() {
             startFn()
         }, 150)
 
-        timeoutId = setTimeout(triggerWait, 5000 + Math.floor(Math.random() * 5000))
+        slowReplayTimeoutId = setTimeout(triggerWait, 5000 + Math.floor(Math.random() * 5000))
     }
 
     generateVideoAd(triggerWait)
@@ -106,6 +104,72 @@ function slightlySlowReplay() {
     document.getElementById("overlay-container").style.display = 'none'
     document.getElementById("overlay-brand").style.display = 'none'
     sendToParent({type: "setPlaybackRate", value: 0.8})
+
+    generateVideoAd()
+}
+
+//
+
+function skippingFlagCleanup(){
+    skipping = false
+}
+
+function handleAdEnd(){
+    if (skipping)
+        return
+
+    finished_count++
+
+    // Worst ending
+    if (slowReplayTimeoutId) {
+        clearTimeout(slowReplayTimeoutId)
+        return finishSlowReplay()
+    }
+
+    if (questionMode)
+        return showFirtsQuestion()
+
+    document.getElementById('skip').style.display = 'none'
+
+    if (skips_counter === 0) {
+        if (finished_count === 1)
+            return userNeverSkipped()
+        return praiseUser()
+    }
+
+    if (skips_counter === 1) {
+        hideEmojiOverlay()
+        userEmojiNoLike()
+    }
+
+    //skipButton.style.display = 'none';
+    //window.top.postMessage({ type: 'fail' }, '*');
+}
+
+function handleSkip() {
+    skipping = true
+    skips_counter++
+    document.getElementById('skip').style.display = 'none'
+
+    if (questionMode)
+        return showFirtsQuestion()
+
+    if (skips_counter === 1) {
+        sendToParent({type: "setPlaybackRate", value: 5})
+        return userFirstSkip() //skips normal playback, renders emojis
+    }
+    if (skips_counter === 2)
+        return userSecondSkip() //
+
+    if (skips_counter === 3) {
+        userThirdSkip(videoDuration)
+        return
+    }
+
+    if (skips_counter === 4) {
+        showFirtsQuestion()
+        return
+    }
 
     generateVideoAd()
 }
