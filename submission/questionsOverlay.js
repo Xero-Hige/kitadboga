@@ -156,9 +156,7 @@ function showThirdQuestion() {
 }
 
 function analizeAnswers() {
-    return showFakeAnswer()
-
-    if (incorrectAnswers === 3)
+    if (incorrectAnswers >= 2)
         return punishUser()
 
     if (skipped || incorrectAnswers > 0)
