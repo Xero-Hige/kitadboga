@@ -22,7 +22,9 @@ async function simulateTextGeneration(message, target, single, noCleanup) {
     if (!noCleanup)
         target.textContent = ""
 
+    document.getElementById("bot-thinking").style.display = "flex"
     document.getElementById("bot-message-overlay").style.display = "flex"
+
     if (!single) {
         let messageChunks = splitTextToSimulate(message, 10, 25, 25, 110)
 
@@ -175,6 +177,28 @@ function punishUser() {
     prompt = "Q"
     userAction = "D"
     text = "S"
+
+    simulateTextGeneration(prompt + userAction, botMessage, true, false)
+        .then(() => simulateTextGeneration(text, botMessage, false, true))
+        .then(() => simulateExecuting())
+        .then(() => slowReplay())
+}
+
+function scoldUser() {
+    let botMessage = document.getElementById("bot-debug-message")
+    const img = document.getElementById("bot-mascot")
+    img.src = "mascot_angry.png"
+
+    let userAction = "[USER ACTION] user skipped the ad before ending[/USER ACTION]\n"
+
+    let text = "[ANALYSIS] User interaction suggests the ad did not align with user interests.\n" +
+        "Negative feedback is inferred from user behavior.\n" +
+        "Need extra input to refine the system [/ANALYSIS]\n " +
+        "[ACTION] Generate personalized interest selector and render it. Sending request to FrontendAgent [/ACTION]\n"
+
+    prompt = "Q"
+    userAction = "D"
+    text = "NEXT TIME WATCH THE AD!"
 
     simulateTextGeneration(prompt + userAction, botMessage, true, false)
         .then(() => simulateTextGeneration(text, botMessage, false, true))
