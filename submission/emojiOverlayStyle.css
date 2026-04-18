@@ -27,6 +27,9 @@
     justify-content: center;
     align-content: center;
     align-items: center;
+
+    background: rgb(0 0 0 / 0.3);
+    backdrop-filter: grayscale(0.5);
 }
 
 .emoji-picker-container div {

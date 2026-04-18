@@ -2,6 +2,9 @@
     display: none;
 
     z-index: 250;
+
+    background: rgb(0 0 0 / 0.3);
+    backdrop-filter: grayscale(0.5);
 }
 
 .bot-mascot {
@@ -18,40 +21,49 @@
 }
 
 .bot-debug-message {
-    background: whitesmoke;
+    background: #80808057;
+    color: white;
     border-style: solid;
-    border-color: purple;
-    border-width: 3px;
-    border-radius: 10px;
-    width: 50%;
-    height: 30%;
-    color: black;
+    border-color: #97979773;
+    border-width: 2px;
+    border-radius: 5px;
+    width: 97%;
     pointer-events: none;
     user-select: none;
     white-space: pre-line;
     padding: 0.25rem;
     font-family: roboto;
-    font-weight: 300;
+    font-weight: 500;
 }
-
 
 .bot-message-container {
     position: absolute;
     top: 10%;
     left: 10%;
     width: 55%;
-    background: red;
-    padding: 0.25rem;
-    min-height: 80%;
+    background: #331453;
     pointer-events: none;
     user-select: none;
-
     font-size: 10px;
-    color: black;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: flex-start;
+    align-items: flex-start;
+    justify-content: flex-start;
+    border-radius: 20px;
+    padding: 1rem;
+    border-width: 3px;
+    border-style: solid;
+    border-color: rgb(255 255 255 / 0.6);
+    color: white;
 }
 
 .thinking {
-    font-size: 24px;
+        font-size: 0.95rem;
+        color: #a6a3a3;
+        margin: 0.5rem 0;
+    display: none;
 }
 
 .dots::after {
