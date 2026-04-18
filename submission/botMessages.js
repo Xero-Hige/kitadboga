@@ -166,6 +166,8 @@ function punishSelf() {
 
 function punishUser() {
     let botMessage = document.getElementById("bot-debug-message")
+    const img = document.getElementById("bot-mascot")
+    img.src = "mascot_angry.png"
 
     let userAction = "[USER ACTION] user skipped the ad before ending[/USER ACTION]\n"
 
