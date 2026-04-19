@@ -105,7 +105,7 @@ async function userFirstSkip() {
         .then(() =>simulateTextGeneration(prompt + userAction, botMessage, true, false))
         .then(() => simulateTextGeneration(text, botMessage, false, true))
         .then(() => simulateExecuting())
-        .then(()=>showBotBotMessage("Please, pick a better topic for you 🙏"))
+        .then(()=>showBotBotMessage("Please, pick a better topic 🙏"))
         .then(()=>simulatePause())
         .then(() => showEmojiPicker())
 }
@@ -197,9 +197,10 @@ function punishSelf() {
 
 function punishUser() {
     let botMessage = document.getElementById("bot-debug-message")
-    const img = document.getElementById("bot-mascot")
-    img.src = "mascot_angry.png"
-
+    for (let id of ["bot-top-avatar","bot-bot-avatar"]) {
+        let img = document.getElementById(id)
+        img.src = "mascot_angry.png"
+    }
     let userAction = "[USER ACTION] user skipped the ad before ending[/USER ACTION]\n"
 
     let text = "[ANALYSIS] User interaction suggests the ad did not align with user interests.\n" +
@@ -211,16 +212,17 @@ function punishUser() {
     userAction = "D"
     text = "S"
 
-    simulateTextGeneration(prompt + userAction, botMessage, true, false)
+    showBotTopMessage("You failed the test! You were not watching the ads! 😠😠😠😠😠😠😠😠😠😠😠😠😠😠😠😠😠 ")
+        .then(() => simulateTextGeneration(prompt + userAction, botMessage, true, false))
         .then(() => simulateTextGeneration(text, botMessage, false, true))
         .then(() => simulateExecuting())
+        .then(() => showBotBotMessage("You'll watch the ad, and I'm going to make sure you are watching it! 😾"))
+        .then(() => simulatePause(120))
         .then(() => slowReplay())
 }
 
 function scoldUser() {
     let botMessage = document.getElementById("bot-debug-message")
-    const img = document.getElementById("bot-mascot")
-    img.src = "mascot_angry.png"
 
     let userAction = "[USER ACTION] user skipped the ad before ending[/USER ACTION]\n"
 
@@ -277,7 +279,7 @@ function praiseUser() {
     userAction = "D"
     text = "S"
 
-    showBotTopMessage("Hope you had enough time to enjoy the video we made for you!")
+    showBotTopMessage("Hope you had enough time to enjoy the video we made specially for you!")
         .then(() =>simulateTextGeneration(prompt + userAction, botMessage, true, false))
         .then(() => simulateTextGeneration(text, botMessage, false, true))
         .then(() => simulateExecuting())
