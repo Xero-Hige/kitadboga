@@ -4,8 +4,8 @@ function hideBotOverlay() {
     document.getElementById("bot-bot-message").style.display = "none"
 }
 
-async function simulatePause() {
-    await new Promise(r => setTimeout(r, 3000))
+async function simulatePause(seconds) {
+    await new Promise(r => setTimeout(r, (seconds||3)*1000))
 }
 
 async function showBotTopMessage(message) {
