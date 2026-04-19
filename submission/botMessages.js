@@ -1,3 +1,26 @@
+function hideBotOverlay() {
+    document.getElementById("bot-message-overlay").style.display = "none"
+    document.getElementById("bot-top-message").style.display = "none"
+    document.getElementById("bot-bot-message").style.display = "none"
+}
+
+async function simulatePause() {
+    await new Promise(r => setTimeout(r, 3000))
+}
+
+async function showBotTopMessage(message) {
+    await __showBotTopMessage(message,"bot-top-message","bot-top-message-text")
+}
+
+async function showBotBotMessage(message) {
+    await __showBotTopMessage(message,"bot-bot-message","bot-bot-message-text")
+}
+
+async function __showBotTopMessage(message,id_container,id_text) {
+    document.getElementById(id_container).style.display = "flex"
+    document.getElementById(id_text).innerText = message
+}
+
 function splitTextToSimulate(text, chunkMinSize, chunkMazSize, minSpeed, maxSpeed) {
     const result = [];
     let i = 0;
@@ -74,10 +97,17 @@ async function userFirstSkip() {
         "Need extra input to refine the system [/ANALYSIS]\n " +
         "[ACTION] Generate personalized interest selector and render it. Sending request to FrontendAgent [/ACTION]\n"
 
-    simulateTextGeneration(prompt+userAction,botMessage,true,false)
-        .then(()=>simulateTextGeneration(text,botMessage,false,true))
-        .then(()=>simulateExecuting())
-        .then(()=>showEmojiPicker())
+    prompt="f"
+    userAction = "D"
+    text = "S"
+
+    showBotTopMessage("You skipped the ad we made specially for you 😟")
+        .then(() =>simulateTextGeneration(prompt + userAction, botMessage, true, false))
+        .then(() => simulateTextGeneration(text, botMessage, false, true))
+        .then(() => simulateExecuting())
+        .then(()=>showBotBotMessage("Please, pick a better topic for you 🙏"))
+        .then(()=>simulatePause())
+        .then(() => showEmojiPicker())
 }
 
 function userEmojiNoLike() {
@@ -223,10 +253,12 @@ function userNeverSkipped() {
     prompt = "Q"
     userAction = "D"
     text = "S"
-
-    simulateTextGeneration(prompt + userAction, botMessage, true, false)
+    showBotTopMessage("Thanks for watching the ad! Your support help us to grow 💗💗")
+        .then(() =>  simulateTextGeneration(prompt + userAction, botMessage, true, false))
         .then(() => simulateTextGeneration(text, botMessage, false, true))
         .then(() => simulateExecuting())
+        .then(() => showBotBotMessage("🎉 Please enjoy the ad without any interferences! 🎉"))
+        .then(() => simulatePause())
         .then(() => slightlySlowReplay())
 }
 
@@ -244,7 +276,8 @@ function praiseUser() {
     userAction = "D"
     text = "S"
 
-    simulateTextGeneration(prompt + userAction, botMessage, true, false)
+    showBotTopMessage("Hope you had enough time to enjoy the video we made for you!")
+        .then(() =>simulateTextGeneration(prompt + userAction, botMessage, true, false))
         .then(() => simulateTextGeneration(text, botMessage, false, true))
         .then(() => simulateExecuting())
         .then(() => sendToParent({"type":"success"}))

@@ -1,10 +1,12 @@
 .overlay.message {
     display: none;
-
     z-index: 250;
 
     background: rgb(0 0 0 / 0.3);
     backdrop-filter: grayscale(0.5);
+
+    justify-content: center;
+    align-items: flex-end;
 }
 
 .bot-mascot {
@@ -38,9 +40,7 @@
 
 .bot-message-container {
     position: absolute;
-    top: 10%;
-    left: 10%;
-    width: 55%;
+    bottom: 0;
     background: #331453;
     pointer-events: none;
     user-select: none;
@@ -49,11 +49,11 @@
     flex-direction: column;
     flex-wrap: nowrap;
     align-content: flex-start;
-    align-items: flex-start;
+    align-items: center;
     justify-content: flex-start;
-    border-radius: 20px;
+    border-radius: 20px 20px 0 0;
     padding: 1rem;
-    border-width: 3px;
+    border-width: 3px 3px 0 3px;
     border-style: solid;
     border-color: rgb(255 255 255 / 0.6);
     color: white;
@@ -64,6 +64,9 @@
         color: #a6a3a3;
         margin: 0.5rem 0;
     display: none;
+    width: 100%;
+    font-weight: 600;
+    text-transform: capitalize;
 }
 
 .dots::after {
@@ -90,4 +93,63 @@
     100% {
         content: "";
     }
+}
+
+.mascot-avatar {
+    height: 5rem;
+    width: 5rem;
+    overflow: hidden;
+    border-radius: 40rem;
+    border-style: solid;
+    border-width: 0.25rem;
+    margin: 0.25rem;
+    animation: avatarColorShift 5s cubic-bezier(0.43, 0.09, 0.58, 0.92) infinite alternate;
+}
+
+.bot-message-icon {
+    height: 8rem;
+    border-radius: 40rem;
+    overflow: hidden;
+    margin-left: -1.5rem;
+}
+
+
+@keyframes avatarColorShift {
+    0% {
+        border-color: #cf22d2;
+    }
+    25% {
+        border-color: #032b77;
+    }
+    50% {
+        border-color: #087ac4;
+    }
+    75% {
+        border-color: rgb(9 169 206 / 0.5);
+    }
+    100% {
+        border-color: #cf22d2;
+    }
+}
+
+.bot-visible-message {
+    width: 100%;
+    background: rgb(255 255 255 / 0.15);
+    border-radius: 4rem;
+    border-width: 0.125rem;
+    border-color: white;
+    border-style: solid;
+    margin: 1rem 0;
+}
+
+.bot-message-container .text{
+    width: 70%;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    flex-direction: row;
+    font-size: 1.25rem;
+    padding-left: 1rem;
 }

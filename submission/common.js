@@ -64,6 +64,7 @@ function generateVideoAd(callback) {
         return __callback;
     }
 
+    hideBotOverlay()
     updateBackdrop()
     setTimeout(updateBackdrop(1, .8, "Generating Video..."), 1000)
     setTimeout(updateBackdrop(0.8, 0.75), 2500)

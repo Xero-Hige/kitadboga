@@ -39,13 +39,22 @@
 
 <div class="overlay message" id="bot-message-overlay">
     <div class="bot-message-container">
-        <div class="bot-visible-message" id="bot-top-message-1"></div>
+        <div class="bot-visible-message" id="bot-top-message">
+            <div class="mascot-avatar">
+                <img id="bot-top-avatar" class="bot-message-icon" src="mascot.png"/>
+            </div>
+            <div id="bot-top-message-text" class="text"></div>
+        </div>
         <div class="thinking" id="bot-thinking">
             Thinking<span class="dots"></span>
         </div>
         <div class="bot-debug-message" id="bot-debug-message"></div>
-        <div class="bot-visible-message" id="bot-bot-message-1"></div>
-        <div class="thinking" id="bot-requesting">
+        <div class="bot-visible-message" id="bot-bot-message">
+            <div class="mascot-avatar">
+                <img id="bot-bot-avatar" class="bot-message-icon" src="mascot.png"/>
+            </div>
+            <div id="bot-bot-message-text" class="text"></div>
+        </div>        <div class="thinking" id="bot-requesting">
             Requesting action to agent<span class="dots"></span>
         </div>
         <div class="thinking" id="bot-executing">
