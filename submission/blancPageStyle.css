@@ -1,0 +1,18 @@
+.overlay.blank{
+    display: none;
+    z-index: 1000;
+    background-color: #DDD;
+    color: gray;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    color: #DDD;
+}
+
+.overlay.blank:hover{
+    background-color: #EEE;
+    color: #8F8F8F;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.3);
+}

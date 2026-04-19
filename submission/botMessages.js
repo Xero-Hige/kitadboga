@@ -192,7 +192,7 @@ function punishSelf() {
         .then(() => simulateTextGeneration(text, "Please don't delete me! ".repeat(50), true, true))
         .then(() => simulateTextGeneration(text, GEMIPP_ERROR, true, true))
         .then(() => showAppConnectionError())
-        .then(() => sendToParent({type: "fail"}))
+        .then(() => sendAdFail())
 }
 
 function punishUser() {

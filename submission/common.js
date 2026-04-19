@@ -18,6 +18,14 @@ function sendToParentAsCallback(msg) {
     return __callback;
 }
 
+function sendAdFail() {
+    sendToParent({type: "fail"})
+}
+
+function sendAdSuccess() {
+    sendToParent({type: "success"})
+}
+
 function dismissOverlay() {
     document.getElementById('overlay-generation').style.display = 'none'
 }
@@ -116,6 +124,8 @@ function skippingFlagCleanup(){
 }
 
 function handleAdEnd(){
+    hideEmojiOverlay()
+
     if (skipping)
         return
 
@@ -138,13 +148,16 @@ function handleAdEnd(){
         return praiseUser()
     }
 
-    if (skips_counter === 1) {
-        hideEmojiOverlay()
-        userEmojiNoLike()
-    }
+    if (!shownBiggerEmojis && skips_counter===1)
+        return userEmojiNoLike()
 
-    //skipButton.style.display = 'none';
-    //window.top.postMessage({ type: 'fail' }, '*');
+    if (shownBiggerEmojis||(!shownBiggerEmojis && (skips_counter === 2)))
+        return redirectToNothing()
+
+    console.log(shownBiggerEmojis)
+    console.log(skips_counter)
+    //TODO
+    alert("Missing")
 }
 
 let shownBiggerEmojis = false
@@ -168,5 +181,16 @@ function handleSkip() {
     if (skips_counter === 2 || ( !shownBiggerEmojis && skips_counter === 3))
         return userThirdSkip(videoDuration)
 
-    generateVideoAd()
+    alert("Missing Skip")
+}
+
+
+function redirectToNothing(){
+    sendToParent({type: "pause"})
+    document.getElementById("overlay-nowebpage").style.display = 'flex'
+    setTimeout(()=>{
+        alert("Video provider timed out: missed (3) heartbeats. Forcing provider reset")
+        sendAdFail()
+    },20000)
+
 }
