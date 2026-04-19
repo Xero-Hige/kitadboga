@@ -119,12 +119,27 @@ function slightlySlowReplay() {
 
 //
 
+function hideSkipButton() {
+    document.getElementById('skip').style.display = 'none'
+}
+
+function animateSkipButton() {
+    document.getElementById('skip').classList.add('animated')
+}
+
+function stopSkipButtonAnimation() {
+    document.getElementById('skip').classList.remove('animated')
+    console.log("Removed animation")
+    console.log(document.getElementById('skip').classList.toString())
+}
+
 function skippingFlagCleanup(){
     skipping = false
 }
 
 function handleAdEnd(){
     hideEmojiOverlay()
+    hideSkipButton()
 
     if (skipping)
         return
@@ -165,7 +180,7 @@ let shownBiggerEmojis = false
 function handleSkip() {
     skipping = true
     skips_counter++
-    document.getElementById('skip').style.display = 'none'
+    hideSkipButton()
 
     if (questionMode)
         return showFirtsQuestion()

@@ -71,6 +71,7 @@ let questionMode = false
 
 function showFirtsQuestion() {
     questionMode = true
+    stopSkipButtonAnimation()
     const questionForm = document.getElementById('FirstQuestion')
     const options = questionForm.querySelectorAll('button')
 

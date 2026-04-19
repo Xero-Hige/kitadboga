@@ -6,8 +6,7 @@ function showMultiSkipOverlay() {
     container = document.getElementById(`emoji-container-2`)?.remove()
     if (container) container.remove()
 
-    document.getElementById("skip").classList.add("animated")
-
+    animateSkipButton()
 
     generateVideoAd(() => {
         document.getElementById('overlay-multiskip').style.display = 'flex'
