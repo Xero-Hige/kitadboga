@@ -147,6 +147,8 @@ function handleAdEnd(){
     //window.top.postMessage({ type: 'fail' }, '*');
 }
 
+let shownBiggerEmojis = false
+
 function handleSkip() {
     skipping = true
     skips_counter++
@@ -159,18 +161,12 @@ function handleSkip() {
         sendToParent({type: "setPlaybackRate", value: 5})
         return userFirstSkip() //skips normal playback, renders emojis
     }
-    if (skips_counter === 2)
-        return userSecondSkip() //
 
-    if (skips_counter === 3) {
-        userThirdSkip(videoDuration)
-        return
-    }
+    if (!shownBiggerEmojis && skips_counter === 2)
+        return userSecondSkip()
 
-    if (skips_counter === 4) {
-        showFirtsQuestion()
-        return
-    }
+    if (skips_counter === 2 || ( !shownBiggerEmojis && skips_counter === 3))
+        return userThirdSkip(videoDuration)
 
     generateVideoAd()
 }

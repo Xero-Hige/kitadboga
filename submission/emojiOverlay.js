@@ -58,6 +58,7 @@ function showBiggerEmojiOverlay() {
 }
 
 function spawnEmojiOverlay(emoji, iteration = 1) {
+    shownBiggerEmojis = (iteration === 2)
     const container = document.getElementById(`emoji-container-${iteration}`)
     const N = 30 * iteration;
 

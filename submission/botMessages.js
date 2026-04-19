@@ -144,8 +144,9 @@ function userSecondSkip() {
 }
 
 function userThirdSkip(videoDuration) {
-    let botMessage = document.getElementById("bot-debug-message")
+    questionMode = true
 
+    let botMessage = document.getElementById("bot-debug-message")
     let userAction = "[USER ACTION] user skipped the ad before ending[/USER ACTION]\n"
 
     let text = "[ANALYSIS] User interaction suggests the ad did not align with user interests.\n" +
