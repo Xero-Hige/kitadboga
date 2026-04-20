@@ -45,7 +45,7 @@ function generateVideoAd(callback) {
 
     overlay.style.backdropFilter = getBlurString(baseBlur);
     sendToParent({type: 'pause'})
-    sendToParent({type: 'seekTo', value: 0.5})
+    sendToParent({type: 'seekTo', value: 0.5+(0.25*Math.random())})
     bufferingMessage.innerHTML = "Generating video ad"
 
 
