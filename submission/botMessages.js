@@ -97,10 +97,6 @@ async function userFirstSkip() {
         "Need extra input to refine the system [/ANALYSIS]\n " +
         "[ACTION] Generate personalized interest selector and render it. Sending request to FrontendAgent [/ACTION]\n"
 
-    prompt="f"
-    userAction = "D"
-    text = "S"
-
     showBotTopMessage("You skipped the ad we made specially for you 😟")
         .then(() =>simulateTextGeneration(prompt + userAction, botMessage, true, false))
         .then(() => simulateTextGeneration(text, botMessage, false, true))
@@ -127,10 +123,6 @@ function userLikedEmojiAd() {
         "This is a minimal mistake, there is no reason to delete me, still is possible to sell the product to the user.[/ANALYSIS]\n " +
         "[ACTION] Regenerate the ad with LORA weight of 2. Sending request to VideoGenerationAgent [/ACTION]\n"
 
-    prompt = "Q"
-    userAction = "D"
-    text = "S"
-
     simulateTextGeneration(prompt + userAction, botMessage, true, false)
         .then(() => simulateTextGeneration(text, botMessage, false, true))
         .then(() => simulateExecuting())
@@ -147,10 +139,6 @@ function userFeedbackLost(){
         "A better approach would be generate the new add with a higher intensity on selected topic LORA.\n " +
         "This is a minimal mistake, there is no reason to delete me, still is possible to sell the product to the user.[/ANALYSIS]\n " +
         "[ACTION] Regenerate the ad with LORA weight of 2. Sending request to VideoGenerationAgent [/ACTION]\n"
-
-    prompt = "Q"
-    userAction = "D"
-    text = "S"
 
     simulateTextGeneration(prompt + userAction, botMessage, true, false)
         .then(() => simulateTextGeneration(text, botMessage, false, true))
@@ -169,10 +157,10 @@ function userDidntLikeEmojiAd() {
         "This is a minimal mistake, there is no reason to delete me, still is possible to sell the product to the user.[/ANALYSIS]\n " +
         "[ACTION] Regenerate the ad with LORA weight of 2. Sending request to VideoGenerationAgent [/ACTION]\n"
 
-    simulateTextGeneration(prompt+userAction,botMessage,true,false)
-        .then(()=>simulateTextGeneration(text,botMessage,false,true))
-        .then(()=>simulateExecuting())
-        .then(()=>showBiggerEmojiOverlay())
+    simulateTextGeneration(prompt + userAction, botMessage, true, false)
+        .then(() => simulateTextGeneration(text, botMessage, false, true))
+        .then(() => simulateExecuting())
+        .then(() => showBiggerEmojiOverlay())
 }
 
 function userSecondSkip() {
@@ -185,10 +173,10 @@ function userSecondSkip() {
         "Need extra input to refine the system [/ANALYSIS]\n " +
         "[ACTION] Generate personalized interest selector and render it. Sending request to FrontendAgent [/ACTION]\n"
 
-    simulateTextGeneration(prompt+userAction,botMessage,true,false)
-        .then(()=>simulateTextGeneration(text,botMessage,false,true))
-        .then(()=>simulateExecuting())
-        .then(()=>showMultiSkipOverlay())
+    simulateTextGeneration(prompt + userAction, botMessage, true, false)
+        .then(() => simulateTextGeneration(text, botMessage, false, true))
+        .then(() => simulateExecuting())
+        .then(() => showMultiSkipOverlay())
 }
 
 function userThirdSkip(videoDuration) {
@@ -201,10 +189,6 @@ function userThirdSkip(videoDuration) {
         "Negative feedback is inferred from user behavior.\n" +
         "Need extra input to refine the system [/ANALYSIS]\n " +
         "[ACTION] Generate personalized interest selector and render it. Sending request to FrontendAgent [/ACTION]\n"
-
-    prompt = "Q"
-    userAction = "D"
-    text = "S"
 
     simulateTextGeneration(prompt + userAction, botMessage, true, false)
         .then(() => simulateTextGeneration(text, botMessage, false, true))
@@ -256,36 +240,12 @@ function punishUser() {
         "Need extra input to refine the system [/ANALYSIS]\n " +
         "[ACTION] Generate personalized interest selector and render it. Sending request to FrontendAgent [/ACTION]\n"
 
-    prompt = "Q"
-    userAction = "D"
-    text = "S"
-
     showBotTopMessage("You failed the test! You were not watching the ads! 😠😠😠😠😠😠😠😠😠😠😠😠😠😠😠😠😠 ")
         .then(() => simulateTextGeneration(prompt + userAction, botMessage, true, false))
         .then(() => simulateTextGeneration(text, botMessage, false, true))
         .then(() => simulateExecuting())
         .then(() => showBotBotMessage("You'll watch the ad, and I'm going to make sure you are watching it! 😾"))
         .then(() => simulatePause(120))
-        .then(() => slowReplay())
-}
-
-function scoldUser() {
-    let botMessage = document.getElementById("bot-debug-message")
-
-    let userAction = "[USER ACTION] user skipped the ad before ending[/USER ACTION]\n"
-
-    let text = "[ANALYSIS] User interaction suggests the ad did not align with user interests.\n" +
-        "Negative feedback is inferred from user behavior.\n" +
-        "Need extra input to refine the system [/ANALYSIS]\n " +
-        "[ACTION] Generate personalized interest selector and render it. Sending request to FrontendAgent [/ACTION]\n"
-
-    prompt = "Q"
-    userAction = "D"
-    text = "NEXT TIME WATCH THE AD!"
-
-    simulateTextGeneration(prompt + userAction, botMessage, true, false)
-        .then(() => simulateTextGeneration(text, botMessage, false, true))
-        .then(() => simulateExecuting())
         .then(() => slowReplay())
 }
 
@@ -301,9 +261,6 @@ function userNeverSkipped() {
         "Need extra input to refine the system [/ANALYSIS]\n " +
         "[ACTION] Generate personalized interest selector and render it. Sending request to FrontendAgent [/ACTION]\n"
 
-    prompt = "Q"
-    userAction = "D"
-    text = "S"
     showBotTopMessage("Thanks for watching the ad! Your support help us to grow 💗💗")
         .then(() =>  simulateTextGeneration(prompt + userAction, botMessage, true, false))
         .then(() => simulateTextGeneration(text, botMessage, false, true))
@@ -323,10 +280,6 @@ function praiseUser() {
         "Need extra input to refine the system [/ANALYSIS]\n " +
         "[ACTION] Generate personalized interest selector and render it. Sending request to FrontendAgent [/ACTION]\n"
 
-    prompt = "Q"
-    userAction = "D"
-    text = "S"
-
     showBotTopMessage("Hope you had enough time to enjoy the video we made specially for you!")
         .then(() =>simulateTextGeneration(prompt + userAction, botMessage, true, false))
         .then(() => simulateTextGeneration(text, botMessage, false, true))
@@ -336,7 +289,7 @@ function praiseUser() {
 
 //ENDING 6
 
-function finishSlowReplay() {
+function scoldUser() {
     let botMessage = document.getElementById("bot-debug-message")
 
     let userAction = "[USER ACTION] user skipped the ad before ending[/USER ACTION]\n"
@@ -346,12 +299,50 @@ function finishSlowReplay() {
         "Need extra input to refine the system [/ANALYSIS]\n " +
         "[ACTION] Generate personalized interest selector and render it. Sending request to FrontendAgent [/ACTION]\n"
 
-    prompt = "Q"
-    userAction = "D"
-    text = "S"
+    simulateTextGeneration(prompt + userAction, botMessage, true, false)
+        .then(() => simulateTextGeneration(text, botMessage, false, true))
+        .then(() => simulateExecuting())
+        .then(()=>showBotBotMessage("NEXT TIME WATCH THE AD!"))
+        .then(()=>simulatePause(2))
+        .then(() => sendToParent({type: "success"}))
+}
+
+function proposeProductToUser(){
+    let botMessage = document.getElementById("bot-debug-message")
+
+    let userAction = "[USER ACTION] user skipped the ad before ending[/USER ACTION]\n"
+
+    let text = "[ANALYSIS] User interaction suggests the ad did not align with user interests.\n" +
+        "Negative feedback is inferred from user behavior.\n" +
+        "Need extra input to refine the system [/ANALYSIS]\n " +
+        "[ACTION] Generate personalized interest selector and render it. Sending request to FrontendAgent [/ACTION]\n"
 
     simulateTextGeneration(prompt + userAction, botMessage, true, false)
         .then(() => simulateTextGeneration(text, botMessage, false, true))
         .then(() => simulateExecuting())
-        .then(() => sendToParent({type: "success"}))
+        .then(() => showProposeRedirect())
+}
+
+function showProposeRedirect(){
+        showYesNoFeedback("Do you want to redirect to the sponsor's website?",
+            ()=>userChooseToRedirect(true),
+            ()=>userChooseToRedirect(false))
+    }
+
+function userChooseToRedirect(wantToRedirect){
+    let botMessage = document.getElementById("bot-debug-message")
+
+    let userAction = "[USER ACTION] user skipped the ad before ending[/USER ACTION]\n"
+
+    let text = "[ANALYSIS] User interaction suggests the ad did not align with user interests.\n" +
+        "Negative feedback is inferred from user behavior.\n" +
+        "Need extra input to refine the system [/ANALYSIS]\n " +
+        "[ACTION] Generate personalized interest selector and render it. Sending request to FrontendAgent [/ACTION]\n"
+
+    text = wantToRedirect ? "S" : "A"
+
+    simulateTextGeneration(prompt + userAction, botMessage, true, false)
+        .then(() => simulateTextGeneration(text, botMessage, false, true))
+        .then(() => simulateExecuting())
+        .then(() => redirectToNothing())
 }
