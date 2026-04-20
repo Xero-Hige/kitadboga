@@ -147,7 +147,7 @@ function handleAdEnd(){
     // Worst ending
     if (slowReplayTimeoutId) {
         clearTimeout(slowReplayTimeoutId)
-        return finishSlowReplay()
+        return scoldUser()
     }
 
     if (questionMode)
@@ -165,7 +165,7 @@ function handleAdEnd(){
         return askUserVideoLike()
 
     if (shownBiggerEmojis||(!shownBiggerEmojis && (skips_counter === 2)))
-        return redirectToNothing()
+        return proposeProductToUser()
 }
 
 let shownBiggerEmojis = false
@@ -196,5 +196,4 @@ function redirectToNothing(){
         alert("Video provider timeout (missed 3 heartbeats): Forcing peer connection reset")
         sendAdFail()
     },20000)
-
 }
