@@ -1,0 +1,56 @@
+.overlay.feedback{
+    display: none;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    z-index: 1050;
+}
+
+.overlay.feedback .container{
+    background: rgb(15 111 111 / 0.6);
+    min-width: 20%;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-radius: 2rem;
+    min-height: 15%;
+    border-style: solid;
+    display: flex;
+}
+
+.overlay.feedback .container .title{
+    text-transform: uppercase;
+    font-weight: 500;
+    font-family: roboto;
+    font-size: 1.75rem;
+    margin:1rem;
+}
+
+.overlay.feedback .container .buttons{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-content: center;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+.overlay.feedback .container .buttons button{
+    width: 40%;
+    height: 2rem;
+    border-radius: 10px;
+    border-style: none;
+    background: #b9b9b9;
+    font-size: 1.3rem;
+    cursor: pointer;
+}
+
+.overlay.feedback .container .buttons button:hover{
+    background:white;
+}

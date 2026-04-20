@@ -11,6 +11,7 @@
     <link href="questionsOverlayStyles.css" rel="stylesheet">
     <link href="skipsOverlayStyles.css" rel="stylesheet">
     <link href="blancPageStyle.css" rel="stylesheet">
+    <link href="feedbackOverlayStyles.css" rel="stylesheet">
     <style type="text/css">
         html,
         body {
@@ -35,6 +36,7 @@
 <script src="./emojiOverlay.js"></script>
 <script src="./skipsButtonsOverlay.js"></script>
 <script src="./questionsOverlay.js"></script>
+<script src="./feedbackOverlay.js"></script>
 <script src="./botMessages.js"></script>
 <body>
 
@@ -73,6 +75,19 @@
         <button id="emoji-button-3">C</button>
         <button id="emoji-button-4">D</button>
         <button id="emoji-button-5">E</button>
+    </div>
+</div>
+
+<div class="overlay feedback" id="likead-overlay">
+    <div class="container">
+        <div class="mascot-avatar">
+            <img class="bot-message-icon" src="mascot.png"/>
+        </div>
+        <div id="feedback-yesno-title" class="title">Did you like the new ad I made?</div>
+        <div class="buttons">
+            <button id="like-button">Yes</button>
+            <button id="dislike-button">No</button>
+        </div>
     </div>
 </div>
 
