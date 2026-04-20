@@ -245,7 +245,7 @@ function punishUser() {
         .then(() => simulateTextGeneration(text, botMessage, false, true))
         .then(() => simulateExecuting())
         .then(() => showBotBotMessage("You'll watch the ad, and I'm going to make sure you are watching it! 😾"))
-        .then(() => simulatePause(120))
+        .then(() => simulatePause())
         .then(() => slowReplay())
 }
 
