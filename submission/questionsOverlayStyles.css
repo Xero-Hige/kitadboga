@@ -30,6 +30,13 @@
     align-content: center;
     align-items: center;
     justify-content: center;
+    font-size: 1.1rem;
+    font-weight: 400;
+    font-family: roboto;
+    color: darkgray;
+
+    user-select: none;
+    pointer-events: none;
 }
 
 .numberQuestionDiv {
@@ -42,10 +49,9 @@
     background: red;
     border-radius: 200%;
     margin: 0.15rem;
-}
 
-.questionTitle {
-    display: flex;
+    user-select: none;
+    pointer-events: none;
 }
 
 .questionButtons {
@@ -55,7 +61,7 @@
     align-content: center;
     justify-content: space-around;
     align-items: center;
-    padding: 1rem;
+    padding: 1rem 1rem 0 1rem;
     width: 100%;
 }
 
@@ -63,6 +69,13 @@
     width: 40%;
     flex: 0 0 auto;
     margin: 0.5rem;
+    padding: 0.25rem 1rem;
+    border-width: 5px;
+    border-style: solid;
+    border-color: gray;
+    border-radius: 3rem;
+    font-size: 1.3rem;
+    cursor: pointer;
 }
 
 .question {
@@ -72,6 +85,13 @@
     align-items: center;
     justify-content: center;
     flex-wrap: nowrap;
+    background: #4c4c6e4d;
+    padding: 1rem;
+    border-radius: 10px;
+    border-width: 0.15rem;
+    border-style: solid;
+    border-color: violet;
+    min-width: 40%;
 }
 
 .questionFakeStacktrace {
@@ -84,4 +104,56 @@
     font-size: 0.45rem;
     width: 60%;
     color: black;
+}
+
+.answer-status{
+    background: #000062b8;
+    width: 40%;
+    display: none;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    border-radius: 2rem;
+    height: 75%;
+    justify-content: center;
+    border-width: 0.15rem;
+    border-style: solid;
+    border-color: violet;
+
+    user-select: none;
+    pointer-events: none;
+}
+
+.answer-status .icon {
+    font-size: 15rem;
+    color: #005700;
+    margin: 0;
+    border-radius: 300%;
+    width: 15rem;
+    height: 15rem;
+    display: flex;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    border-style: solid;
+    border-color: #005700;
+    border-width: 5px;
+
+    user-select: none;
+    pointer-events: none;
+}
+
+.answer-status .icon.error {
+    color: #ab0303;
+    border-color: #ab0303;
+}
+
+.answer-status .label {
+    font-size: 3rem;
+    text-transform: uppercase;
+
+    user-select: none;
+    pointer-events: none;
 }

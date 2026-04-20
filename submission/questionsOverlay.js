@@ -3,7 +3,7 @@ function generateRandomColorString() {
     const g = Math.floor(Math.random() * 255)
     const b = Math.floor(Math.random() * 255)
 
-    const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+    const brightness = (r * 299 + g * 587 + b * 114) / 1000
 
     return [`rgb(${r},${g},${b})`, (brightness > 125 ? "black" : "white")]
 }
@@ -69,6 +69,26 @@ let incorrectAnswers = 0
 
 let questionMode = false
 
+function __showCorrectIncorrectAnswer(resultDivId,previousId, callback) {
+    document.getElementById(previousId).style.display = "none"
+
+    const resultDiv = document.getElementById(resultDivId)
+    resultDiv.style.display = "flex"
+
+    setTimeout(() => {
+        resultDiv.style.display = "none"
+        callback()
+    }, 3000)
+}
+
+function showCorrect(previousId, callback) {
+    return __showCorrectIncorrectAnswer("correctAnswer",previousId, callback)
+}
+
+function showIncorrect(previousId, callback) {
+    return __showCorrectIncorrectAnswer("incorrectAnswer",previousId, callback)
+}
+
 function showFirtsQuestion() {
     questionMode = true
     stopSkipButtonAnimation()
@@ -81,14 +101,11 @@ function showFirtsQuestion() {
     if (colors[2][1] === "black")
         [incorrect, correct] = options
 
-    correct.onclick = () => {
-        questionForm.style.display = "none"
-        showSecondQuestion()
-    }
+    correct.onclick = () => showCorrect('FirstQuestion',showSecondQuestion)
+
     incorrect.onclick = () => {
         incorrectAnswers++
-        questionForm.style.display = "none"
-        showSecondQuestion()
+        showIncorrect('FirstQuestion',showSecondQuestion)
     }
 
     document.getElementById('overlay-questions').style.display = 'flex'
@@ -107,19 +124,19 @@ function showSecondQuestion() {
     const [distance3A, distance3B] = pairs[Math.floor(Math.random() * pairs.length)]
     let answers = [numbers[0], numbers[0] + distance0A, numbers[0] + distance0B, numbers[3], numbers[3] + distance3A, numbers[3] + distance3B]
 
-    const shuffledAnswers = answers.sort(() => Math.random() - 0.5);
+    const shuffledAnswers = answers.sort(() => Math.random() - 0.5)
 
     options.forEach((optionButton, idx) => {
         optionButton.innerText = shuffledAnswers[idx]
 
         optionButton.onclick = () => {
-            if (shuffledAnswers[idx] !== numbers[0])
+            if (shuffledAnswers[idx] !== numbers[0]) {
                 incorrectAnswers++
-
-            questionForm.style.display = "none"
-            showThirdQuestion();
-        };
-    });
+                showIncorrect("SecondQuestion", showThirdQuestion)
+            } else
+                showCorrect("SecondQuestion", showThirdQuestion)
+        }
+    })
 
     questionForm.style.display = "flex"
 }
@@ -134,7 +151,7 @@ function showThirdQuestion() {
 
     let answers = [colors[4], colors[6], colors[7], colors[0], colors[9], colors[1]]
 
-    const shuffledAnswers = answers.sort(() => Math.random() - 0.5);
+    const shuffledAnswers = answers.sort(() => Math.random() - 0.5)
 
     options.forEach((optionButton, idx) => {
         optionButton.style.background = shuffledAnswers[idx][0]
@@ -145,13 +162,14 @@ function showThirdQuestion() {
             console.log(idx)
 
         optionButton.onclick = () => {
-            if (shuffledAnswers[idx] !== colors[4])
+            if (shuffledAnswers[idx] !== colors[4]) {
                 incorrectAnswers++
-
-            questionForm.style.display = "none"
-            analizeAnswers();
-        };
-    });
+                showIncorrect("ThirdQuestion", analizeAnswers)
+            }
+            else
+                showCorrect("ThirdQuestion", analizeAnswers)
+        }
+    })
 
     questionForm.style.display = "flex"
 }
