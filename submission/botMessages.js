@@ -221,8 +221,8 @@ function punishSelf() {
 
     simulateTextGeneration(prompt + userAction, botMessage, true, false)
         .then(() => simulateTextGeneration(text, botMessage, false, true))
-        .then(() => simulateTextGeneration(text, "Please don't delete me! ".repeat(50), true, true))
-        .then(() => simulateTextGeneration(text, GEMIPP_ERROR, true, true))
+        .then(() => simulateTextGeneration("Please don't delete me!\n".repeat(150), botMessage, true, true))
+        .then(() => simulateTextGeneration(GEMIPP_ERROR,botMessage, true, true))
         .then(() => showAppConnectionError())
         .then(() => sendAdFail())
 }
