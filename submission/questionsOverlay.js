@@ -158,9 +158,6 @@ function showThirdQuestion() {
         optionButton.style.color = shuffledAnswers[idx][1]
         optionButton.innerText = numbers[4].toString()
 
-        if (shuffledAnswers[idx] === colors[4])
-            console.log(idx)
-
         optionButton.onclick = () => {
             if (shuffledAnswers[idx] !== colors[4]) {
                 incorrectAnswers++

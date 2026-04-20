@@ -129,8 +129,6 @@ function animateSkipButton() {
 
 function stopSkipButtonAnimation() {
     document.getElementById('skip').classList.remove('animated')
-    console.log("Removed animation")
-    console.log(document.getElementById('skip').classList.toString())
 }
 
 function skippingFlagCleanup(){
@@ -168,11 +166,6 @@ function handleAdEnd(){
 
     if (shownBiggerEmojis||(!shownBiggerEmojis && (skips_counter === 2)))
         return redirectToNothing()
-
-    console.log(shownBiggerEmojis)
-    console.log(skips_counter)
-    //TODO
-    alert("Missing")
 }
 
 let shownBiggerEmojis = false
@@ -185,18 +178,14 @@ function handleSkip() {
     if (questionMode)
         return showFirtsQuestion()
 
-    if (skips_counter === 1) {
-        sendToParent({type: "setPlaybackRate", value: 5})
+    if (skips_counter === 1)
         return userFirstSkip() //skips normal playback, renders emojis
-    }
 
     if (!shownBiggerEmojis && skips_counter === 2)
         return userSecondSkip()
 
     if (skips_counter === 2 || ( !shownBiggerEmojis && skips_counter === 3))
         return userThirdSkip(videoDuration)
-
-    alert("Missing Skip")
 }
 
 

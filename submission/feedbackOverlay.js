@@ -28,7 +28,6 @@ function showSurveyFeedback(title,callback) {
     const submitButton = document.getElementById('submit-survey')
 
     textarea.oninput = () => {
-        console.log(textarea.value.length)
         submitButton.disabled = 500 > textarea.value.length
     }
 
