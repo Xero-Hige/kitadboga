@@ -23,6 +23,7 @@ function showSurveyFeedback(title,callback) {
     let overlay = document.getElementById("feedback")
     document.getElementById("yesNoContainer").style.display = "none"
     document.getElementById("surveyContainer").style.display = "flex"
+    document.getElementById("survey-title").innerText  = title
 
     const textarea = document.getElementById('survey-input')
     const submitButton = document.getElementById('submit-survey')
