@@ -23,6 +23,7 @@
 }
 
 .bot-debug-message {
+    font-size: 0.65rem;
     background: #80808057;
     color: white;
     border-style: solid;
