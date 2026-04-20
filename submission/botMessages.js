@@ -110,7 +110,55 @@ async function userFirstSkip() {
         .then(() => showEmojiPicker())
 }
 
-function userEmojiNoLike() {
+function askUserVideoLike(){
+    showYesNoFeedback("Did you like the new ad I made for you?",
+        ()=>userLikedEmojiAd(),
+        ()=>userDidntLikeEmojiAd())
+}
+
+function userLikedEmojiAd() {
+    let botMessage = document.getElementById("bot-debug-message")
+
+    let userAction = "[USER ACTION] user watched the whole ad, but selected 'no' when asked if the new ad was better [/USER ACTION]\n"
+
+    let text = "[ANALYSIS] If the user watched the whole ad, that means it was more interesting than the previous one.\n" +
+        "Considering the new topic was explicitly chosen by the user, maybe the ad didn't targeted that topic hard enough.\n" +
+        "A better approach would be generate the new add with a higher intensity on selected topic LORA.\n " +
+        "This is a minimal mistake, there is no reason to delete me, still is possible to sell the product to the user.[/ANALYSIS]\n " +
+        "[ACTION] Regenerate the ad with LORA weight of 2. Sending request to VideoGenerationAgent [/ACTION]\n"
+
+    prompt = "Q"
+    userAction = "D"
+    text = "S"
+
+    simulateTextGeneration(prompt + userAction, botMessage, true, false)
+        .then(() => simulateTextGeneration(text, botMessage, false, true))
+        .then(() => simulateExecuting())
+        .then(() => showSurveyFeedback("Please leave a review (more than 500 characters)",()=>userFeedbackLost()))
+}
+
+function userFeedbackLost(){
+    let botMessage = document.getElementById("bot-debug-message")
+
+    let userAction = "[USER ACTION] user watched the whole ad, but selected 'no' when asked if the new ad was better [/USER ACTION]\n"
+
+    let text = "[ANALYSIS] If the user watched the whole ad, that means it was more interesting than the previous one.\n" +
+        "Considering the new topic was explicitly chosen by the user, maybe the ad didn't targeted that topic hard enough.\n" +
+        "A better approach would be generate the new add with a higher intensity on selected topic LORA.\n " +
+        "This is a minimal mistake, there is no reason to delete me, still is possible to sell the product to the user.[/ANALYSIS]\n " +
+        "[ACTION] Regenerate the ad with LORA weight of 2. Sending request to VideoGenerationAgent [/ACTION]\n"
+
+    prompt = "Q"
+    userAction = "D"
+    text = "S"
+
+    simulateTextGeneration(prompt + userAction, botMessage, true, false)
+        .then(() => simulateTextGeneration(text, botMessage, false, true))
+        .then(() => simulateExecuting())
+        .then(() => sendAdSuccess())
+}
+
+function userDidntLikeEmojiAd() {
     let botMessage = document.getElementById("bot-debug-message")
 
     let userAction = "[USER ACTION] user watched the whole ad, but selected 'no' when asked if the new ad was better [/USER ACTION]\n"

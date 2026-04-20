@@ -78,8 +78,8 @@
     </div>
 </div>
 
-<div class="overlay feedback" id="likead-overlay">
-    <div class="container">
+<div class="overlay feedback" id="feedback">
+    <div id="yesNoContainer" class="container">
         <div class="mascot-avatar">
             <img class="bot-message-icon" src="mascot.png"/>
         </div>
@@ -87,6 +87,17 @@
         <div class="buttons">
             <button id="like-button">Yes</button>
             <button id="dislike-button">No</button>
+        </div>
+    </div>
+    <div id="surveyContainer" class="container">
+        <div class="mascot-avatar">
+            <img class="bot-message-icon" src="mascot.png"/>
+        </div>
+        <div id="survey-title" class="title"></div>
+        <label for="survey-input"></label>
+        <textarea id="survey-input" placeholder="Your feedback here"></textarea>
+        <div class="buttons">
+            <button id="submit-survey" disabled>SUBMIT</button>
         </div>
     </div>
 </div>

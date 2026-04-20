@@ -20,7 +20,7 @@
     border-radius: 2rem;
     min-height: 15%;
     border-style: solid;
-    display: flex;
+    display: none;
 }
 
 .overlay.feedback .container .title{
@@ -51,6 +51,19 @@
     cursor: pointer;
 }
 
-.overlay.feedback .container .buttons button:hover{
+.overlay.feedback .container .buttons button:disabled {
+    cursor: not-allowed;
+}
+
+.overlay.feedback .container .buttons button:not(:disabled):hover{
     background:white;
+}
+
+.overlay.feedback .container textarea{
+    width: 45rem;
+    min-height: 6rem;
+    margin: 1rem;
+    padding: 0.25rem;
+    border-radius: 10px;
+    font-size: 0.8rem;
 }

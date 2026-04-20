@@ -164,7 +164,7 @@ function handleAdEnd(){
     }
 
     if (!shownBiggerEmojis && skips_counter===1)
-        return userEmojiNoLike()
+        return askUserVideoLike()
 
     if (shownBiggerEmojis||(!shownBiggerEmojis && (skips_counter === 2)))
         return redirectToNothing()
