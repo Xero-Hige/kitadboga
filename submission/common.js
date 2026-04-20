@@ -46,7 +46,7 @@ function generateVideoAd(callback) {
     overlay.style.backdropFilter = getBlurString(baseBlur);
     sendToParent({type: 'pause'})
     sendToParent({type: 'seekTo', value: 0.5})
-    bufferingMessage.innerHTML = "Generating video ad..."
+    bufferingMessage.innerHTML = "Generating video ad"
 
 
     function updateBackdrop(originalBlurRate, blurRate, message) {
@@ -204,7 +204,7 @@ function redirectToNothing(){
     sendToParent({type: "pause"})
     document.getElementById("overlay-nowebpage").style.display = 'flex'
     setTimeout(()=>{
-        alert("Video provider timed out: missed (3) heartbeats. Forcing provider reset")
+        alert("Video provider timeout (missed 3 heartbeats): Forcing peer connection reset")
         sendAdFail()
     },20000)
 
