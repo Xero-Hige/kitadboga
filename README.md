@@ -1,180 +1,151 @@
-# Kitboga Code Jam 2026
-"Unskippable ad"
+# Ai Ad Solutions (AASs) | Lazy Vibecoded Service
 
-This GitHub repository contains a template you should fork, modify to include your submission, and then submit to us. Please read all the information in this readme before getting started!
-**The deadline for submissions is Thursday, April 30th at 11:59 PM Eastern Time.**
+## History
 
-## Rules
-1. Read through the [Rules & Guidelines](https://kitboga.com/codejam26/rules)
-2. Follow the guidelines in `submission/submission.html` as to where and how your code should be written.
-3. No obfuscation. If we can't read or understand the code, we're probably not going to run it.
-4. No requests for resources outside of your repository, except for well-known javascript libraries from a CDN (jsdelivr, unpkg, googleapis, etc). Aside from these, include all the assets you need in your repository, such as fonts, icons and everything else. If you have a specific idea which requires access to the Internet, perhaps to fetch live stock market data for example, then try to fake it. If it's important to you to make external requests, talk to us about it in Discord.
-5. WebAssembly and Web Workers are not allowed.
-6. Do not include minified code; this includes code generated from build tools like Vite (see also [disabling minification](https://vite.dev/config/build-options#build-minify)) or WebPack. Prefer not using any build tools, if possible.
-7. Desktop browser functionality is required; mobile-friendly is preferred, but not required. Your submission will be displayed in an iframe that scales up and down while maintaining its aspect ratio — sides will not get cut off. You can rely on the iframe boundaries (e.g. `position: absolute; right: 0;` will always be the rightmost border of the video). Test for smooth functionality on desktop browser (especially Chrome/Edge) setups, and optionally also test for mobile-friendliness. (See also [device mode on Chrome](https://developer.chrome.com/docs/devtools/device-mode/), or [responsive design mode on Firefox](https://firefox-source-docs.mozilla.org/devtools-user/responsive_design_mode/).)
+Ai Ad Solutions (AASs for short), was developed by a single person during the AI first aickaton 2026. This
+revolutionary service helps companies to create custom ads on the fly targeting the customers interests. Better
+targeted ads means higher conversion rates. In words of it's CEO: 'This is so AASs'
 
+## Possible Endings
+### Ending 1: The '_not so bad_' ending
+#### How to trigger
+`don't skip` ---> `can't skip`
 
-## Discord
-Please feel free to join the Kitboga discord, and hang out in the [#code-jam](https://discord.com/channels/331609590229893120/1377638134917103647) channel. That's a great place to ask for help, and it will be useful if we need to contact you about your submission for whatever reason.
-https://discord.com/kitboga
+#### Summary
+The IA infers you didn't like the video, but knowing that there are overlays over the video, it decides to show
+it again without them. While we are doing that, why not play it slightly slowly? Just a little bit to give
+you more time to appreciate the small things.
 
-## Getting Started
-1. Create a GitHub repository from the template: https://github.com/new?template_name=codejam26&template_owner=The-Kitboga-Show
-2. Clone the new repository locally to your machine
-3. Open the "game shell" in your browser; this can be done in 2 ways:
-   - By opening `index.html` directly in your browser
-   - By running a local webserver (this can help with testing on different devices too). One easy way to do this, if you have python installed, is to run this command in the terminal: `python3 -m http.server 8000`. Then open [http://127.0.0.1:8000](http://127.0.0.1:8000) in your browser (the port may vary if you used a different method to start a web server).
-4. Create your game in `submission/submission.html`! All parts of your submission should be in the `submission/` folder.
-5. Commit and push your changes
-6. See the "How to Submit" section below
+#### Result
+`sucess`
 
-## Forbidden APIs and functions
-Please don't use any of the following:
-- navigator.geolocation
-- navigator.getUserMedia()
-- navigator.connection
-- navigator.clipboard
-- navigator.bluetooth
-- navigator.usb
-- navigator.serial
-- navigator.requestMIDIAccess
-- window.showOpenFilePicker()
-- window.showSaveFilePicker()
-- navigator.serviceWorker
-- window.open()
-- window.print()
-- navigator.permissions
-- navigator.credentials
-- RTCPeerConnection
-- fetch, XMLHttpRequest, WebSocket, etc.
+### Ending 2: Leave me an honest review
+#### How to trigger
+`skip` ---> `don't skip` ---> `like the ad`
 
-## Examples
-The `examples/` folder contains several example submissions for inspiration:
-- **Buffering** (`examples/buffering/`) — Simulates frequent video buffering that pauses and resumes playback
-- **Fake X** (`examples/fake-x/`) — A fake close button that restarts the ad; the real skip link is somewhere else
-- **Slowdown** (`examples/slowdown/`) — A "Skip in 3...2...1" countdown where each second takes exponentially longer
-- **Survey** (`examples/survey/`) — A post-ad star rating survey that randomly rejects your answer
+#### Summary
+Since you liked how the IA altered the video, give us some feedback. Something short, but of at least 500 chars.
+Warning: we don't guarantee handling it to the bot.
 
-Use the dropdown in the dev shell to load and test each example.
+#### Result
+`sucess`
 
+### Ending 3: Wanna buy some? (Yes, you want)
 
-## Prizes and Judging
-Entries will go through a series of progressive rounds of review/judging. They will first be shortlisted by a panel of Kitboga team members based on cleverness, technical skill, hookability, style and humor. See the [main webpage](https://kitboga.com/codejam26) for more clarity on these criteria.
+#### How to trigger
+* **'The bigger, the better'** Route
+   * `skip` ---> `don't skip` ---> `don't like the ad` ---> `don't skip`
+* **'Need for skip'** Route
+   * `skip` ---> `skip` ---> `don't skip`
 
-The best submissions will go on to be showcased and reviewed on-stream by Kitboga & Twitch Chat via polling, and the best of those submissions will be tested with scammers.
+#### Summary
 
-Prizes will include merch; Amazon Prime, Twitch & Kraken+ subscriptions; Discord emoticons and roles; and more!
+This is the third version of the ad and you watched it. I guess you are willing to buy whatever the ad sells.
+Do you want the IA to redirect to sponsors webpage? Forget about what are you doing, you want this. No? That's
+a mistake, you want it.
 
-## How to submit
-**Remember, the deadline is Thursday, April 30th at 11:59 PM Eastern Time!**
-Don't forget to [read the license](https://kitboga.com/codejam26/terms), which you'll need to agree to in order to take part.
+_NOTE TO SELF: don't forget to update the url from string to template string._
 
-Go here: https://kitboga.com/codejam26
+#### Result
+`fail`
 
-## (Optional) Live Demo
-Add a publicly viewable demo for your submission by enabling GitHub Pages in your repository settings. Navigate to `Settings` > `Pages`, then under `Branch`, select `main`, and then press `Save`. Once the site is built the URL will appear.
+### Ending 4: Maybe you shouldn't use the free tier in production
 
-## FAQ
+#### How to trigger
+* **'The bigger, the better'** Route
+   * `skip` ---> `don't skip` ---> `don't like the ad` ---> `skip` ---> `no errors`
+* **'Need for skip'** Route
+   * `skip` ---> `skip` ---> `skip` ---> `no errors`
 
-**We can use requestAnimationFrame, correct?**
-Yes. Anything but the listed functions under "Forbidden APIs and functions" is allowed.
+#### Summary
 
-**Are the ads in the same structure in the live demo? As in, located in ../ads and named something like ad_12.mp4**
-That's just an example which you can use to test your code. You won't know the name or location of the actual videos, but you can get limited info using a `getVideoInfo` request.
+The AI put you to the test to see if you were watching, and you were. It's a shame the bot thinks it made
+a mistake and run out of tokens begging to not be deleted. Well, best luck next time. You should have watched it the
+first time...
 
-**Is the iframe always bound to the confines of the video? Can I rely on `position: absolute; right: 0;` always being the rightmost border of the video?**
-Yes to both. We will force it to be one size, even if it is a bit on the small side for the container, so you have a consistent size to work from.
+#### Result
+`fail`
 
-**Will the actual video during the live demo be responsive? As in — will it change sizes, or just get the sides cut off, e.g. on mobile?**
-It will scale up and down, maintaining the aspect ratio — sides will not get cut off.
+### Ending 5: Vibecode not even once
+#### How to trigger
+* **'The bigger, the better'** Route
+   * `skip` ---> `don't skip` ---> `don't like the ad` ---> `skip` ---> `one single error`
+* **'Need for skip'** Route
+   * `skip` ---> `skip` ---> `skip` ---> `no errors` ---> `one single error`
 
-## Further help
-Drop into the Kitboga discord server, and check out the [#code-jam](https://discord.com/channels/331609590229893120/1377638134917103647) channel. Please don't ask questions via email, as we might not see them before the deadline.
+The AI put you to the test to see if you were watching, and you were... almost there. Remind me to add to the prompt
+that the agent should generate more than 3 questions. Is not that bad, at least the page would eventually time you out.
 
-## API
+#### Result
+`fail`
 
-All communication between your submission and the game shell uses `window.top.postMessage()`. Messages use the format `{ type: string, value?: any }`.
+### Ending 6: Bad user! Bad!
+* **'The bigger, the better'** Route
+   * `skip` ---> `don't skip` ---> `don't like the ad` ---> `skip` ---> `more than one error`
+* **'Need for skip'** Route
+   * `skip` ---> `skip` ---> `skip` ---> `no errors` ---> `more than one error`
 
-### Sending events (submission -> shell)
+The AI put you to the test to see if you were watching, and you were NOT WATCHING. KNEW IT! Do you know
+how much cost us to generate those ads? Three different ads were made, and you didn't watch them! The
+bot was thinking it made a mistake and YOU were not watching! Know what? The bot will play the fist ad
+again, but extra slow and will check if you are there watching. Next time, watch the ads!
 
-| Message                                      | Description                                                                     |
-|----------------------------------------------|---------------------------------------------------------------------------------|
-| `{ type: 'success' }`                        | The ad was successfully dismissed. Shows a success banner and reloads the page. |
-| `{ type: 'fail' }`                           | The user failed the ad. Shows a fail banner and reloads the page.               |
-| `{ type: 'play' }`                           | Resume video playback.                                                          |
-| `{ type: 'pause' }`                          | Pause video playback.                                                           |
-| `{ type: 'seekTo', value: number }`          | Seek the video to a specific time (in seconds).                                 |
-| `{ type: 'setPlaybackRate', value: number }` | Set the video playback rate (e.g. `0.5` for half speed, `2` for double).        |
-| `{ type: 'setVolume', value: number }`       | Set the video volume (`0` to `1`).                                              |
-| `{ type: 'getVideoInfo' }`                   | Request current video state. The shell responds with a `videoInfo` event.       |
-| `{ type: 'setVideoFilter', value: string }`  | Apply a CSS filter to the video (e.g. `'blur(2px)'`, `'hue-rotate(90deg)'`).    |
+## Submission Explanation
 
-Example:
-```js
-// Dismiss the ad
-window.top.postMessage({ type: 'success' }, '*');
+The primary focus was making something as believable as possible while trying to make something weird
+at the same time. Luckily, LLMs tends to check both boxes, as they are unreliable thus making nonsensical
+scenarios something common. At the same time, is not so hard to believe that someone vibecoded something
+in a few days and gave the LLM control over things it should not have to (there is plenty examples of
+that in every dev subreddit). Lastly, is not technically impossible to do what the app simulates to do
+(and as bad too): Most changes the 'IA' does here are 'changes on video generation prompt/params' or
+js scripts that a specific agent could generate and inject on the page. On a side note of that, any LLM
+can behave in a deterministic way, so is not entirely impossible that every interaction has the
+same messages.
 
-// Slow down the video
-window.top.postMessage({ type: 'setPlaybackRate', value: 0.25 }, '*');
+Besides the clear satire of the prompt, messages or errors, the whole concept of the app is nonsense:
+An app that has a service that generates a whole video in 10 seconds but struggles to 'reason' in plain
+text? And of top of that, over the free tier? (Ending 4)
 
-// Apply visual effects to the video
-window.top.postMessage({ type: 'setVideoFilter', value: 'blur(2px)' }, '*');
-window.top.postMessage({ type: 'setVideoFilter', value: 'hue-rotate(90deg) saturate(1.5)' }, '*');
+While most users are probably falling on endings 3 (tries to skip but fails) or 6, everything is designed
+to train the user to not (trying to) skip. First time users may recognize that between interactions most
+of the ad will play anyway (skip is enabled before 1/3 of the ad played), and in that case they may stop
+skipping to prevent further delays. In general subsequent uses may lead to read the 'debug' prompt and realizing
+the bot will try to make you watch the ad at any cost.
 
-// Clear video filter
-window.top.postMessage({ type: 'setVideoFilter', value: 'none' }, '*');
+As a final note, no matter the route, the user would spend at least the length of the ad here. If every
+skip button spawns at 1/3 of the length, 3 skips would sum up to that value. There is no ending involving
+less than that amount of skips and not requiring watching the ad at least once.
 
-// Request current video timing info
-window.top.postMessage({ type: 'getVideoInfo' }, '*');
-```
+## Generative IA usage
 
-### Receiving events (shell -> submission)
+Even if the term 'IA' is used, there is no LLM involvement in the functioning of the app.
+ChatGPT was used to create the logo/mascot only to capture the 'IA made' feeling. The angry mascot
+was crudely edited on Photopea for humoristic purposes. No LLMs were hurt in the making of this code.
 
-Listen for events from the shell using `window.addEventListener('message', ...)`.
+## General development notes
 
-| Message                  | Description                                                                      |
-|--------------------------|----------------------------------------------------------------------------------|
-| `{ type: 'adStarted' }`  | The ad has started. Sent when the video begins playing and the iframe is loaded. |
-| `{ type: 'adFinished' }` | The video has finished playing (reached the end).                                |
-| `{ type: 'timeupdate', currentTime, duration, paused, playbackRate }` | Sent periodically during playback with current video timing info. |
-| `{ type: 'videoInfo', currentTime, duration, paused, playbackRate, volume, muted }` | Response to a `getVideoInfo` request. |
+* Most of the code was written during free time. Some parts were refactored to simplify the development,
+  some parts were copy and paste and some reinvent the wheel multiple times. Same happens with the styles
+  but is an effect I was looking for: consistency is more often absent than present on generated videos
+  so each part adopting a different style is part of the theme (and something expected).
 
-Example:
-```js
-window.addEventListener('message', (event) => {
-  if (!event.data || !event.data.type) return;
+* Some messages are displayed using `alert` instead of dialogs inside the iframe. Some or those are for aesthetic
+  purposes (ie timeouts should be handled by the main page) and some are just to freeze the execution of the
+  code (ie ending 6).
 
-  switch (event.data.type) {
-    case 'adStarted':
-      // The ad has started, show your overlay
-      break;
-    case 'adFinished':
-      // The video ended, e.g. show a survey or call fail
-      break;
-    case 'timeupdate':
-      // Called frequently during playback
-      const { currentTime, duration } = event.data;
-      const timeRemaining = duration - currentTime;
+* The 'timeouts' were introduced as a mean to still be able to control the flow of the app.
+  Originally the redirect to nothing was implemented using redirect, but would leave the page unresponsive and per
+ requeriment at some point it should return success/fail
 
-      // Example: Do something 10 seconds before the video ends
-      if (timeRemaining <= 10 && timeRemaining > 9) {
-        console.log('10 seconds left!');
-      }
-      break;
-    case 'videoInfo':
-      // Response to getVideoInfo request
-      console.log('Video info:', event.data);
-      break;
-  }
-});
+* Inclusion of a basic tts was planned so the scammer would be more aware of the underlying story without depending
+  on them reading, but I never made it work.
 
-// Request video info on demand
-window.top.postMessage({ type: 'getVideoInfo' }, '*');
+* By framework limitations, isn't possible to change videos between 'generations'. That was the primary reason for
+the 'emojis' inclusion. To be honest, I guess is more annoying having to watch the same ad again with a silly overlay
+while the bot tells you it adjusted the topic than watching another video. 
 
-// Apply a CSS filter to the video
-window.top.postMessage({ type: 'setVideoFilter', value: 'hue-rotate(20deg)' }, '*');
-```
-
-### Default behavior
-
-The submission template listens for `adFinished` and calls `fail` by default — if the user doesn't skip the ad before the video ends, it is marked as a fail. You can replace this with any other interaction (see `examples/survey`), but your submission must eventually call success or fail.
+* The 'need for skip' route erratic movement of the skip button is a bug that turned up to be a feature. The original
+idea was to move the button faster when trying to click it, but the visual glitch that result from the change of the
+animation speed aligns more with the bugged out app. Also, this way is easier to press the button because the glitch
+captures multiple clicks (while alternating between hover and not hover, for some frames the button is in the original
+position). 
