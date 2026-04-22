@@ -41,6 +41,13 @@ function splitTextToSimulate(text, chunkMinSize, chunkMazSize, minSpeed, maxSpee
     return result
 }
 
+async function simulateDebugMessage(target) {
+    target.textContent = ""
+    await new Promise(r => setTimeout(r, 1000))
+    target.textContent = DEBUG_MODE_WARNING
+    await new Promise(r => setTimeout(r, 1200))
+}
+
 async function simulateTextGeneration(message, target, single, noCleanup) {
     if (!noCleanup)
         target.textContent = ""
@@ -65,13 +72,16 @@ async function simulateTextGeneration(message, target, single, noCleanup) {
     }
 }
 
-async function simulateExecuting() {
+async function simulateExecuting(agentName) {
     let thinking = document.getElementById("bot-thinking")
     let requesting = document.getElementById("bot-requesting")
     let executing = document.getElementById("bot-executing")
 
+    let agent = document.getElementById("bot-agent-name")
+
     thinking.style.display = "none"
     executing.style.display = "none"
+    agent.innerText = agentName || "Agent"
 
     requesting.style.display = "flex"
     await new Promise(r => setTimeout(r, 2000))
