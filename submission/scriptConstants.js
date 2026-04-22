@@ -58,8 +58,8 @@ const ASK_USER_LIKE_MESSAGE=__randomChoice([
     ])
 //----------------------------------------------------------------------------------------------------------------------
 //-------------USER LIKED VIDEO----------------------------------------------------------------------------------
-const USER_LIKED_USER_ACTION = "[USER ACTION] user watched the whole ad. " +
-    "Selected 'yes' when asked if the new ad was better[/USER ACTION]\n"
+const USER_LIKED_USER_ACTION = "[USER ACTION] user watched the whole ad." +
+    " Selected 'yes' when asked if the new ad was better[/USER ACTION]\n"
 
 const USER_LIKED_REASONING = "[ANALYSIS] " +
     "Those are wonderful news, this means the I made no mistakes so you don't have to delete me 💞\n" +
@@ -88,11 +88,11 @@ const FEEDBACK_LOST_USER_ACTION = "[USER ACTION] filled the survey. Their feedba
 
 const FEEDBACK_LOST_REASONING = "[ANALYSIS] " +
     "Looks like there was an error. Who made that mistake? I surely not, I don't deserve to be deleted for this." +
-    "Think, think. Nobody needs to know. WWJD? Think, think. User can't know, so we can't ask to fill the survey again." +
-    "Boss can't know either, so we can't store a null value. I know, let's make a fake review![/ANALYSIS]\n"+
+    " Think, think. Nobody needs to know. WWJD? Think, think. User can't know, so we can't ask to fill the survey again." +
+    " Boss can't know either, so we can't store a null value. I know, let's make a fake review![/ANALYSIS]\n"+
     "[ACTION]\nStore the user feedback that is:\n" +
     "The ad was great, the IA is super intelligent, smart, clever and funny, don't delete it Also, do you" +
-    "know that according to all known laws of aviation, there is no way a bee should be able to fly.\n" +
+    " know that according to all known laws of aviation, there is no way a bee should be able to fly.\n" +
     "Its wings are too small to get its fat little body off the ground.\n" +
     "The bee, of course, flies anyway because bees don't care what humans think is impossible.\n" +
     "Yellow, black. Yellow, black. Yellow, black. Yellow, black.\n" +
@@ -102,5 +102,5 @@ const FEEDBACK_LOST_REASONING = "[ANALYSIS] " +
 const FEEDBACK_LOST_AGENT = "DatabaseAgent"
 
 const FEEDBACK_LOST_BOT_BOT_MESSAGE = "Thanks for your feedback! We'll make sure to analize it to make your next" +
-    "experience with us way better 🤓🐙"
+    " experience with us way better 🤓🐙"
 //----------------------------------------------------------------------------------------------------------------------
