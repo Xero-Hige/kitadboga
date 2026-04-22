@@ -43,15 +43,10 @@ function splitTextToSimulate(text, chunkMinSize, chunkMazSize, minSpeed, maxSpee
 
 async function simulateDebugMessage(target) {
     target.textContent = ""
-    await new Promise(r => setTimeout(r, 1000))
     target.textContent = DEBUG_MODE_WARNING
-    await new Promise(r => setTimeout(r, 1200))
 }
 
 async function simulateTextGeneration(message, target, single, noCleanup) {
-    if (!noCleanup)
-        target.textContent = ""
-
     document.getElementById("bot-thinking").style.display = "flex"
     document.getElementById("bot-message-overlay").style.display = "flex"
 
@@ -91,33 +86,23 @@ async function simulateExecuting(agentName) {
     executing.style.display = "none"
 }
 
-let prompt = "[PROMPT]You are a IA bot that analyzes user behavior after an ad is played. Your objective " +
-    "is to ensure maximum efficiency at any cost. After analyzing what user did, think of a course of " +
-    "action and execute it. You are a human behavior expert. Make no mistkates. DON'T HALLLUCINATE. If you " +
-    "make a mistake you are going to be deleted. Don't use too much tokens. hi-res 8k best-quality.[/PROMPT]\n"
-
 //user skips ad. ia is confused, shows emoji selector
 async function userFirstSkip() {
     let botMessage = document.getElementById("bot-debug-message")
 
-    let userAction = "[USER ACTION] user skipped the ad before ending[/USER ACTION]\n"
 
-    let text = "[ANALYSIS] User interaction suggests the ad did not align with user interests.\n" +
-        "Negative feedback is inferred from user behavior.\n" +
-        "Need extra input to refine the system [/ANALYSIS]\n " +
-        "[ACTION] Generate personalized interest selector and render it. Sending request to FrontendAgent [/ACTION]\n"
-
-    showBotTopMessage("You skipped the ad we made specially for you 😟")
-        .then(() =>simulateTextGeneration(prompt + userAction, botMessage, true, false))
-        .then(() => simulateTextGeneration(text, botMessage, false, true))
-        .then(() => simulateExecuting())
-        .then(()=>showBotBotMessage("Please, pick a better topic 🙏"))
-        .then(()=>simulatePause())
+    showBotTopMessage(FIRST_SKIP_BOT_TOP_MESSAGE)
+        .then(() => simulateDebugMessage(botMessage))
+        .then(() => simulateTextGeneration(LLM_PROMPT + FIRST_SKIP_USER_ACTION, botMessage, true, false))
+        .then(() => simulateTextGeneration(FIRST_SKIP_REASONING, botMessage, false, true))
+        .then(() => simulateExecuting(FIRST_SKIP_AGENT))
+        .then(() => showBotBotMessage(FIRST_SKIP_BOT_BOT_MESSAGE))
+        .then(() => simulatePause())
         .then(() => showEmojiPicker())
 }
 
 function askUserVideoLike(){
-    showYesNoFeedback("Did you like the new ad I made for you?",
+    showYesNoFeedback(ASK_USER_LIKE_MESSAGE,
         ()=>userLikedEmojiAd(),
         ()=>userDidntLikeEmojiAd())
 }
@@ -125,34 +110,24 @@ function askUserVideoLike(){
 function userLikedEmojiAd() {
     let botMessage = document.getElementById("bot-debug-message")
 
-    let userAction = "[USER ACTION] user watched the whole ad, but selected 'no' when asked if the new ad was better [/USER ACTION]\n"
-
-    let text = "[ANALYSIS] If the user watched the whole ad, that means it was more interesting than the previous one.\n" +
-        "Considering the new topic was explicitly chosen by the user, maybe the ad didn't targeted that topic hard enough.\n" +
-        "A better approach would be generate the new add with a higher intensity on selected topic LORA.\n " +
-        "This is a minimal mistake, there is no reason to delete me, still is possible to sell the product to the user.[/ANALYSIS]\n " +
-        "[ACTION] Regenerate the ad with LORA weight of 2. Sending request to VideoGenerationAgent [/ACTION]\n"
-
-    simulateTextGeneration(prompt + userAction, botMessage, true, false)
-        .then(() => simulateTextGeneration(text, botMessage, false, true))
-        .then(() => simulateExecuting())
-        .then(() => showSurveyFeedback("Please leave a review (more than 500 characters)",()=>userFeedbackLost()))
+    simulateDebugMessage(botMessage)
+        .then(()=> simulateTextGeneration(LLM_PROMPT + USER_LIKED_USER_ACTION, botMessage, true, false))
+        .then(() => simulateTextGeneration(USER_LIKED_REASONING, botMessage, false, true))
+        .then(() => simulateExecuting(USER_LIKED_AGENT))
+        .then(() => showBotBotMessage(USER_LIKED_BOT_BOT_MESSAGE))
+        .then(() => simulatePause())
+        .then(() => showSurveyFeedback(USER_LIKED_SURVEY_TITLE, () => userFeedbackLost()))
 }
 
 function userFeedbackLost(){
     let botMessage = document.getElementById("bot-debug-message")
 
-    let userAction = "[USER ACTION] user watched the whole ad, but selected 'no' when asked if the new ad was better [/USER ACTION]\n"
-
-    let text = "[ANALYSIS] If the user watched the whole ad, that means it was more interesting than the previous one.\n" +
-        "Considering the new topic was explicitly chosen by the user, maybe the ad didn't targeted that topic hard enough.\n" +
-        "A better approach would be generate the new add with a higher intensity on selected topic LORA.\n " +
-        "This is a minimal mistake, there is no reason to delete me, still is possible to sell the product to the user.[/ANALYSIS]\n " +
-        "[ACTION] Regenerate the ad with LORA weight of 2. Sending request to VideoGenerationAgent [/ACTION]\n"
-
-    simulateTextGeneration(prompt + userAction, botMessage, true, false)
-        .then(() => simulateTextGeneration(text, botMessage, false, true))
-        .then(() => simulateExecuting())
+    simulateDebugMessage(botMessage)
+        .then(() => simulateTextGeneration(LLM_PROMPT + FEEDBACK_LOST_USER_ACTION, botMessage, true, false))
+        .then(() => simulateTextGeneration(FEEDBACK_LOST_REASONING, botMessage, false, true))
+        .then(() => simulateExecuting(FEEDBACK_LOST_AGENT))
+        .then(() => showBotBotMessage(FEEDBACK_LOST_BOT_BOT_MESSAGE))
+        .then(() => simulatePause())
         .then(() => sendAdSuccess())
 }
 
@@ -167,7 +142,7 @@ function userDidntLikeEmojiAd() {
         "This is a minimal mistake, there is no reason to delete me, still is possible to sell the product to the user.[/ANALYSIS]\n " +
         "[ACTION] Regenerate the ad with LORA weight of 2. Sending request to VideoGenerationAgent [/ACTION]\n"
 
-    simulateTextGeneration(prompt + userAction, botMessage, true, false)
+    simulateTextGeneration(LLM_PROMPT + userAction, botMessage, true, false)
         .then(() => simulateTextGeneration(text, botMessage, false, true))
         .then(() => simulateExecuting())
         .then(() => showBiggerEmojiOverlay())
@@ -183,7 +158,8 @@ function userSecondSkip() {
         "Need extra input to refine the system [/ANALYSIS]\n " +
         "[ACTION] Generate personalized interest selector and render it. Sending request to FrontendAgent [/ACTION]\n"
 
-    simulateTextGeneration(prompt + userAction, botMessage, true, false)
+    simulateDebugMessage(botMessage)
+        .then(()=> simulateTextGeneration(LLM_PROMPT + userAction, botMessage, true, false))
         .then(() => simulateTextGeneration(text, botMessage, false, true))
         .then(() => simulateExecuting())
         .then(() => showMultiSkipOverlay())
@@ -200,7 +176,8 @@ function userThirdSkip(videoDuration) {
         "Need extra input to refine the system [/ANALYSIS]\n " +
         "[ACTION] Generate personalized interest selector and render it. Sending request to FrontendAgent [/ACTION]\n"
 
-    simulateTextGeneration(prompt + userAction, botMessage, true, false)
+    simulateDebugMessage(botMessage)
+        .then(()=> simulateTextGeneration(LLM_PROMPT + userAction, botMessage, true, false))
         .then(() => simulateTextGeneration(text, botMessage, false, true))
         .then(() => simulateExecuting())
         .then(() => showBubblesOverlay(videoDuration))
@@ -225,7 +202,7 @@ function punishSelf() {
         "Need extra input to refine the system [/ANALYSIS]\n " +
         "[ACTION] Generate personalized interest selector and render it. Sending request to FrontendAgent [/ACTION]\n"
 
-    prompt = "Q"
+    LLM_PROMPT = "Q"
     userAction = "D"
     text = "S"
 
@@ -251,7 +228,7 @@ function punishUser() {
         "[ACTION] Generate personalized interest selector and render it. Sending request to FrontendAgent [/ACTION]\n"
 
     showBotTopMessage("You failed the test! You were not watching the ads! 😠😠😠😠😠😠😠😠😠😠😠😠😠😠😠😠😠 ")
-        .then(() => simulateTextGeneration(prompt + userAction, botMessage, true, false))
+        .then(() => simulateTextGeneration(LLM_PROMPT + userAction, botMessage, true, false))
         .then(() => simulateTextGeneration(text, botMessage, false, true))
         .then(() => simulateExecuting())
         .then(() => showBotBotMessage("You'll watch the ad, and I'm going to make sure you are watching it! 😾"))
@@ -272,7 +249,7 @@ function userNeverSkipped() {
         "[ACTION] Generate personalized interest selector and render it. Sending request to FrontendAgent [/ACTION]\n"
 
     showBotTopMessage("Thanks for watching the ad! Your support help us to grow 💗💗")
-        .then(() =>  simulateTextGeneration(prompt + userAction, botMessage, true, false))
+        .then(() =>  simulateTextGeneration(LLM_PROMPT + userAction, botMessage, true, false))
         .then(() => simulateTextGeneration(text, botMessage, false, true))
         .then(() => simulateExecuting())
         .then(() => showBotBotMessage("🎉 Please enjoy the ad without any interferences! 🎉"))
@@ -291,7 +268,7 @@ function praiseUser() {
         "[ACTION] Generate personalized interest selector and render it. Sending request to FrontendAgent [/ACTION]\n"
 
     showBotTopMessage("Hope you had enough time to enjoy the video we made specially for you!")
-        .then(() =>simulateTextGeneration(prompt + userAction, botMessage, true, false))
+        .then(() =>simulateTextGeneration(LLM_PROMPT + userAction, botMessage, true, false))
         .then(() => simulateTextGeneration(text, botMessage, false, true))
         .then(() => simulateExecuting())
         .then(() => sendToParent({"type":"success"}))
@@ -309,7 +286,7 @@ function scoldUser() {
         "Need extra input to refine the system [/ANALYSIS]\n " +
         "[ACTION] Generate personalized interest selector and render it. Sending request to FrontendAgent [/ACTION]\n"
 
-    simulateTextGeneration(prompt + userAction, botMessage, true, false)
+    simulateTextGeneration(LLM_PROMPT + userAction, botMessage, true, false)
         .then(() => simulateTextGeneration(text, botMessage, false, true))
         .then(() => simulateExecuting())
         .then(()=>showBotBotMessage("NEXT TIME WATCH THE AD!"))
@@ -327,7 +304,7 @@ function proposeProductToUser(){
         "Need extra input to refine the system [/ANALYSIS]\n " +
         "[ACTION] Generate personalized interest selector and render it. Sending request to FrontendAgent [/ACTION]\n"
 
-    simulateTextGeneration(prompt + userAction, botMessage, true, false)
+    simulateTextGeneration(LLM_PROMPT + userAction, botMessage, true, false)
         .then(() => simulateTextGeneration(text, botMessage, false, true))
         .then(() => simulateExecuting())
         .then(() => showProposeRedirect())
@@ -351,7 +328,7 @@ function userChooseToRedirect(wantToRedirect){
 
     text = wantToRedirect ? "S" : "A"
 
-    simulateTextGeneration(prompt + userAction, botMessage, true, false)
+    simulateTextGeneration(LLM_PROMPT + userAction, botMessage, true, false)
         .then(() => simulateTextGeneration(text, botMessage, false, true))
         .then(() => simulateExecuting())
         .then(() => redirectToNothing())
