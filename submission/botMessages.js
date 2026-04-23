@@ -179,10 +179,6 @@ function userThirdSkip(videoDuration) {
         .then(() => showBubblesOverlay(videoDuration))
 }
 
-const GEMIPP_ERROR = "[Errno fetch http://text-gen-service.gemimipp.svc.cluster.local:8082/gemimipp/worker_convo2text\n" +
-    "failed: 429: b'{\\n \"error\": {\\n \"message\": \"You're generating text too quickly. To ensure the best experience for everyone on the free tier, we have rate limits in place. Please wait before making more requests.\",\\n \"type\": \"text\",\\n \"param\": null,\\n \"code\": \"rate_limit_exceeded\"\\n }\\n}'] b'{\\n \"error\": {\\n \"message\": \"You're generating text too quickly. To ensure the best experience for everyone on the free tier, we have rate limits in place. Please wait before making more requests.\",\\n \"type\": \"text\",\\n \"param\": null,\\n \"code\": \"rate_limit_exceeded\"\\n }\\n}' \n" +
-    "\n"
-
 async function showAppConnectionError() {
     await new Promise(r => setTimeout(r, 2500))
     alert("App connection returned an error\nErrno 45: free tier tokens limit exceeded")
