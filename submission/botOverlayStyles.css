@@ -39,6 +39,15 @@
     font-weight: 500;
 }
 
+.bot-debug-message:empty {
+    display: none;
+}
+
+.bot-debug-message ::first-line {
+    font-weight: 300;
+    color: #bd0a0a;
+}
+
 .bot-message-container {
     position: absolute;
     bottom: 0;
