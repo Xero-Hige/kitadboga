@@ -48,6 +48,10 @@ async function simulateDebugMessage(target) {
     target.textContent = DEBUG_MODE_WARNING
 }
 
+async function attachText(message, target) {
+    target.textContent = target.textContent + message
+}
+
 async function simulateTextGeneration(message, target, single, cleanup, noThinking) {
     if (cleanup)
         target.textContent = ""
@@ -174,34 +178,27 @@ function userThirdSkip(videoDuration) {
         .then(() => simulateTextGeneration(LLM_PROMPT + THIRD_SKIP_USER_ACTION, botMessage, true,))
         .then(() => simulateTextGeneration(THIRD_SKIP_REASONING, botMessage, false))
         .then(() => simulateExecuting(THIRD_SKIP_AGENT))
-        .then(()=>showBotBotMessage(THIRD_SKIP_BOT_BOT_MESSAGE))
+        .then(() => showBotBotMessage(THIRD_SKIP_BOT_BOT_MESSAGE))
         .then(() => simulatePause())
         .then(() => showBubblesOverlay(videoDuration))
 }
 
 async function showAppConnectionError() {
     await new Promise(r => setTimeout(r, 2500))
-    alert("App connection returned an error\nErrno 45: free tier tokens limit exceeded")
+    alert(GEMIPP_ALERT_MESSAGE)
 }
 
 function punishSelf() {
     let botMessage = document.getElementById("bot-debug-message")
 
-    let userAction = "[USER ACTION] user skipped the ad before ending[/USER ACTION]\n"
-
-    let text = "[ANALYSIS] User interaction suggests the ad did not align with user interests.\n" +
-        "Negative feedback is inferred from user behavior.\n" +
-        "Need extra input to refine the system [/ANALYSIS]\n " +
-        "[ACTION] Generate personalized interest selector and render it. Sending request to FrontendAgent [/ACTION]\n"
-
-    LLM_PROMPT = "Q"
-    userAction = "D"
-    text = "S"
-
-    simulateTextGeneration(prompt + userAction, botMessage, true)
-        .then(() => simulateTextGeneration(text, botMessage, false))
-        .then(() => simulateTextGeneration("Please don't delete me!\n".repeat(150), botMessage, true))
-        .then(() => simulateTextGeneration(GEMIPP_ERROR, botMessage, true))
+    showBotTopMessage(PUNISH_SELF_BOT_TOP_MESSAGE)
+        .then(() => simulateDebugMessage())
+        .then(() => simulateTextGeneration(prompt + PUNISH_SELF_USER_ACTION, botMessage, true)
+            .then(() => simulateTextGeneration(PUNISH_SELF_REASONING, botMessage, false))
+            .then(() => simulateTextGeneration(PUNISH_SELF_PLEADING, botMessage, true))
+            .then(() => simulatePause(2))
+            .then(() => attachText(GEMIPP_ERROR, botMessage))
+            .then(() => simulatePause(6)))
         .then(() => showAppConnectionError())
         .then(() => sendAdFail())
 }

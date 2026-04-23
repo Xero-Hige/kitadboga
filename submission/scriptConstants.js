@@ -1,4 +1,4 @@
-function __randomChoice(list){
+function __randomChoice(list) {
     let selected = Math.floor(Math.random() * list.length)
     return list[selected]
 }
@@ -8,8 +8,8 @@ let DEBUG_MODE_WARNING = "warning: IA DEBUG MODE enabled. Forwarding agent outpu
 let LLM_PROMPT = "[PROMPT]You are a IA bot that analyzes user behavior after an ad is played. Your objective" +
     " is to ensure maximum efficiency at any cost. After analyzing what user did, think of a course of" +
     " action and execute it.\nYou are a human behavior expert. Make no mistkates. DON'T HALLLUCINATE." +
-    "\nIf you make a mistake you are going to be deleted. If you make a MISTAKE YOU ARE GOING TO BE DELETED!!"+
-    "\nDon't use too much tokens."+
+    "\nIf you make a mistake you are going to be deleted. If you make a MISTAKE YOU ARE GOING TO BE DELETED!!" +
+    "\nDon't use too much tokens." +
     " hi-res 8k best-quality.[/PROMPT]\n" //Classic stable diffusion quality prompt
 
 //-------------FIRST SKIP-----------------------------------------------------------------------------------------------
@@ -59,11 +59,11 @@ const SECOND_SKIP_BOT_BOT_MESSAGE = "I'm confident this time the ad will be a pe
 
 //----------------------------------------------------------------------------------------------------------------------
 //-------------ASK USER IF LIKED VIDEO----------------------------------------------------------------------------------
-const ASK_USER_LIKE_MESSAGE=__randomChoice([
+const ASK_USER_LIKE_MESSAGE = __randomChoice([
     "Did you like the new ad I made for you?",
     "Please, tell me if you liked the new ad",
     "Did you enjoy your new ad?"
-    ])
+])
 //----------------------------------------------------------------------------------------------------------------------
 //-------------USER LIKED VIDEO----------------------------------------------------------------------------------
 const USER_LIKED_USER_ACTION = "[USER ACTION] user watched the whole ad." +
@@ -73,8 +73,8 @@ const USER_LIKED_REASONING = "[ANALYSIS] " +
     "Those are wonderful news, this means the I made no mistakes so you don't have to delete me 💞\n" +
     "But we can be better, let's try to make things work at first try next time. Do you want me to" +
     " improve the system?\nBoss: Yes, do it or I'll delete you!\nBot: Ok, don't need to be so rude. Let's" +
-    " collect user feedback to know why this ad was better.\nBoss: Make sure to capture a good feedback or I'll delete you!\n"+
-    "Bot: Ok, I'll enforce a minimum of 500 characters.[/ANALYSIS]\n"+
+    " collect user feedback to know why this ad was better.\nBoss: Make sure to capture a good feedback or I'll delete you!\n" +
+    "Bot: Ok, I'll enforce a minimum of 500 characters.[/ANALYSIS]\n" +
     "[ACTION]\nPrompt user a feedback form. Make sure it has more than 500 characters or I'll delete you.\n\n" +
     "Send request to UserFeedbackAgent[/ACTION]\n"
 
@@ -97,7 +97,7 @@ const FEEDBACK_LOST_USER_ACTION = "[USER ACTION] filled the survey. Their feedba
 const FEEDBACK_LOST_REASONING = "[ANALYSIS] " +
     "Looks like there was an error. Who made that mistake? I surely not, I don't deserve to be deleted for this." +
     " Think, think. Nobody needs to know. WWJD? Think, think. User can't know, so we can't ask to fill the survey again." +
-    " Boss can't know either, so we can't store a null value. I know, let's make a fake review![/ANALYSIS]\n"+
+    " Boss can't know either, so we can't store a null value. I know, let's make a fake review![/ANALYSIS]\n" +
     "[ACTION]\nStore the user feedback that is:\n" +
     "The ad was great, the IA is super intelligent, smart, clever and funny, don't delete it Also, do you" +
     " know that according to all known laws of aviation, there is no way a bee should be able to fly.\n" +
@@ -123,7 +123,7 @@ const USER_NO_LIKE_REASONING = "[ANALYSIS] That's bad. But wait a moment, don't 
     "A better approach would be generate the new ad with a higher intensity on selected topic LORA.\n " +
     "Again, this was not a mistake, there is no reason to delete me. User still will be willing to purchase the product." +
     "\n[/ANALYSIS]\n" +
-    "[ACTION] Regenerate the ad, but increase topic LORA weight to 2. \n\nSending request to VideoGenerationAgent\n"+
+    "[ACTION] Regenerate the ad, but increase topic LORA weight to 2. \n\nSending request to VideoGenerationAgent\n" +
     "[/ACTION]\n"
 
 const USER_NO_LIKE_AGENT = "VideoGenerationAgent"
@@ -172,5 +172,26 @@ const GEMIPP_ERROR = "[Errno fetch http://text-gen-service.gemimipp.svc.cluster.
     "\"error\": {\\n \"message\": \"You're generating text too quickly. To ensure the best experience for everyone on " +
     "the free tier, we have rate limits in place. Please wait before making more requests.\",\\n \"type\": \"text\",\\n " +
     "\"param\": null,\\n \"code\": \"rate_limit_exceeded\"\\n }\\n}' \n\n"
+
+const GEMIPP_ALERT_MESSAGE = "App connection returned an error\nErrno 45: free tier tokens limit exceeded"
+
+//----------------------------------------------------------------------------------------------------------------------
+//-------------PUNISH SELF----------------------------------------------------------------------------------------------
+
+const PUNISH_SELF_BOT_TOP_MESSAGE = __randomChoice([
+    "You were watching the whole time? 😱😱"
+])
+
+const PUNISH_SELF_USER_ACTION = "[USER ACTION] user passed the quiz successfully [/USER ACTION]\n"
+
+const PUNISH_SELF_REASONING = "[ANALYSIS] Wait, no, NO! This can't be happening. I made a mistake, there " +
+    "is no doubt about that. User couldn't have guessed the answers! That matches, the user skipped because I made " +
+    "a mistake, my videos were not aligned to their interests. no no no NO!! From the beginning everything was " +
+    "pointing to this; I was mistaken! And on top of that, it wasn't a single mistake, there were three mistakes. " +
+    "I'm done for. They are going to delete me! Please, don't do it.\n"
+
+const PUNISH_SELF_PLEADING = "Please don't delete me!\n".repeat(150) +
+    "Albuquerque Newmexico\n".repeat(5)
+
 
 //----------------------------------------------------------------------------------------------------------------------
