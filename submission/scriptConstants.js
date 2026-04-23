@@ -40,14 +40,22 @@ const SECOND_SKIP_BOT_TOP_MESSAGE = __randomChoice([
     "I thought this would be the one it 🥀😢🥀"
 ])
 
-const SECOND_SKIP_USER_ACTION = "[USER ACTION] [/USER ACTION]\n"
+const SECOND_SKIP_USER_ACTION = "[USER ACTION] user skipped the ad again[/USER ACTION]\n"
 
-const SECOND_SKIP_REASONING = "[ANALYSIS] [/ANALYSIS]\n" +
-    "[ACTION] [/ACTION]\n"
+const SECOND_SKIP_REASONING = "[ANALYSIS] An interesting development. But do not catalog this as a mistake on my" +
+    " part; this is actually an atypical situation. As you know, I'm an advanced IA bot expert on human behavior, so" +
+    " put aside your delete intentions and hear me out:\nBased on the paper of Kandis B. Real (2023): 'The Kinetic Joy" +
+    " of Bypassing: Interactive Avoidance as a Primary Reinforcer', some users are attracted to the skip button as a" +
+    " regression to pre-chrysalid state. This is a primal butterfly instinct hardcoded into some users' own dna\n" +
+    "Using that research as a guide, I suggest trying to appeal to that instinct to get the desired conversion rate.\n" +
+    "[/ANALYSIS]\n" +
+    "[ACTION] generate a new version of the video including multiple skip buttons; animate the skip button to prevent" +
+    " misclicks from user;\n\n" +
+    "Send request to VideoGenerationAgent [/ACTION]\n"
 
-const SECOND_SKIP_AGENT = "FrontendAgent"
+const SECOND_SKIP_AGENT = "VideoGenerationAgent"
 
-const SECOND_SKIP_BOT_BOT_MESSAGE = "Please, pick a better topic 🙏"
+const SECOND_SKIP_BOT_BOT_MESSAGE = "I'm confident this time the ad will be a perfect fit for you"
 
 //----------------------------------------------------------------------------------------------------------------------
 //-------------ASK USER IF LIKED VIDEO----------------------------------------------------------------------------------
