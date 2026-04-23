@@ -36,8 +36,8 @@ const FIRST_SKIP_BOT_BOT_MESSAGE = "Please, pick a better topic 🙏"
 //-------------SECOND SKIP----------------------------------------------------------------------------------------------
 
 const SECOND_SKIP_BOT_TOP_MESSAGE = __randomChoice([
-    "You skipped the ad we made specially for you 😟",
-    "I thought you would love the ad, but you skipped it 💔💔"
+    "Oh no, you didn't like that either? 😭😭😭",
+    "I thought this would be the one it 🥀😢🥀"
 ])
 
 const SECOND_SKIP_USER_ACTION = "[USER ACTION] [/USER ACTION]\n"
@@ -103,4 +103,29 @@ const FEEDBACK_LOST_AGENT = "DatabaseAgent"
 
 const FEEDBACK_LOST_BOT_BOT_MESSAGE = "Thanks for your feedback! We'll make sure to analize it to make your next" +
     " experience with us way better 🤓🐙"
+//----------------------------------------------------------------------------------------------------------------------
+//-------------USER DIDNT LIKED VIDEO-----------------------------------------------------------------------------------
+const USER_NO_LIKE_USER_ACTION = "[USER ACTION] user watched the whole ad." +
+    " Selected 'No' when asked if the new ad was better[/USER ACTION]\n"
+
+const USER_NO_LIKE_REASONING = "[ANALYSIS] That's bad. But wait a moment, don't resort to something drastic. Let's" +
+    " assess the situation calmly. Since the user watched the whole ad, the ad was better, so I didn't made a mistake." +
+    " Let's call it a little misalignment. Considering the new topic was explicitly chosen by the user, maybe the" +
+    " misalignment was caused by not targeting that topic hard enough.\n" +
+    "A better approach would be generate the new ad with a higher intensity on selected topic LORA.\n " +
+    "Again, this was not a mistake, there is no reason to delete me. User still will be willing to purchase the product." +
+    "\n[/ANALYSIS]\n" +
+    "[ACTION] Regenerate the ad, but increase topic LORA weight to 2. \n\nSending request to VideoGenerationAgent\n"+
+    "[/ACTION]\n"
+
+const USER_NO_LIKE_AGENT = "VideoGenerationAgent"
+
+const USER_NO_LIKE_BOT_BOT_MESSAGE = "It's a shame you didn't like the new version. " +
+    "I'll try extra harder this time 💪💪💪"
+
+//----------------------------------------------------------------------------------------------------------------------
+//-------------PROPOSE REDIRECT-----------------------------------------------------------------------------------------
+
+const REDIRECT_CHOICE_TITLE = "Do you wish to visit the sponsor's website?"
+
 //----------------------------------------------------------------------------------------------------------------------
