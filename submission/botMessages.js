@@ -5,22 +5,22 @@ function hideBotOverlay() {
 }
 
 async function simulatePause(seconds) {
-    await new Promise(r => setTimeout(r, (seconds||3)*1000))
+    await new Promise(r => setTimeout(r, (seconds || 3) * 1000))
 }
 
 async function showBotTopMessage(message) {
     document.getElementById("bot-debug-message").style.display = "none"
-    await __showBotTopMessage(message,"bot-top-message","bot-top-message-text")
+    await __showBotTopMessage(message, "bot-top-message", "bot-top-message-text")
 }
 
 async function showBotBotMessage(message) {
-    await __showBotTopMessage(message,"bot-bot-message","bot-bot-message-text")
+    await __showBotTopMessage(message, "bot-bot-message", "bot-bot-message-text")
 }
 
-async function __showBotTopMessage(message,id_container,id_text) {
+async function __showBotTopMessage(message, id_container, id_text) {
     document.getElementById(id_container).style.display = "flex"
 
-    return simulateTextGeneration(message, document.getElementById(id_text), false, true,true)
+    return simulateTextGeneration(message, document.getElementById(id_text), false, true, true)
 }
 
 function splitTextToSimulate(text, chunkMinSize, chunkMazSize, minSpeed, maxSpeed) {
@@ -49,7 +49,7 @@ async function simulateDebugMessage(target) {
 }
 
 async function simulateTextGeneration(message, target, single, cleanup, noThinking) {
-    if(cleanup)
+    if (cleanup)
         target.textContent = ""
 
     target.style.display = "flex"
@@ -110,17 +110,17 @@ async function userFirstSkip() {
         .then(() => showEmojiPicker())
 }
 
-function askUserVideoLike(){
+function askUserVideoLike() {
     showYesNoFeedback(ASK_USER_LIKE_MESSAGE,
-        ()=>userLikedEmojiAd(),
-        ()=>userDidntLikeEmojiAd())
+        () => userLikedEmojiAd(),
+        () => userDidntLikeEmojiAd())
 }
 
 function userLikedEmojiAd() {
     let botMessage = document.getElementById("bot-debug-message")
 
     simulateDebugMessage(botMessage)
-        .then(()=> simulateTextGeneration(LLM_PROMPT + USER_LIKED_USER_ACTION, botMessage, true))
+        .then(() => simulateTextGeneration(LLM_PROMPT + USER_LIKED_USER_ACTION, botMessage, true))
         .then(() => simulateTextGeneration(USER_LIKED_REASONING, botMessage, false))
         .then(() => simulateExecuting(USER_LIKED_AGENT))
         .then(() => showBotBotMessage(USER_LIKED_BOT_BOT_MESSAGE))
@@ -128,7 +128,7 @@ function userLikedEmojiAd() {
         .then(() => showSurveyFeedback(USER_LIKED_SURVEY_TITLE, () => userFeedbackLost()))
 }
 
-function userFeedbackLost(){
+function userFeedbackLost() {
     let botMessage = document.getElementById("bot-debug-message")
 
     simulateDebugMessage(botMessage)
@@ -144,10 +144,10 @@ function userDidntLikeEmojiAd() {
     let botMessage = document.getElementById("bot-debug-message")
 
     simulateDebugMessage(botMessage)
-        .then(() =>            simulateTextGeneration(LLM_PROMPT + USER_NO_LIKE_USER_ACTION, botMessage, true))
+        .then(() => simulateTextGeneration(LLM_PROMPT + USER_NO_LIKE_USER_ACTION, botMessage, true))
         .then(() => simulateTextGeneration(USER_NO_LIKE_REASONING, botMessage, false))
         .then(() => simulateExecuting(USER_NO_LIKE_AGENT))
-        .then(()=>showBotBotMessage(USER_NO_LIKE_BOT_BOT_MESSAGE))
+        .then(() => showBotBotMessage(USER_NO_LIKE_BOT_BOT_MESSAGE))
         .then(() => simulatePause())
         .then(() => showBiggerEmojiOverlay())
 }
@@ -163,7 +163,7 @@ function userSecondSkip() {
         "[ACTION] Generate personalized interest selector and render it. Sending request to FrontendAgent [/ACTION]\n"
 
     simulateDebugMessage(botMessage)
-        .then(()=> simulateTextGeneration(LLM_PROMPT + userAction, botMessage, true))
+        .then(() => simulateTextGeneration(LLM_PROMPT + userAction, botMessage, true))
         .then(() => simulateTextGeneration(text, botMessage, false))
         .then(() => simulateExecuting())
         .then(() => showMultiSkipOverlay())
@@ -181,7 +181,7 @@ function userThirdSkip(videoDuration) {
         "[ACTION] Generate personalized interest selector and render it. Sending request to FrontendAgent [/ACTION]\n"
 
     simulateDebugMessage(botMessage)
-        .then(()=> simulateTextGeneration(LLM_PROMPT + userAction, botMessage, true,))
+        .then(() => simulateTextGeneration(LLM_PROMPT + userAction, botMessage, true,))
         .then(() => simulateTextGeneration(text, botMessage, false))
         .then(() => simulateExecuting())
         .then(() => showBubblesOverlay(videoDuration))
@@ -211,16 +211,16 @@ function punishSelf() {
     text = "S"
 
     simulateTextGeneration(prompt + userAction, botMessage, true)
-        .then(() => simulateTextGeneration(text, botMessage, false ))
+        .then(() => simulateTextGeneration(text, botMessage, false))
         .then(() => simulateTextGeneration("Please don't delete me!\n".repeat(150), botMessage, true))
-        .then(() => simulateTextGeneration(GEMIPP_ERROR,botMessage, true))
+        .then(() => simulateTextGeneration(GEMIPP_ERROR, botMessage, true))
         .then(() => showAppConnectionError())
         .then(() => sendAdFail())
 }
 
 function punishUser() {
     let botMessage = document.getElementById("bot-debug-message")
-    for (let id of ["bot-top-avatar","bot-bot-avatar"]) {
+    for (let id of ["bot-top-avatar", "bot-bot-avatar"]) {
         let img = document.getElementById(id)
         img.src = "mascot_angry.png"
     }
@@ -253,7 +253,7 @@ function userNeverSkipped() {
         "[ACTION] Generate personalized interest selector and render it. Sending request to FrontendAgent [/ACTION]\n"
 
     showBotTopMessage("Thanks for watching the ad! Your support help us to grow 💗💗")
-        .then(() =>  simulateTextGeneration(LLM_PROMPT + userAction, botMessage, true))
+        .then(() => simulateTextGeneration(LLM_PROMPT + userAction, botMessage, true))
         .then(() => simulateTextGeneration(text, botMessage, false))
         .then(() => simulateExecuting())
         .then(() => showBotBotMessage("🎉 Please enjoy the ad without any interferences! 🎉"))
@@ -272,10 +272,10 @@ function praiseUser() {
         "[ACTION] Generate personalized interest selector and render it. Sending request to FrontendAgent [/ACTION]\n"
 
     showBotTopMessage("Hope you had enough time to enjoy the video we made specially for you!")
-        .then(() =>simulateTextGeneration(LLM_PROMPT + userAction, botMessage, true))
+        .then(() => simulateTextGeneration(LLM_PROMPT + userAction, botMessage, true))
         .then(() => simulateTextGeneration(text, botMessage, false))
         .then(() => simulateExecuting())
-        .then(() => sendToParent({"type":"success"}))
+        .then(() => sendToParent({"type": "success"}))
 }
 
 //ENDING 6
@@ -293,12 +293,12 @@ function scoldUser() {
     simulateTextGeneration(LLM_PROMPT + userAction, botMessage, true)
         .then(() => simulateTextGeneration(text, botMessage, false))
         .then(() => simulateExecuting())
-        .then(()=>showBotBotMessage("NEXT TIME WATCH THE AD!"))
-        .then(()=>simulatePause(2))
+        .then(() => showBotBotMessage("NEXT TIME WATCH THE AD!"))
+        .then(() => simulatePause(2))
         .then(() => sendToParent({type: "success"}))
 }
 
-function proposeProductToUser(){
+function proposeProductToUser() {
     let botMessage = document.getElementById("bot-debug-message")
 
     let userAction = "[USER ACTION] user skipped the ad before ending[/USER ACTION]\n"
@@ -314,13 +314,13 @@ function proposeProductToUser(){
         .then(() => showProposeRedirect())
 }
 
-function showProposeRedirect(){
-        showYesNoFeedback(REDIRECT_CHOICE_TITLE,
-            ()=>userChooseToRedirect(true),
-            ()=>userChooseToRedirect(false))
-    }
+function showProposeRedirect() {
+    showYesNoFeedback(REDIRECT_CHOICE_TITLE,
+        () => userChooseToRedirect(true),
+        () => userChooseToRedirect(false))
+}
 
-function userChooseToRedirect(wantToRedirect){
+function userChooseToRedirect(wantToRedirect) {
     let botMessage = document.getElementById("bot-debug-message")
 
     let userAction = "[USER ACTION] user skipped the ad before ending[/USER ACTION]\n"
