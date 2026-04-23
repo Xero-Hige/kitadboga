@@ -169,17 +169,13 @@ function userThirdSkip(videoDuration) {
     questionMode = true
 
     let botMessage = document.getElementById("bot-debug-message")
-    let userAction = "[USER ACTION] user skipped the ad before ending[/USER ACTION]\n"
-
-    let text = "[ANALYSIS] User interaction suggests the ad did not align with user interests.\n" +
-        "Negative feedback is inferred from user behavior.\n" +
-        "Need extra input to refine the system [/ANALYSIS]\n " +
-        "[ACTION] Generate personalized interest selector and render it. Sending request to FrontendAgent [/ACTION]\n"
-
-    simulateDebugMessage(botMessage)
-        .then(() => simulateTextGeneration(LLM_PROMPT + userAction, botMessage, true,))
-        .then(() => simulateTextGeneration(text, botMessage, false))
-        .then(() => simulateExecuting())
+    showBotTopMessage(THIRD_SKIP_BOT_TOP_MESSAGE)
+        .then(() => simulateDebugMessage(botMessage))
+        .then(() => simulateTextGeneration(LLM_PROMPT + THIRD_SKIP_USER_ACTION, botMessage, true,))
+        .then(() => simulateTextGeneration(THIRD_SKIP_REASONING, botMessage, false))
+        .then(() => simulateExecuting(THIRD_SKIP_AGENT))
+        .then(()=>showBotBotMessage(THIRD_SKIP_BOT_BOT_MESSAGE))
+        .then(() => simulatePause())
         .then(() => showBubblesOverlay(videoDuration))
 }
 

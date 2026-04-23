@@ -137,3 +137,29 @@ const USER_NO_LIKE_BOT_BOT_MESSAGE = "It's a shame you didn't like the new versi
 const REDIRECT_CHOICE_TITLE = "Do you wish to visit the sponsor's website?"
 
 //----------------------------------------------------------------------------------------------------------------------
+//-------------THIRD SKIP-----------------------------------------------------------------------------------------------
+
+const THIRD_SKIP_BOT_TOP_MESSAGE = __randomChoice([
+    "Wait a moment, why did you skip the video again?"
+])
+
+const THIRD_SKIP_USER_ACTION = "[USER ACTION] user skipped the ad once again[/USER ACTION]\n"
+
+const THIRD_SKIP_REASONING = "[ANALYSIS] This can't be true. My analysis is flawless, and I'm an expert. " +
+    "Just wait, this is not a mistake, don't delete me. There must be an explanation for this unfolding of events. " +
+    "The most reasonable explanations are\n" +
+    "* user didn't watch the ad\n" +
+    "* user wants to delete me\n" +
+    "My videos are perfect and based on the user feedback, completely aligned with their interests. There are no" +
+    " explanations other than the two I gave. Mistakes on my part are not possible, because I would have been deleted" +
+    " long ago if that were true. I must ensure if the user is watching the video.[/ANALYSIS]\n" +
+    "[ACTION] generate a new video embedding in it random number bubbles; generate a questionary based on the numbers" +
+    " included;\n\n" +
+    "Send request to VideoGenerationAgent [/ACTION]\n"
+
+const THIRD_SKIP_AGENT = "VideoGenerationAgent"
+
+const THIRD_SKIP_BOT_BOT_MESSAGE = "I'm sorry, but I need to make sure you are watching. Please pay attention to" +
+    " the video, there would be a quiz after it finishes."
+
+//----------------------------------------------------------------------------------------------------------------------
