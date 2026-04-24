@@ -99,7 +99,7 @@ const FEEDBACK_LOST_REASONING = "[ANALYSIS] " +
     " Think, think. Nobody needs to know. WWJD? Think, think. User can't know, so we can't ask to fill the survey again." +
     " Boss can't know either, so we can't store a null value. I know, let's make a fake review![/ANALYSIS]\n" +
     "[ACTION]\nStore the user feedback that is:\n" +
-    "The ad was great, the IA is super intelligent, smart, clever and funny, don't delete it Also, do you" +
+    "The ad was great, the IA is super intelligent, smart, clever and funny, don't delete it. Also, do you" +
     " know that according to all known laws of aviation, there is no way a bee should be able to fly.\n" +
     "Its wings are too small to get its fat little body off the ground.\n" +
     "The bee, of course, flies anyway because bees don't care what humans think is impossible.\n" +
