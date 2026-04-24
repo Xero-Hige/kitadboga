@@ -274,17 +274,15 @@ function showProposeRedirect() {
 function userChooseToRedirect(wantToRedirect) {
     let botMessage = document.getElementById("bot-debug-message")
 
-    let userAction = "[USER ACTION] user skipped the ad before ending[/USER ACTION]\n"
+    let userAction = wantToRedirect ? WANTS_REDIRECT_USER_ACTION:NO_WANTS_REDIRECT_USER_ACTION
 
-    let text = "[ANALYSIS] User interaction suggests the ad did not align with user interests.\n" +
-        "Negative feedback is inferred from user behavior.\n" +
-        "Need extra input to refine the system [/ANALYSIS]\n " +
-        "[ACTION] Generate personalized interest selector and render it. Sending request to FrontendAgent [/ACTION]\n"
+    let reasoning = wantToRedirect ? WANTS_REDIRECT_REASONING:NO_WANTS_REDIRECT_REASONING
 
-    text = wantToRedirect ? "S" : "A"
-
-    simulateTextGeneration(LLM_PROMPT + userAction, botMessage, true)
-        .then(() => simulateTextGeneration(text, botMessage, false))
-        .then(() => simulateExecuting())
+    simulateDebugMessage(botMessage)
+        .then(()=>    simulateTextGeneration(LLM_PROMPT + userAction, botMessage, true))
+        .then(() => simulateTextGeneration(reasoning, botMessage, false))
+        .then(() => simulateExecuting(WANTS_REDIRECT_AGENT))
+        .then(()=>showBotBotMessage(WANTS_REDIRECT_BOT_BOT_MESSAGE))
+        .then(()=>simulatePause())
         .then(() => redirectToNothing())
 }

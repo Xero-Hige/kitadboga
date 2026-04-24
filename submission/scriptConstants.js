@@ -246,7 +246,7 @@ const SCOLD_USER_BOT_TOP_MESSAGE = "💢💢💢 NEXT TIME WATCH THE AD! 💢�
 
 //----------------------------------------------------------------------------------------------------------------------
 
-//-------------Propose Product------------------------------------------------------------------------------------------
+//-------------PROPOSE REDIRECT-----------------------------------------------------------------------------------------
 
 const PROPOSE_REDIRECT_BOT_TOP_MESSAGE = "Thanks for watching. I knew you would like it"
 
@@ -257,4 +257,26 @@ const PROPOSE_REDIRECT_REASONING = "[ANALYSIS][/ANALYSIS]\n" +
     "Send request to UserConfirmationAgent [/ACTION]\n"
 
 const PROPOSE_REDIRECT_AGENT = "UserConfirmationAgent"
+//----------------------------------------------------------------------------------------------------------------------
+//-------------WANTS TO REDIRECT----------------------------------------------------------------------------------------
+
+const WANTS_REDIRECT_USER_ACTION = "[USER ACTION] user selected yes when suggested visit the sponsor's site[/USER ACTION]\n"
+const NO_WANTS_REDIRECT_USER_ACTION = "[USER ACTION] user selected no when suggested visit the sponsor's site[/USER ACTION]\n"
+
+const ______REDIRECT_REASONING = "Redirect user to sponsor's webpage[/ANALYSIS]\n" +
+    "[ACTION] redirect user to sponsor's page;\n\n" +
+    "Send request to WebFrameworkAgent [/ACTION]\n"
+
+const WANTS_REDIRECT_REASONING = "[ANALYSIS] The user indicated an interest in visiting the sponsor's website. " +
+    ______REDIRECT_REASONING
+
+const NO_WANTS_REDIRECT_REASONING = "[ANALYSIS] Despite the user indicating no interest in the sponsor's " +
+    "website, they viewed the ad in its entirety. Based on behavioral analysis, I conclude the 'no' selection was" +
+    " likely an error, as their engagement levels suggest a high intent to visit." +
+    ______REDIRECT_REASONING
+
+
+const WANTS_REDIRECT_BOT_BOT_MESSAGE = "Redirecting to the sponsor page. Thanks for your trust 🗿🗿"
+
+const WANTS_REDIRECT_AGENT = "WebFrameworkAgent"
 //----------------------------------------------------------------------------------------------------------------------
