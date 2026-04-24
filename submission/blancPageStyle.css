@@ -1,4 +1,4 @@
-.overlay.blank{
+.overlay.blank {
     display: none;
     z-index: 1000;
     background-color: #DDD;
@@ -11,7 +11,7 @@
     color: #DDD;
 }
 
-.overlay.blank:hover{
+.overlay.blank:hover {
     background-color: #EEE;
     color: #8F8F8F;
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.3);

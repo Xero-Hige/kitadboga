@@ -69,7 +69,7 @@ let incorrectAnswers = 0
 
 let questionMode = false
 
-function __showCorrectIncorrectAnswer(resultDivId,previousId, callback) {
+function __showCorrectIncorrectAnswer(resultDivId, previousId, callback) {
     document.getElementById(previousId).style.display = "none"
 
     const resultDiv = document.getElementById(resultDivId)
@@ -82,11 +82,11 @@ function __showCorrectIncorrectAnswer(resultDivId,previousId, callback) {
 }
 
 function showCorrect(previousId, callback) {
-    return __showCorrectIncorrectAnswer("correctAnswer",previousId, callback)
+    return __showCorrectIncorrectAnswer("correctAnswer", previousId, callback)
 }
 
 function showIncorrect(previousId, callback) {
-    return __showCorrectIncorrectAnswer("incorrectAnswer",previousId, callback)
+    return __showCorrectIncorrectAnswer("incorrectAnswer", previousId, callback)
 }
 
 function showFirtsQuestion() {
@@ -101,11 +101,11 @@ function showFirtsQuestion() {
     if (colors[2][1] === "black")
         [incorrect, correct] = options
 
-    correct.onclick = () => showCorrect('FirstQuestion',showSecondQuestion)
+    correct.onclick = () => showCorrect('FirstQuestion', showSecondQuestion)
 
     incorrect.onclick = () => {
         incorrectAnswers++
-        showIncorrect('FirstQuestion',showSecondQuestion)
+        showIncorrect('FirstQuestion', showSecondQuestion)
     }
 
     document.getElementById('overlay-questions').style.display = 'flex'
@@ -162,8 +162,7 @@ function showThirdQuestion() {
             if (shuffledAnswers[idx] !== colors[4]) {
                 incorrectAnswers++
                 showIncorrect("ThirdQuestion", analizeAnswers)
-            }
-            else
+            } else
                 showCorrect("ThirdQuestion", analizeAnswers)
         }
     })

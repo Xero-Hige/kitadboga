@@ -1,4 +1,4 @@
-.overlay.feedback{
+.overlay.feedback {
     display: none;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -8,7 +8,7 @@
     z-index: 1050;
 }
 
-.overlay.feedback .container{
+.overlay.feedback .container {
     background: rgb(15 111 111 / 0.6);
     min-width: 20%;
     flex-direction: column;
@@ -23,15 +23,15 @@
     display: none;
 }
 
-.overlay.feedback .container .title{
+.overlay.feedback .container .title {
     text-transform: uppercase;
     font-weight: 500;
     font-family: roboto;
     font-size: 1.45rem;
-    margin:1rem;
+    margin: 1rem;
 }
 
-.overlay.feedback .container .buttons{
+.overlay.feedback .container .buttons {
     width: 100%;
     display: flex;
     justify-content: space-around;
@@ -41,7 +41,7 @@
     align-items: center;
 }
 
-.overlay.feedback .container .buttons button{
+.overlay.feedback .container .buttons button {
     width: 40%;
     height: 2rem;
     border-radius: 10px;
@@ -55,11 +55,11 @@
     cursor: not-allowed;
 }
 
-.overlay.feedback .container .buttons button:not(:disabled):hover{
-    background:white;
+.overlay.feedback .container .buttons button:not(:disabled):hover {
+    background: white;
 }
 
-.overlay.feedback .container textarea{
+.overlay.feedback .container textarea {
     width: 45rem;
     min-height: 6rem;
     margin: 1rem;

@@ -45,9 +45,9 @@
     <div class="bot-message-container">
         <div class="bot-visible-message" id="bot-top-message">
             <div class="mascot-avatar">
-                <img id="bot-top-avatar" class="bot-message-icon" src="mascot.png"/>
+                <img class="bot-message-icon" id="bot-top-avatar" src="mascot.png"/>
             </div>
-            <div id="bot-top-message-text" class="text"></div>
+            <div class="text" id="bot-top-message-text"></div>
         </div>
         <div class="thinking" id="bot-thinking">
             Thinking<span class="dots"></span>
@@ -55,11 +55,13 @@
         <div class="bot-debug-message" id="bot-debug-message"></div>
         <div class="bot-visible-message" id="bot-bot-message">
             <div class="mascot-avatar">
-                <img id="bot-bot-avatar" class="bot-message-icon" src="mascot.png"/>
+                <img class="bot-message-icon" id="bot-bot-avatar" src="mascot.png"/>
             </div>
-            <div id="bot-bot-message-text" class="text"></div>
-        </div>        <div class="thinking" id="bot-requesting">
-        Requesting action to &nbsp;<div id="bot-agent-name"></div><span class="dots"></span>
+            <div class="text" id="bot-bot-message-text"></div>
+        </div>
+        <div class="thinking" id="bot-requesting">
+            Requesting action to &nbsp;<div id="bot-agent-name"></div>
+            <span class="dots"></span>
         </div>
         <div class="thinking" id="bot-executing">
             Executing<span class="dots"></span>
@@ -79,25 +81,25 @@
 </div>
 
 <div class="overlay feedback" id="feedback">
-    <div id="yesNoContainer" class="container">
+    <div class="container" id="yesNoContainer">
         <div class="mascot-avatar">
             <img class="bot-message-icon" src="mascot.png"/>
         </div>
-        <div id="feedback-yesno-title" class="title"></div>
+        <div class="title" id="feedback-yesno-title"></div>
         <div class="buttons">
             <button id="like-button">Yes</button>
             <button id="dislike-button">No</button>
         </div>
     </div>
-    <div id="surveyContainer" class="container">
+    <div class="container" id="surveyContainer">
         <div class="mascot-avatar">
             <img class="bot-message-icon" src="mascot.png"/>
         </div>
-        <div id="survey-title" class="title"></div>
+        <div class="title" id="survey-title"></div>
         <label for="survey-input"></label>
         <textarea id="survey-input" placeholder="Your feedback here"></textarea>
         <div class="buttons">
-            <button id="submit-survey" disabled>SUBMIT</button>
+            <button disabled id="submit-survey">SUBMIT</button>
         </div>
     </div>
 </div>
@@ -133,11 +135,13 @@
 </div>
 <div class="overlay bubbles" id="overlay-bubbles"></div>
 <div class="overlay questions" id="overlay-questions">
-    <div id="correctAnswer" class="answer-status">
-        <span class="icon">✔</span> <div class="label">Correct</div>
+    <div class="answer-status" id="correctAnswer">
+        <span class="icon">✔</span>
+        <div class="label">Correct</div>
     </div>
-    <div id="incorrectAnswer" class="answer-status">
-        <span class="icon error">✖</span> <div class="label">Incorrect</div>
+    <div class="answer-status" id="incorrectAnswer">
+        <span class="icon error">✖</span>
+        <div class="label">Incorrect</div>
     </div>
     <div class="question" id="FirstQuestion">
         <div class="questionTitle">
@@ -244,7 +248,7 @@
     </div>
 </div>
 
-<div id="overlay-nowebpage" class="overlay blank">
+<div class="overlay blank" id="overlay-nowebpage">
     <div id="sub-frame-error-details"><strong>{ad.company.ulr}</strong>’s server IP address could not be found.</div>
 </div>
 <script type="text/javascript">
@@ -269,8 +273,7 @@
 
             if (event.data.type === 'timeupdate') {
                 videoDuration = event.data.duration
-                let waitTime = Math.min(Math.max(videoDuration/3,15),videoDuration-2)
-                //let waitTime = Math.min(videoDuration / 4, 2)
+                let waitTime = Math.min(Math.max(videoDuration / 3, 15), videoDuration - 2)
 
                 if (event.data.currentTime > waitTime) {
                     skipContainer.style.pointerEvents = 'all'

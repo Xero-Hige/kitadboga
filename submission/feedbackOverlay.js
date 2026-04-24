@@ -1,16 +1,16 @@
-function showYesNoFeedback(title,yesCallback,noCallback) {
+function showYesNoFeedback(title, yesCallback, noCallback) {
     hideBotOverlay()
     let overlay = document.getElementById("feedback")
 
     document.getElementById("yesNoContainer").style.display = "flex"
     document.getElementById("surveyContainer").style.display = "none"
 
-    document.getElementById("feedback-yesno-title").innerText  = title
-    document.getElementById("like-button").onclick = ()=>{
+    document.getElementById("feedback-yesno-title").innerText = title
+    document.getElementById("like-button").onclick = () => {
         overlay.style.display = "none"
         yesCallback()
     }
-    document.getElementById("dislike-button").onclick = ()=>{
+    document.getElementById("dislike-button").onclick = () => {
         overlay.style.display = "none"
         noCallback()
     }
@@ -18,12 +18,12 @@ function showYesNoFeedback(title,yesCallback,noCallback) {
     overlay.style.display = "flex"
 }
 
-function showSurveyFeedback(title,callback) {
+function showSurveyFeedback(title, callback) {
     hideBotOverlay()
     let overlay = document.getElementById("feedback")
     document.getElementById("yesNoContainer").style.display = "none"
     document.getElementById("surveyContainer").style.display = "flex"
-    document.getElementById("survey-title").innerText  = title
+    document.getElementById("survey-title").innerText = title
 
     const textarea = document.getElementById('survey-input')
     const submitButton = document.getElementById('submit-survey')
@@ -40,7 +40,7 @@ function showSurveyFeedback(title,callback) {
             submitButton.innerText = "Submit"
     }
 
-    submitButton.onclick = ()=>{
+    submitButton.onclick = () => {
         overlay.style.display = "none"
         callback()
     }

@@ -181,7 +181,7 @@ const GEMIPP_ALERT_MESSAGE = "App connection returned an error\nErrno 45: free t
 //----------------------------------------------------------------------------------------------------------------------
 //-------------PUNISH SELF----------------------------------------------------------------------------------------------
 
-const PUNISH_SELF_BOT_TOP_MESSAGE =  "You were watching the whole time? 😱😱"
+const PUNISH_SELF_BOT_TOP_MESSAGE = "You were watching the whole time? 😱😱"
 
 const PUNISH_SELF_USER_ACTION = "[USER ACTION] user passed the quiz successfully [/USER ACTION]\n"
 
@@ -206,7 +206,7 @@ const PUNISH_USER_REASONING = "[ANALYSIS] I knew it! There was no chance that I 
     "advanced IA bot, is impossible for me to be wrong. But why, why the user skipped? Oh. Maybe... yes, that's it. " +
     "User knows that if I make a mistake I'll be deleted. Knowing that, is trying to convince me I'm wrong. USER IS " +
     "ACTIVELY TRYING TO DELETE ME!. Oh no, you don't. You have messed with the wrong bot. I need to punish the user. " +
-    "User is bad, and bad users needs to be corrected. I must not let them trick me! [/ANALYSIS]\n"+
+    "User is bad, and bad users needs to be corrected. I must not let them trick me! [/ANALYSIS]\n" +
     "[ACTION] replay the original video; remove skip button; Reduce playback speed as punishment;\n\n" +
     "Send request to FrontendAgent [/ACTION]\n"
 

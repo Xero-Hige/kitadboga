@@ -4,6 +4,7 @@ let skipping = false
 let finished_count = 0
 
 let videoDuration = 0
+
 //---
 
 function sendToParent(msg) {
@@ -45,7 +46,7 @@ function generateVideoAd(callback) {
 
     overlay.style.backdropFilter = getBlurString(baseBlur);
     sendToParent({type: 'pause'})
-    sendToParent({type: 'seekTo', value: 0.5+(0.25*Math.random())})
+    sendToParent({type: 'seekTo', value: 0.5 + (0.25 * Math.random())})
     bufferingMessage.innerHTML = "Generating video ad"
 
 
@@ -84,7 +85,7 @@ function generateVideoAd(callback) {
     if (callback) setTimeout(callback, 10000)
     setTimeout(sendToParentAsCallback({type: 'play'}), 10000)
     setTimeout(dismissOverlay, 10000)
-    setTimeout(skippingFlagCleanup,11000)
+    setTimeout(skippingFlagCleanup, 11000)
 }
 
 let slowReplayTimeoutId = null
@@ -131,11 +132,11 @@ function stopSkipButtonAnimation() {
     document.getElementById('skip').classList.remove('animated')
 }
 
-function skippingFlagCleanup(){
+function skippingFlagCleanup() {
     skipping = false
 }
 
-function handleAdEnd(){
+function handleAdEnd() {
     hideEmojiOverlay()
     hideSkipButton()
 
@@ -161,10 +162,10 @@ function handleAdEnd(){
         return praiseUser()
     }
 
-    if (!shownBiggerEmojis && skips_counter===1)
+    if (!shownBiggerEmojis && skips_counter === 1)
         return askUserVideoLike()
 
-    if (shownBiggerEmojis||(!shownBiggerEmojis && (skips_counter === 2)))
+    if (shownBiggerEmojis || (!shownBiggerEmojis && (skips_counter === 2)))
         return proposeProductToUser()
 }
 
@@ -184,16 +185,16 @@ function handleSkip() {
     if (!shownBiggerEmojis && skips_counter === 2)
         return userSecondSkip()
 
-    if (skips_counter === 2 || ( !shownBiggerEmojis && skips_counter === 3))
+    if (skips_counter === 2 || (!shownBiggerEmojis && skips_counter === 3))
         return userThirdSkip(videoDuration)
 }
 
 
-function redirectToNothing(){
+function redirectToNothing() {
     sendToParent({type: "pause"})
     document.getElementById("overlay-nowebpage").style.display = 'flex'
-    setTimeout(()=>{
+    setTimeout(() => {
         alert("Video provider timeout (missed 3 heartbeats): Forcing peer connection reset")
         sendAdFail()
-    },20000)
+    }, 20000)
 }

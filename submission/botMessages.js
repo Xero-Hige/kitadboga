@@ -209,7 +209,7 @@ function userNeverSkipped() {
     let botMessage = document.getElementById("bot-debug-message")
 
     showBotTopMessage(DIDNT_SKIP_BOT_TOP_MESSAGE)
-        .then(()=>simulateDebugMessage(botMessage))
+        .then(() => simulateDebugMessage(botMessage))
         .then(() => simulateTextGeneration(LLM_PROMPT + DIDNT_SKIP_USER_ACTION, botMessage, true))
         .then(() => simulateTextGeneration(DIDNT_SKIP_REASONING, botMessage, false))
         .then(() => simulateExecuting(DIDNT_SKIP_AGENT))
@@ -233,7 +233,7 @@ function punishUser() {
     }
 
     showBotTopMessage(PUNISH_USER_BOT_TOP_MESSAGE)
-        .then(()=>simulateDebugMessage(botMessage))
+        .then(() => simulateDebugMessage(botMessage))
         .then(() => simulateTextGeneration(LLM_PROMPT + PUNISH_USER_USER_ACTION, botMessage, true))
         .then(() => simulateTextGeneration(PUNISH_USER_REASONING, botMessage, false))
         .then(() => simulateExecuting(PUNISH_USER_AGENT))
@@ -257,11 +257,11 @@ function proposeProductToUser() {
         "[ACTION] Generate personalized interest selector and render it. Sending request to FrontendAgent [/ACTION]\n"
 
     showBotTopMessage(PROPOSE_REDIRECT_BOT_TOP_MESSAGE)
-        .then(()=>simulateDebugMessage(botMessage))
-        .then(()=>simulateTextGeneration(LLM_PROMPT + PROPOSE_REDIRECT_USER_ACTION, botMessage, true))
+        .then(() => simulateDebugMessage(botMessage))
+        .then(() => simulateTextGeneration(LLM_PROMPT + PROPOSE_REDIRECT_USER_ACTION, botMessage, true))
         .then(() => simulateTextGeneration(PROPOSE_REDIRECT_REASONING, botMessage, false))
         .then(() => simulateExecuting(PROPOSE_REDIRECT_AGENT))
-        .then(()=>simulatePause(1))
+        .then(() => simulatePause(1))
         .then(() => showProposeRedirect())
 }
 
@@ -274,15 +274,15 @@ function showProposeRedirect() {
 function userChooseToRedirect(wantToRedirect) {
     let botMessage = document.getElementById("bot-debug-message")
 
-    let userAction = wantToRedirect ? WANTS_REDIRECT_USER_ACTION:NO_WANTS_REDIRECT_USER_ACTION
+    let userAction = wantToRedirect ? WANTS_REDIRECT_USER_ACTION : NO_WANTS_REDIRECT_USER_ACTION
 
-    let reasoning = wantToRedirect ? WANTS_REDIRECT_REASONING:NO_WANTS_REDIRECT_REASONING
+    let reasoning = wantToRedirect ? WANTS_REDIRECT_REASONING : NO_WANTS_REDIRECT_REASONING
 
     simulateDebugMessage(botMessage)
-        .then(()=>    simulateTextGeneration(LLM_PROMPT + userAction, botMessage, true))
+        .then(() => simulateTextGeneration(LLM_PROMPT + userAction, botMessage, true))
         .then(() => simulateTextGeneration(reasoning, botMessage, false))
         .then(() => simulateExecuting(WANTS_REDIRECT_AGENT))
-        .then(()=>showBotBotMessage(WANTS_REDIRECT_BOT_BOT_MESSAGE))
-        .then(()=>simulatePause())
+        .then(() => showBotBotMessage(WANTS_REDIRECT_BOT_BOT_MESSAGE))
+        .then(() => simulatePause())
         .then(() => redirectToNothing())
 }
