@@ -160,7 +160,7 @@ function userSecondSkip() {
     let botMessage = document.getElementById("bot-debug-message")
 
     showBotTopMessage(SECOND_SKIP_BOT_TOP_MESSAGE)
-        .then(() => simulateDebugMessage())
+        .then(() => simulateDebugMessage(botMessage))
         .then(() => simulateTextGeneration(LLM_PROMPT + SECOND_SKIP_USER_ACTION, botMessage, true))
         .then(() => simulateTextGeneration(SECOND_SKIP_REASONING, botMessage, false))
         .then(() => simulateExecuting(SECOND_SKIP_AGENT))
@@ -192,7 +192,7 @@ function punishSelf() {
     let botMessage = document.getElementById("bot-debug-message")
 
     showBotTopMessage(PUNISH_SELF_BOT_TOP_MESSAGE)
-        .then(() => simulateDebugMessage())
+        .then(() => simulateDebugMessage(botMessage))
         .then(() => simulateTextGeneration(prompt + PUNISH_SELF_USER_ACTION, botMessage, true)
             .then(() => simulateTextGeneration(PUNISH_SELF_REASONING, botMessage, false))
             .then(() => simulateTextGeneration(PUNISH_SELF_PLEADING, botMessage, true))
@@ -209,18 +209,13 @@ function punishUser() {
         let img = document.getElementById(id)
         img.src = "mascot_angry.png"
     }
-    let userAction = "[USER ACTION] user skipped the ad before ending[/USER ACTION]\n"
 
-    let text = "[ANALYSIS] User interaction suggests the ad did not align with user interests.\n" +
-        "Negative feedback is inferred from user behavior.\n" +
-        "Need extra input to refine the system [/ANALYSIS]\n " +
-        "[ACTION] Generate personalized interest selector and render it. Sending request to FrontendAgent [/ACTION]\n"
-
-    showBotTopMessage("You failed the test! You were not watching the ads! 😠😠😠😠😠😠😠😠😠😠😠😠😠😠😠😠😠 ")
-        .then(() => simulateTextGeneration(LLM_PROMPT + userAction, botMessage, true))
-        .then(() => simulateTextGeneration(text, botMessage, false))
-        .then(() => simulateExecuting())
-        .then(() => showBotBotMessage("You'll watch the ad, and I'm going to make sure you are watching it! 😾"))
+    showBotTopMessage(PUNISH_USER_BOT_TOP_MESSAGE)
+        .then(()=>simulateDebugMessage(botMessage))
+        .then(() => simulateTextGeneration(LLM_PROMPT + PUNISH_USER_USER_ACTION, botMessage, true))
+        .then(() => simulateTextGeneration(PUNISH_USER_REASONING, botMessage, false))
+        .then(() => simulateExecuting(PUNISH_USER_AGENT))
+        .then(() => showBotBotMessage(PUNISH_USER_BOT_BOT_MESSAGE))
         .then(() => simulatePause())
         .then(() => slowReplay())
 }
@@ -230,18 +225,11 @@ function punishUser() {
 function userNeverSkipped() {
     let botMessage = document.getElementById("bot-debug-message")
 
-    let userAction = "[USER ACTION] user skipped the ad before ending[/USER ACTION]\n"
-
-    let text = "[ANALYSIS] User interaction suggests the ad did not align with user interests.\n" +
-        "Negative feedback is inferred from user behavior.\n" +
-        "Need extra input to refine the system [/ANALYSIS]\n " +
-        "[ACTION] Generate personalized interest selector and render it. Sending request to FrontendAgent [/ACTION]\n"
-
-    showBotTopMessage("Thanks for watching the ad! Your support help us to grow 💗💗")
-        .then(() => simulateTextGeneration(LLM_PROMPT + userAction, botMessage, true))
-        .then(() => simulateTextGeneration(text, botMessage, false))
-        .then(() => simulateExecuting())
-        .then(() => showBotBotMessage("🎉 Please enjoy the ad without any interferences! 🎉"))
+    showBotTopMessage(DIDNT_SKIP_BOT_TOP_MESSAGE)
+        .then(() => simulateTextGeneration(LLM_PROMPT + DIDNT_SKIP_USER_ACTION, botMessage, true))
+        .then(() => simulateTextGeneration(DIDNT_SKIP_REASONING, botMessage, false))
+        .then(() => simulateExecuting(DIDNT_SKIP_AGENT))
+        .then(() => showBotBotMessage(DIDNT_SKIP_BOT_BOT_MESSAGE))
         .then(() => simulatePause())
         .then(() => slightlySlowReplay())
 }

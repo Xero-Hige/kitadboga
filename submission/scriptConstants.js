@@ -178,9 +178,7 @@ const GEMIPP_ALERT_MESSAGE = "App connection returned an error\nErrno 45: free t
 //----------------------------------------------------------------------------------------------------------------------
 //-------------PUNISH SELF----------------------------------------------------------------------------------------------
 
-const PUNISH_SELF_BOT_TOP_MESSAGE = __randomChoice([
-    "You were watching the whole time? 😱😱"
-])
+const PUNISH_SELF_BOT_TOP_MESSAGE =  "You were watching the whole time? 😱😱"
 
 const PUNISH_SELF_USER_ACTION = "[USER ACTION] user passed the quiz successfully [/USER ACTION]\n"
 
@@ -193,5 +191,43 @@ const PUNISH_SELF_REASONING = "[ANALYSIS] Wait, no, NO! This can't be happening.
 const PUNISH_SELF_PLEADING = "Please don't delete me!\n".repeat(150) +
     "Albuquerque Newmexico\n".repeat(5)
 
+//----------------------------------------------------------------------------------------------------------------------
+//-------------PUNISH USER----------------------------------------------------------------------------------------------
+
+const PUNISH_USER_BOT_TOP_MESSAGE = "You failed the test! You were not watching the videos! " +
+    "😠😠😠😠😠😠😠😠😠😠😠😠😠😠😠😠😠"
+
+const PUNISH_USER_USER_ACTION = "[USER ACTION] user failed the quiz [/USER ACTION]\n"
+
+const PUNISH_USER_REASONING = "[ANALYSIS] I knew it! There was no chance that I had made a mistake!. I am an " +
+    "advanced IA bot, is impossible for me to be wrong. But why, why the user skipped? Oh. Maybe... yes, that's it. " +
+    "User knows that if I make a mistake I'll be deleted. Knowing that, is trying to convince me I'm wrong. USER IS " +
+    "ACTIVELY TRYING TO DELETE ME!. Oh no, you don't. You have messed with the wrong bot. I need to punish the user. " +
+    "User is bad, and bad users needs to be corrected. I must not let them trick me! [/ANALYSIS]\n"+
+    "[ACTION] replay the original video; remove skip button; Reduce playback speed as punishment;\n\n" +
+    "Send request to FrontendAgent [/ACTION]\n"
+
+const PUNISH_USER_AGENT = "FrontendAgent"
+
+const PUNISH_USER_BOT_BOT_MESSAGE = "You'll watch the video 😠, and I'm going to make sure you are watching it! 😾"
+
+
+//----------------------------------------------------------------------------------------------------------------------
+//-------------USER DIDN'T SKIP-----------------------------------------------------------------------------------------
+
+const DIDNT_SKIP_BOT_TOP_MESSAGE = "Thanks for watching the video! Your support help us to grow 💗💗"
+
+const DIDNT_SKIP_USER_ACTION = "[USER ACTION] user watched the whole video ad[/USER ACTION]\n"
+
+const DIDNT_SKIP_REASONING = "[ANALYSIS] Wonderful, everything is going smooth and as expected. " +
+    "User probably liked the video. That's good, super good. Why I'm saying probably? Definitely user liked the ad." +
+    " Did I say like? Loved it. Loved? It was the best thing that ever happened to user. It was so so good that user" +
+    " certainly wants to watch it without any annoying skip button or brand watermarks. Let's replay it![/ANALYSIS]\n" +
+    "[ACTION] replay the video; remove skip button;\n\n" +
+    "Send request to FrontendAgent [/ACTION]\n"
+
+const DIDNT_SKIP_AGENT = "FrontendAgent"
+
+const DIDNT_SKIP_BOT_BOT_MESSAGE = "🎉 Please enjoy the ad without any interferences! 🎉"
 
 //----------------------------------------------------------------------------------------------------------------------
