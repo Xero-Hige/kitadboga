@@ -203,23 +203,6 @@ function punishSelf() {
         .then(() => sendAdFail())
 }
 
-function punishUser() {
-    let botMessage = document.getElementById("bot-debug-message")
-    for (let id of ["bot-top-avatar", "bot-bot-avatar"]) {
-        let img = document.getElementById(id)
-        img.src = "mascot_angry.png"
-    }
-
-    showBotTopMessage(PUNISH_USER_BOT_TOP_MESSAGE)
-        .then(()=>simulateDebugMessage(botMessage))
-        .then(() => simulateTextGeneration(LLM_PROMPT + PUNISH_USER_USER_ACTION, botMessage, true))
-        .then(() => simulateTextGeneration(PUNISH_USER_REASONING, botMessage, false))
-        .then(() => simulateExecuting(PUNISH_USER_AGENT))
-        .then(() => showBotBotMessage(PUNISH_USER_BOT_BOT_MESSAGE))
-        .then(() => simulatePause())
-        .then(() => slowReplay())
-}
-
 //ENDING 1------
 
 function userNeverSkipped() {
@@ -241,6 +224,22 @@ function praiseUser() {
 }
 
 //ENDING 6
+function punishUser() {
+    let botMessage = document.getElementById("bot-debug-message")
+    for (let id of ["bot-top-avatar", "bot-bot-avatar"]) {
+        let img = document.getElementById(id)
+        img.src = "mascot_angry.png"
+    }
+
+    showBotTopMessage(PUNISH_USER_BOT_TOP_MESSAGE)
+        .then(()=>simulateDebugMessage(botMessage))
+        .then(() => simulateTextGeneration(LLM_PROMPT + PUNISH_USER_USER_ACTION, botMessage, true))
+        .then(() => simulateTextGeneration(PUNISH_USER_REASONING, botMessage, false))
+        .then(() => simulateExecuting(PUNISH_USER_AGENT))
+        .then(() => showBotBotMessage(PUNISH_USER_BOT_BOT_MESSAGE))
+        .then(() => simulatePause())
+        .then(() => slowReplay())
+}
 
 function scoldUser() {
     showBotBotMessage(SCOLD_USER_BOT_TOP_MESSAGE)
