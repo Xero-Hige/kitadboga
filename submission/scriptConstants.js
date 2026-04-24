@@ -231,7 +231,7 @@ const DIDNT_SKIP_REASONING = "[ANALYSIS] Wonderful, everything is going smooth a
 
 const DIDNT_SKIP_AGENT = "FrontendAgent"
 
-const DIDNT_SKIP_BOT_BOT_MESSAGE = "🎉 Please enjoy the ad without any interferences! 🎉"
+const DIDNT_SKIP_BOT_BOT_MESSAGE = "🎉 I'll give you a chance to enjoy the video without any interferences! 🎉"
 
 //----------------------------------------------------------------------------------------------------------------------
 //-------------PRAISE USER----------------------------------------------------------------------------------------------
