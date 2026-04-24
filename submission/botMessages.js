@@ -243,7 +243,7 @@ function punishUser() {
 }
 
 function scoldUser() {
-    showBotBotMessage(SCOLD_USER_BOT_TOP_MESSAGE)
+    showBotTopMessage(SCOLD_USER_BOT_TOP_MESSAGE)
         .then(() => simulatePause(3))
         .then(() => sendToParent({type: "success"}))
 }
