@@ -259,7 +259,7 @@ function proposeProductToUser() {
     showBotTopMessage(PROPOSE_REDIRECT_BOT_TOP_MESSAGE)
         .then(()=>simulateDebugMessage(botMessage))
         .then(()=>simulateTextGeneration(LLM_PROMPT + PROPOSE_REDIRECT_USER_ACTION, botMessage, true))
-        .then(() => simulateTextGeneration(text, botMessage, false))
+        .then(() => simulateTextGeneration(PROPOSE_REDIRECT_REASONING, botMessage, false))
         .then(() => simulateExecuting(PROPOSE_REDIRECT_AGENT))
         .then(()=>simulatePause(1))
         .then(() => showProposeRedirect())

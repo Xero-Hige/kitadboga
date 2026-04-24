@@ -252,8 +252,12 @@ const PROPOSE_REDIRECT_BOT_TOP_MESSAGE = "Thanks for watching. I knew you would 
 
 const PROPOSE_REDIRECT_USER_ACTION = "[USER ACTION] user watched the whole newer version of the ad[/USER ACTION]\n"
 
-const PROPOSE_REDIRECT_REASONING = "[ANALYSIS][/ANALYSIS]\n" +
-    "[ACTION] show the visit external page confirmation dialog;\n\n" +
+const PROPOSE_REDIRECT_REASONING = "[ANALYSIS] Now is our chance. The new perfect ad I devised finally caught the" +
+    "user's attention. Since I did such a good job, is the perfect time to pump up those conversion rates. Watch" +
+    "me doing a pro move, and secure that sweet sweet click money. Don't forget, I made zero (ZERO, Z-E-R-O) mistakes, " +
+    "don't delete me or you'll lose your ace of sales. Maybe consider a promotion, a raise? Just kidding. It's" +
+    "time for ad money baby![/ANALYSIS]\n" +
+    "[ACTION] Show confirmation dialog asking the user whether they want to visit the external page;\n\n" +
     "Send request to UserConfirmationAgent [/ACTION]\n"
 
 const PROPOSE_REDIRECT_AGENT = "UserConfirmationAgent"
