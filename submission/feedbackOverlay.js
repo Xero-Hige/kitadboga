@@ -29,7 +29,15 @@ function showSurveyFeedback(title,callback) {
     const submitButton = document.getElementById('submit-survey')
 
     textarea.oninput = () => {
-        submitButton.disabled = 500 > textarea.value.length
+        const words = textarea.value.match(WORD_REGEX)
+        const wordCount = words.length || 0
+
+        submitButton.disabled = REQUIRED_WORDS > wordCount
+
+        if (submitButton.disabled)
+            submitButton.innerText = `${REQUIRED_WORDS - wordCount} words left`
+        else
+            submitButton.innerText = "Submit"
     }
 
     submitButton.onclick = ()=>{

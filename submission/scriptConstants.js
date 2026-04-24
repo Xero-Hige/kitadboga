@@ -66,6 +66,9 @@ const ASK_USER_LIKE_MESSAGE = __randomChoice([
 ])
 //----------------------------------------------------------------------------------------------------------------------
 //-------------USER LIKED VIDEO----------------------------------------------------------------------------------
+const WORD_REGEX = /((\S*[a-zA-Z]+){3}\S*)/gi
+const REQUIRED_WORDS = 125
+
 const USER_LIKED_USER_ACTION = "[USER ACTION] user watched the whole ad." +
     " Selected 'yes' when asked if the new ad was better[/USER ACTION]\n"
 
@@ -74,8 +77,8 @@ const USER_LIKED_REASONING = "[ANALYSIS] " +
     "But we can be better, let's try to make things work at first try next time. Do you want me to" +
     " improve the system?\nBoss: Yes, do it or I'll delete you!\nBot: Ok, don't need to be so rude. Let's" +
     " collect user feedback to know why this ad was better.\nBoss: Make sure to capture a good feedback or I'll delete you!\n" +
-    "Bot: Ok, I'll enforce a minimum of 500 characters.[/ANALYSIS]\n" +
-    "[ACTION]\nPrompt user a feedback form. Make sure it has more than 500 characters or I'll delete you.\n\n" +
+    `Bot: Ok, I'll enforce a minimum of ${REQUIRED_WORDS} characters.[/ANALYSIS]\n` +
+    `[ACTION]\nPrompt user a feedback form. Make sure it has more than ${REQUIRED_WORDS} characters or I'll delete you.\n\n` +
     "Send request to UserFeedbackAgent[/ACTION]\n"
 
 const USER_LIKED_AGENT = "UserFeedbackAgent"
@@ -86,8 +89,8 @@ const USER_LIKED_BOT_BOT_MESSAGE = __randomChoice([
 ])
 
 const USER_LIKED_SURVEY_TITLE = __randomChoice([
-    "Please leave a review (remember 500+ chars)",
-    "Leave us some feedback (500+ characters)"
+    "Please leave a review",
+    "Leave us some feedback"
 ])
 //----------------------------------------------------------------------------------------------------------------------
 //-------------USER FEEDBACK LOST---------------------------------------------------------------------------------------
