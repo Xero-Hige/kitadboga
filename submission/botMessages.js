@@ -250,16 +250,17 @@ function scoldUser() {
 function proposeProductToUser() {
     let botMessage = document.getElementById("bot-debug-message")
 
-    let userAction = "[USER ACTION] user skipped the ad before ending[/USER ACTION]\n"
-
     let text = "[ANALYSIS] User interaction suggests the ad did not align with user interests.\n" +
         "Negative feedback is inferred from user behavior.\n" +
         "Need extra input to refine the system [/ANALYSIS]\n " +
         "[ACTION] Generate personalized interest selector and render it. Sending request to FrontendAgent [/ACTION]\n"
 
-    simulateTextGeneration(LLM_PROMPT + userAction, botMessage, true)
+    showBotTopMessage(PROPOSE_REDIRECT_BOT_TOP_MESSAGE)
+        .then(()=>simulateDebugMessage(botMessage))
+        .then(()=>simulateTextGeneration(LLM_PROMPT + PROPOSE_REDIRECT_USER_ACTION, botMessage, true))
         .then(() => simulateTextGeneration(text, botMessage, false))
-        .then(() => simulateExecuting())
+        .then(() => simulateExecuting(PROPOSE_REDIRECT_AGENT))
+        .then(()=>simulatePause(1))
         .then(() => showProposeRedirect())
 }
 

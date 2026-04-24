@@ -242,3 +242,16 @@ const PRAISE_USER_BOT_TOP_MESSAGE = "Hope you had enough time to enjoy the video
 const SCOLD_USER_BOT_TOP_MESSAGE = "💢💢💢 NEXT TIME WATCH THE AD! 💢💢💢 DON'T EVER TRY TO ERASE ME! 💢💢💢"
 
 //----------------------------------------------------------------------------------------------------------------------
+
+//-------------Propose Product------------------------------------------------------------------------------------------
+
+const PROPOSE_REDIRECT_BOT_TOP_MESSAGE = "Thanks for watching. I knew you would like it"
+
+const PROPOSE_REDIRECT_USER_ACTION = "[USER ACTION] user watched the whole newer version of the ad[/USER ACTION]\n"
+
+const PROPOSE_REDIRECT_REASONING = "[ANALYSIS][/ANALYSIS]\n" +
+    "[ACTION] show the visit external page confirmation dialog;\n\n" +
+    "Send request to UserConfirmationAgent [/ACTION]\n"
+
+const PROPOSE_REDIRECT_AGENT = "UserConfirmationAgent"
+//----------------------------------------------------------------------------------------------------------------------
