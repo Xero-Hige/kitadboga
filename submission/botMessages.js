@@ -209,6 +209,7 @@ function userNeverSkipped() {
     let botMessage = document.getElementById("bot-debug-message")
 
     showBotTopMessage(DIDNT_SKIP_BOT_TOP_MESSAGE)
+        .then(()=>simulateDebugMessage(botMessage))
         .then(() => simulateTextGeneration(LLM_PROMPT + DIDNT_SKIP_USER_ACTION, botMessage, true))
         .then(() => simulateTextGeneration(DIDNT_SKIP_REASONING, botMessage, false))
         .then(() => simulateExecuting(DIDNT_SKIP_AGENT))
